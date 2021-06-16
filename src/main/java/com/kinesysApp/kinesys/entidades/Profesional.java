@@ -1,4 +1,4 @@
-package com.kinesysApp.kinesys.Entity;
+package com.kinesysApp.kinesys.entidades;
 
 import com.kinesysApp.kinesys.enumeraciones.Sexo;
 import java.io.Serializable;

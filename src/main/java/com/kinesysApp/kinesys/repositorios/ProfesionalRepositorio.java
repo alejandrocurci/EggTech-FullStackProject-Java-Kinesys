@@ -6,9 +6,8 @@
 package com.kinesysApp.kinesys.repositorios;
 
 
-import com.kinesysApp.kinesys.Entity.Profesional;
+import com.kinesysApp.kinesys.entidades.Profesional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  *

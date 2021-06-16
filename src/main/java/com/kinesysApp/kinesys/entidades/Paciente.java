@@ -1,4 +1,4 @@
-package com.kinesysApp.kinesys.Entity;
+package com.kinesysApp.kinesys.entidades;
 
 import java.io.Serializable;
 import lombok.Data;

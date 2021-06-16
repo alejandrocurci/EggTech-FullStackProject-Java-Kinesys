@@ -1,6 +1,6 @@
 package com.kinesysApp.kinesys.servicios;
 
-import com.kinesysApp.kinesys.Entity.ObraSocial;
+import com.kinesysApp.kinesys.entidades.ObraSocial;
 import com.kinesysApp.kinesys.repositorios.ObraSocialRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
