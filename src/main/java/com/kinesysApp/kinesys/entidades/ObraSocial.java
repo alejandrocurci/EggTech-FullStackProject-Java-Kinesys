@@ -18,8 +18,11 @@ public class ObraSocial implements Serializable {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String idObraSocial;
+
     private String nombre;
+
     private Long telefono;
+
     private String email;
 
     @ManyToMany

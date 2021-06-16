@@ -7,7 +7,7 @@ import com.kinesysApp.kinesys.enumeraciones.Sexo;
 import com.kinesysApp.kinesys.repositorios.ProfesionalRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,6 +17,7 @@ public class ProfesionalServicio {
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
 
+    @Transactional(rollbackFor = Exception.class)
     public void crear(Long dni, String nombre, String apellido, Integer edad,
                       Long telefono, String email, Integer matricula, Sexo sexo,
                       String provincia, String localidad, String domicilio,
@@ -44,11 +45,12 @@ public class ProfesionalServicio {
 
         profesionalRepositorio.save(profesional);
     }
-
+    @Transactional(readOnly = true)
     public List<Profesional> buscarTodos() {
         return profesionalRepositorio.findAll();
     }
 
+    @Transactional
     public void eliminar(String idProfesional) {
         profesionalRepositorio.deleteById(idProfesional);
     }
@@ -65,7 +67,7 @@ public class ProfesionalServicio {
     }
     */
 
-
+    @Transactional(readOnly = true)
     public Profesional buscarPorId(String idProfesional) {
         return profesionalRepositorio.findById(idProfesional).orElse(null);
     }

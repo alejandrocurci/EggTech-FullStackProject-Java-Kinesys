@@ -4,8 +4,8 @@ import com.kinesysApp.kinesys.entidades.Paciente;
 import com.kinesysApp.kinesys.repositorios.PacienteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PacienteServicio {
@@ -13,6 +13,7 @@ public class PacienteServicio {
     @Autowired
     private PacienteRepositorio pacienteRepositorio;
 
+    @Transactional(rollbackFor = Exception.class)
     public void crear(Long dni, String nombre, String apellido, Integer telefono, String email) {
 
         Paciente paciente = new Paciente();
@@ -23,15 +24,17 @@ public class PacienteServicio {
         paciente.setEmail(email);
         pacienteRepositorio.save(paciente);
     }
-
+    @Transactional(readOnly = true)
     public List<Paciente> buscarTodos() {
         return pacienteRepositorio.findAll();
     }
 
+    @Transactional
     public void eliminar(String idPaciente) {
         pacienteRepositorio.deleteById(idPaciente);
     }
 
+    @Transactional
     public void modificar(String idPaciente, Long dni, String nombre, String apellido, Integer telefono, String email) {
 
         Paciente paciente = pacienteRepositorio.findById(idPaciente).orElse(null);
@@ -44,7 +47,7 @@ public class PacienteServicio {
             pacienteRepositorio.save(paciente);
         }
     }
-
+    @Transactional(readOnly = true)
     public Paciente buscarPorId(String idPaciente) {
         return pacienteRepositorio.findById(idPaciente).orElse(null);
     }

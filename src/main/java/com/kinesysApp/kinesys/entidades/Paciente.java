@@ -3,6 +3,7 @@ package com.kinesysApp.kinesys.entidades;
 import java.io.Serializable;
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,10 +17,16 @@ public class Paciente implements Serializable {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String idPaciente;
+
+    @Column(unique = true)
     private Long dni ;
+
     private String nombre;
-    private String apellido;   
+
+    private String apellido;
+
     private Integer telefono;
+
     private String email;
     
     
