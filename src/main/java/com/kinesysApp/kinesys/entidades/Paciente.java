@@ -3,10 +3,8 @@ package com.kinesysApp.kinesys.entidades;
 import java.io.Serializable;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 import org.hibernate.annotations.GenericGenerator;
 
 @Data
@@ -28,6 +26,13 @@ public class Paciente implements Serializable {
     private Integer telefono;
 
     private String email;
+
+    @OneToOne
+    private Usuario usuarioPaciente;
+
+
+
+
     
     
    

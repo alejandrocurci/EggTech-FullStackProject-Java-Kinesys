@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.kinesysApp.kinesys.entidades;
 
 import java.io.Serializable;
@@ -11,13 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.kinesysApp.kinesys.enumeraciones.Provincia;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
-/**
- *
- * @author flor
- */
 @Data
 @Entity
 public class Zona implements Serializable {
@@ -26,7 +19,7 @@ public class Zona implements Serializable {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String idZona;
-    private String provincia;
+    private Provincia provincia;
     private String localidad;
     private String domicilio;
     

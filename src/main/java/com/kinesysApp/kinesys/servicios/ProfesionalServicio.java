@@ -3,6 +3,7 @@ package com.kinesysApp.kinesys.servicios;
 import com.kinesysApp.kinesys.entidades.ObraSocial;
 import com.kinesysApp.kinesys.entidades.Profesional;
 import com.kinesysApp.kinesys.entidades.Zona;
+import com.kinesysApp.kinesys.enumeraciones.Provincia;
 import com.kinesysApp.kinesys.enumeraciones.Sexo;
 import com.kinesysApp.kinesys.repositorios.ProfesionalRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class ProfesionalServicio {
     @Transactional(rollbackFor = Exception.class)
     public void crear(Long dni, String nombre, String apellido, Integer edad,
                       Long telefono, String email, Integer matricula, Sexo sexo,
-                      String provincia, String localidad, String domicilio,
+                      Provincia provincia, String localidad, String domicilio,
                       List<ObraSocial> listObraSocial) {
 
         Profesional profesional = new Profesional();

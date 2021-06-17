@@ -30,12 +30,12 @@ public class ObraSocialServicio {
 
         return obraSocialRepositorio.findAll();
     }
-
+    @Transactional
     public void eliminar(String idObraSocial) {
 
         obraSocialRepositorio.deleteById(idObraSocial);
     }
-
+    @Transactional
     public void modificar(String idObraSocial, String nombre, Long telefono, String email) {
 
         ObraSocial obraSocial = obraSocialRepositorio.findById(idObraSocial).orElse(null);
