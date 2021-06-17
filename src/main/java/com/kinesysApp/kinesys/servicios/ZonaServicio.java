@@ -1,6 +1,7 @@
 package com.kinesysApp.kinesys.servicios;
 
 import com.kinesysApp.kinesys.entidades.Zona;
+import com.kinesysApp.kinesys.enumeraciones.Provincia;
 import com.kinesysApp.kinesys.repositorios.ZonaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class ZonaServicio {
     private ZonaRepositorio zonaRepositorio;
 
     @Transactional(rollbackFor = Exception.class)
-    public void crear(String provincia, String localidad, String domicilio) {
+    public void crear(Provincia provincia, String localidad, String domicilio) {
 
         Zona zona = new Zona();
         zona.setProvincia(provincia);
@@ -33,8 +34,10 @@ public class ZonaServicio {
     }
 
     @Transactional
-    public void modificar(String idZona, String provincia, String localidad, String domicilio) {
+    public void modificar(String idZona, Provincia provincia, String localidad, String domicilio) {
+
         Zona zona = zonaRepositorio.findById(idZona).orElse(null);
+
         if (zona != null) {
             zona.setProvincia(provincia);
             zona.setLocalidad(localidad);
