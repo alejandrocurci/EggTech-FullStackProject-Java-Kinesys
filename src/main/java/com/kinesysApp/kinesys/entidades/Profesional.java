@@ -4,15 +4,9 @@ import com.kinesysApp.kinesys.enumeraciones.Sexo;
 import java.io.Serializable;
 import lombok.Data;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.List;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+
 import org.hibernate.annotations.GenericGenerator;
 
 @Data
@@ -40,5 +34,8 @@ public class Profesional implements Serializable {
     
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
+
+    @OneToOne
+    private Usuario usuarioProfesional;
 
 }
