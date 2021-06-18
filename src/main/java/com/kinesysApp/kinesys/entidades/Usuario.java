@@ -19,10 +19,10 @@ public class Usuario implements Serializable {
 
     private String clave;
 
-   /* @OneToMany(mappedBy = "Usuario",fetch = FetchType.EAGER)
-    private List <Paciente> ListaPaciente;
+    @OneToOne
+    private Paciente ListaPaciente;
 
-    @OneToMany(mappedBy = "Usuario",fetch = FetchType.EAGER)
-    private List <Profesional> listaProfesional;*/
+    @OneToOne
+    private Profesional listaProfesional;
 
 }

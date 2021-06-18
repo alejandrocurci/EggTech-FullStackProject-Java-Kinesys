@@ -57,6 +57,7 @@ public class PacienteServicio  {
             pacienteRepositorio.save(paciente);
         }
     }
+
     @Transactional(readOnly = true)
     public Paciente buscarPorId(String idPaciente) {
 

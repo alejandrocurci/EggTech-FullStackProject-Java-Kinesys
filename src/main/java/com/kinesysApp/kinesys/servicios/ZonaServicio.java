@@ -15,13 +15,14 @@ public class ZonaServicio {
     private ZonaRepositorio zonaRepositorio;
 
     @Transactional(rollbackFor = Exception.class)
-    public void crear(Provincia provincia, String localidad, String domicilio) {
+    public Zona crear(Provincia provincia, String localidad, String domicilio) {
 
         Zona zona = new Zona();
         zona.setProvincia(provincia);
         zona.setLocalidad(localidad);
         zona.setDomicilio(domicilio);
-        zonaRepositorio.save(zona);
+        //zonaRepositorio.save(zona);
+        return zona;
     }
     @Transactional(readOnly = true)
     public List<Zona> buscarTodas() {
