@@ -4,6 +4,7 @@ import java.io.Serializable;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -16,6 +17,7 @@ public class Paciente implements Serializable {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String idPaciente;
 
+    @NotBlank(message ="El Dni no puede estar vacio")
     @Column(unique = true)
     private Long dni ;
 

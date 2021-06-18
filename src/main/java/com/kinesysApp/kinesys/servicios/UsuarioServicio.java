@@ -2,7 +2,6 @@ package com.kinesysApp.kinesys.servicios;
 
 import com.kinesysApp.kinesys.entidades.Usuario;
 import com.kinesysApp.kinesys.repositorios.UsuarioRepositorio;
-import com.sun.xml.internal.fastinfoset.Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

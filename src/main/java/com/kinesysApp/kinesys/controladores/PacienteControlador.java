@@ -2,10 +2,8 @@ package com.kinesysApp.kinesys.controladores;
 
 import com.kinesysApp.kinesys.entidades.Paciente;
 import com.kinesysApp.kinesys.entidades.Usuario;
-import com.kinesysApp.kinesys.entidades.Zona;
 import com.kinesysApp.kinesys.servicios.PacienteServicio;
 import com.kinesysApp.kinesys.servicios.UsuarioServicio;
-import javafx.scene.control.TableView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-
-import javax.annotation.sql.DataSourceDefinition;
 
 @Controller
 @RequestMapping("/pacientes")
