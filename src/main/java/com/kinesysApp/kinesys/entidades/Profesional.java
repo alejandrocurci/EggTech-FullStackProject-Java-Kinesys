@@ -26,7 +26,7 @@ public class Profesional implements Serializable {
     private Integer matricula;
     
 
-   @OneToMany(mappedBy = "profesional",fetch = FetchType.EAGER)
+   @OneToMany(mappedBy = "profesional",cascade = CascadeType.ALL)
     private List<Zona> zonasProf;
    
    @ManyToMany
@@ -35,7 +35,7 @@ public class Profesional implements Serializable {
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuarioProfesional;
 
 }

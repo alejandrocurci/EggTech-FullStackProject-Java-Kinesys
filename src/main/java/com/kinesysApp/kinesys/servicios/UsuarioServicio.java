@@ -28,13 +28,10 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setNombreU(nombreU);
         usuario.setClave(encoder.encode(clave));
 
-        usuarioRepositorio.save(usuario);
+        //usuarioRepositorio.save(usuario);
 
         return usuario;
     }
-
-
-
 
 
 

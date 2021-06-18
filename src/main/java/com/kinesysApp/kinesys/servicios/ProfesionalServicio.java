@@ -18,11 +18,16 @@ public class ProfesionalServicio {
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
 
+    @Autowired
+    private UsuarioServicio usuarioServicio;
+    @Autowired
+    private ZonaServicio zonaServicio;
+
     @Transactional(rollbackFor = Exception.class)
     public void crear(Long dni, String nombre, String apellido, Integer edad,
                       Long telefono, String email, Integer matricula, Sexo sexo,
                       Provincia provincia, String localidad, String domicilio,
-                      List<ObraSocial> listObraSocial) {
+                      List<ObraSocial> listObraSocial,String nombreU, String clave) {
 
         Profesional profesional = new Profesional();
         profesional.setDni(dni);
@@ -33,14 +38,10 @@ public class ProfesionalServicio {
         profesional.setEmail(email);
         profesional.setMatricula(matricula);
         profesional.setSexo(sexo);
-
-        Zona zona = new Zona();
-        zona.setProvincia(provincia);
-        zona.setLocalidad(localidad);
-        zona.setDomicilio(domicilio);
-
+        //seteamo el usuario
+        profesional.setUsuarioProfesional(usuarioServicio.crear(nombreU,clave));
         // inicia con una sola zona, luego podra agregar mas zonas
-        profesional.setZonasProf(Arrays.asList(zona));
+        profesional.setZonasProf(Arrays.asList(zonaServicio.crear(provincia,localidad,domicilio)));
 
         profesional.setListObraSocial(listObraSocial);
 

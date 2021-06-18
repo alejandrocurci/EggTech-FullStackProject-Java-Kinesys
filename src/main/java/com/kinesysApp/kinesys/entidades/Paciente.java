@@ -27,7 +27,7 @@ public class Paciente implements Serializable {
 
     private String email;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuarioPaciente;
 
 
