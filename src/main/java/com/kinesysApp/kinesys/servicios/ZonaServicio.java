@@ -30,7 +30,7 @@ public class ZonaServicio {
     }
 
     @Transactional
-    public void eliminar(String idZona) {
+    public void eliminarZona(String idZona) {
         zonaRepositorio.deleteById(idZona);
     }
 

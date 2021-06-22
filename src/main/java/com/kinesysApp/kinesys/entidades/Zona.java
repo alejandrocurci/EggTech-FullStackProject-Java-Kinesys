@@ -24,8 +24,7 @@ public class Zona implements Serializable {
     private String domicilio;
     
     
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Profesional profesional;
+
     
     
 }

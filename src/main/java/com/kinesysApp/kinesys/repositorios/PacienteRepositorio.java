@@ -11,5 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PacienteRepositorio extends JpaRepository<Paciente,String>{
+@Query("SELECT p FROM Paciente p WHERE p.dni = :dni")
+    Paciente BuscarPorDni(@Param("dni")Long dni );
 
 }

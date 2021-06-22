@@ -3,11 +3,8 @@ package com.kinesysApp.kinesys.entidades;
 import java.io.Serializable;
 import java.util.List;
 import org.hibernate.annotations.GenericGenerator;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import lombok.Data;
 
 @Data
@@ -23,9 +20,8 @@ public class ObraSocial implements Serializable {
 
     private Long telefono;
 
-    private String email;
+    private String Plan;
 
-    @ManyToMany
-    private List<Profesional> listaProfesionales;
+
 
 }
