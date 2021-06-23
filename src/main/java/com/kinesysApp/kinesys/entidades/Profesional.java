@@ -42,7 +42,7 @@ public class Profesional implements Serializable {
     inverseJoinColumns = @JoinColumn(name = "FK_obrasoial",nullable = false) //@Column(nullable = false) afecta al esquema de la base de datos haciendo que la columna pueda ser null,
                                                                                     // tampoco compila si al objeto se le pone null en un campo, pero el error es por parte del gestor de la base de datos y no de java.
     )*/
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<ObraSocial> obraSocialProfesionales;
 
     @Enumerated(EnumType.STRING)

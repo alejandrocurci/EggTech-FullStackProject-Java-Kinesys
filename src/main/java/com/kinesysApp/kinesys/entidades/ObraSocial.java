@@ -22,6 +22,4 @@ public class ObraSocial implements Serializable {
 
     private String Plan;
 
-
-
 }

@@ -41,21 +41,11 @@ public class ZonaControlador {
 
     @PostMapping("/guardar")
     //@PreAuthorize("hasRole('ADMIN')")
-    public RedirectView guardarZona(@RequestParam(name = "provincia") Provincia provincia,
-                                    @RequestParam(name = "localidad") String localidad,
-                                    @RequestParam(name = "domicilio") String domicilio,
-                                    Profesional profesional) {
+    public RedirectView guardarZona(Zona zona) {
         //try {
-
-            zonaServicio.crear( provincia,localidad,domicilio);
-            /*profesionalServicio.crear(profesional.getDni(),profesional.getNombre(),profesional.getApellido(),
-                    profesional.getEdad(),profesional.getTelefono(), profesional.getEmail(),
-                    profesional.getMatricula(),profesional.getSexo());*/
-
+            zonaServicio.crear(zona);
             return new RedirectView("/");
-
-       // } catch (Exception ex) {
-
+           // } catch (Exception ex) {
           //  Logger.getLogger(ZonaControlador.class.getName()).log(Level.SEVERE, null, ex);
 
         //}

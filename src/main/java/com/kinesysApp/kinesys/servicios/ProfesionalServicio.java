@@ -1,22 +1,18 @@
 package com.kinesysApp.kinesys.servicios;
 
 import com.kinesysApp.kinesys.entidades.ObraSocial;
-import com.kinesysApp.kinesys.entidades.Paciente;
 import com.kinesysApp.kinesys.entidades.Profesional;
+import com.kinesysApp.kinesys.entidades.Usuario;
 import com.kinesysApp.kinesys.entidades.Zona;
-import com.kinesysApp.kinesys.enumeraciones.Provincia;
 import com.kinesysApp.kinesys.enumeraciones.Sexo;
 import com.kinesysApp.kinesys.excepciones.ExcepcionKinessysProfesional;
-import com.kinesysApp.kinesys.excepciones.ExcepcionKinesysPaciente;
 import com.kinesysApp.kinesys.repositorios.ProfesionalRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.management.OperatingSystemMXBean;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProfesionalServicio {
@@ -33,11 +29,20 @@ public class ProfesionalServicio {
     @Autowired
     private ObraSocialServicio obraSocialServicio;
 
-    @Transactional(rollbackFor = Exception.class)
-    public void crear(Long dni, String nombre, String apellido, Integer edad,
-                      Long telefono, String email, Integer matricula, Sexo sexo,
-                      Provincia provincia, String localidad, String domicilio,
-                      ObraSocial obraSocial,String nombreU, String clave) {
+    @Transactional
+    public void crear(Long dni,
+                      String nombre,
+                      String apellido,
+                      Integer edad,
+                      Long telefono,
+                      String email,
+                      Integer matricula,
+                      Sexo sexo,
+                      Zona zona,
+                      List<ObraSocial> obraSocial,
+                      Usuario usuario) throws ExcepcionKinessysProfesional {
+
+        validarProfesional(dni, nombre, apellido, edad, telefono, email, matricula, sexo, zona, obraSocial, usuario);
 
         Profesional profesional = new Profesional();
         profesional.setRolProfesional(rolServicio.buscarPorNombre("PROFESIONAL"));
@@ -49,17 +54,17 @@ public class ProfesionalServicio {
         profesional.setEmail(email);
         profesional.setMatricula(matricula);
         profesional.setSexo(sexo);
+
         //seteamos el usuario
-        profesional.setUsuarioProfesional(usuarioServicio.crear(nombreU,clave));
-        // inicia con una sola zona, luego podra agregar mas zonas
-        profesional.setZonaProfesionales(Arrays.asList(zonaServicio.crear(provincia,localidad,domicilio)));
+        profesional.setUsuarioProfesional(usuarioServicio.crear(usuario.getNombreU(), usuario.getClave()));
 
-        obraSocialServicio.crear(obraSocial);
+        profesional.setZonaProfesionales(Arrays.asList(zona));
 
-        profesional.setObraSocialProfesionales(null);
+        profesional.setObraSocialProfesionales(obraSocial);
 
         profesionalRepositorio.save(profesional);
     }
+
     @Transactional(readOnly = true)
     public List<Profesional> buscarTodos() {
         return profesionalRepositorio.findAll();
@@ -70,32 +75,42 @@ public class ProfesionalServicio {
         profesionalRepositorio.deleteById(idProfesional);
     }
 
-
     @Transactional(readOnly = true)
     public Profesional buscarPorId(String idProfesional) {
         return profesionalRepositorio.findById(idProfesional).orElse(null);
     }
 
-    public void validarProfesional(Long dni, String nombre, String apellido, Integer edad,
-                                   Long telefono, String email, Integer matricula, Sexo sexo,
-                                   Provincia provincia, String localidad, String domicilio,
-                                   ObraSocial obraSocial,String nombreU, String clave) throws ExcepcionKinessysProfesional {
-        if(dni == null || dni <= 0){
+    public void validarProfesional(Long dni,
+                                   String nombre,
+                                   String apellido,
+                                   Integer edad,
+                                   Long telefono,
+                                   String email,
+                                   Integer matricula,
+                                   Sexo sexo,
+                                   Zona zona,
+                                   List<ObraSocial> obraSocial,
+                                   Usuario usuario) throws ExcepcionKinessysProfesional {
+
+        if (dni == null || dni <= 0) {
             throw new ExcepcionKinessysProfesional("El dni no puede ser nulo");
         }
-        if(dni == null || dni <= 0){
-            throw new ExcepcionKinessysProfesional("El dni no puede ser nulo");
-        }
-        if(nombre == null || nombre.isEmpty()){
+        if (nombre == null || nombre.isEmpty()) {
             throw new ExcepcionKinessysProfesional("El nombre no puede ser nulo");
         }
-        if(dni == null || dni <= 0){
-            throw new ExcepcionKinessysProfesional("El dni no puede ser nulo");
+        if (apellido == null || apellido.isEmpty()) {
+            throw new ExcepcionKinessysProfesional("El apellido no puede ser nulo");
         }
-        if(dni == null || dni <= 0){
-            throw new ExcepcionKinessysProfesional("El dni no puede ser nulo");
+        if (edad == null ) {
+            throw new ExcepcionKinessysProfesional("La edad no puede ser nula");
         }
-        if(dni == null || dni <= 0){
+        if (edad <= 0 ) {
+            throw new ExcepcionKinessysProfesional("La edad debe ser mayor que 0");
+        }
+        if (edad >= 120 ) {
+            throw new ExcepcionKinessysProfesional("La edad debe ser menor que 120");
+        }
+        if (dni == null || dni <= 0) {
             throw new ExcepcionKinessysProfesional("El dni no puede ser nulo");
         }
     }
