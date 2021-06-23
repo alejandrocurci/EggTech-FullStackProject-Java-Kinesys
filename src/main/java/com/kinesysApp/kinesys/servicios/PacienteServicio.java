@@ -7,11 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PacienteServicio  {
+public class PacienteServicio {
 
     @Autowired
     private PacienteRepositorio pacienteRepositorio;
@@ -22,12 +23,12 @@ public class PacienteServicio  {
     @Autowired
     private RolServicio rolServicio;
 
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
     public void crear(Long dni, String nombre, String apellido,
-                      String  telefono, String email,
-                      String nombreU,String clave) throws ExcepcionKinesysPaciente {
+                      String telefono, String email,
+                      String nombreU, String clave) throws ExcepcionKinesysPaciente {
 
-        validarPaciente(dni,nombre,apellido,telefono,email,nombreU,clave);
+        validarPaciente(dni, nombre, apellido, telefono, email, nombreU, clave);
 
         Paciente paciente = new Paciente();
         paciente.setRolPaciente(rolServicio.buscarPorNombre("PACIENTE"));
@@ -36,7 +37,7 @@ public class PacienteServicio  {
         paciente.setApellido(apellido);
         paciente.setTelefono(telefono);
         paciente.setEmail(email);
-        paciente.setUsuarioPaciente(usuarioServicio.crear(nombreU,clave));
+        paciente.setUsuarioPaciente(usuarioServicio.crear(nombreU, clave));
         pacienteRepositorio.save(paciente);
     }
 
@@ -53,7 +54,7 @@ public class PacienteServicio  {
     @Transactional
     public void modificar(String idPaciente, Long dni, String nombre,
                           String apellido, String telefono, String email
-                          ) {
+    ) {
 
         Paciente paciente = pacienteRepositorio.findById(idPaciente).orElse(null);
         if (paciente != null) {
@@ -73,48 +74,68 @@ public class PacienteServicio  {
     }
 
     @Transactional
-    public void elimiarPaciente(String idPaciente)throws ExcepcionKinesysPaciente{
-        Optional<Paciente> respPaciente =pacienteRepositorio.findById(idPaciente);
-        if(respPaciente.isPresent()){
+    public void eliminarPaciente(String idPaciente) throws ExcepcionKinesysPaciente {
+        Optional<Paciente> respPaciente = pacienteRepositorio.findById(idPaciente);
+        if (respPaciente.isPresent()) {
             pacienteRepositorio.delete(respPaciente.get());
-        }else{
+        } else {
             throw new ExcepcionKinesysPaciente("El paciente no puede ser eliminado");
         }
 
     }
-    @Transactional(readOnly = true)
-    public Paciente buscarPacientePorDni(Long dni) throws ExcepcionKinesysPaciente {
 
-        Paciente respPaciente =pacienteRepositorio.BuscarPorDni(dni);
-        if (respPaciente== null) {
-            throw new ExcepcionKinesysPaciente("No existe ese paciente registrado");
+    @Transactional(readOnly = true)
+    public List<Paciente> buscarPacientePorDni(Long dni) throws ExcepcionKinesysPaciente {
+        List<Paciente> respPaciente = null;
+        if (dni == null) {
+            respPaciente = pacienteRepositorio.findAll();
         } else {
-            return respPaciente;
+            respPaciente = Arrays.asList(pacienteRepositorio.findByDni(dni));
+            if (respPaciente == null) {
+                throw new ExcepcionKinesysPaciente("No existe ese paciente registrado");
+            }
         }
+        return respPaciente;
     }
 
+    @Transactional(readOnly = true)
+    public List<Paciente> buscarPacientePorNombre(String nombre) throws ExcepcionKinesysPaciente {
+
+        List<Paciente> respPaciente = null;
+        if (nombre.isEmpty()) {
+            respPaciente = pacienteRepositorio.findAll();
+        } else {
+            respPaciente = pacienteRepositorio.findByNombre(nombre);
+            if (respPaciente == null || respPaciente.isEmpty()) {
+                throw new ExcepcionKinesysPaciente("No existe ese paciente registrado");
+            }
+        }
+        return respPaciente;
+    }
+
+
     public void validarPaciente(Long dni, String nombre, String apellido, String telefono, String email,
-                                String nombreU,String clave) throws ExcepcionKinesysPaciente {
-        if(dni == null || dni <= 0){
+                                String nombreU, String clave) throws ExcepcionKinesysPaciente {
+        if (dni == null || dni <= 0) {
             throw new ExcepcionKinesysPaciente("El dni no puede ser nulo");
         }
-        if(dni == null || dni <= 0){
+        if (dni == null || dni <= 0) {
             throw new ExcepcionKinesysPaciente("El dni no puede ser nulo");
         }
-        Paciente paciente = pacienteRepositorio.BuscarPorDni(dni);
-        if(paciente != null ){
+        Paciente paciente = pacienteRepositorio.findByDni(dni);
+        if (paciente != null) {
             throw new ExcepcionKinesysPaciente("El paciente se encuentra registrado con ese dni");
         }
-        if(nombre == null || nombre.isEmpty()){
+        if (nombre == null || nombre.isEmpty()) {
             throw new ExcepcionKinesysPaciente("El nombre no puede ser nulo");
         }
-        if(apellido == null || apellido.isEmpty()){
+        if (apellido == null || apellido.isEmpty()) {
             throw new ExcepcionKinesysPaciente("El apellido no puede ser nulo");
         }
-        if(telefono == null || dni <= 0){
+        if (telefono == null || dni <= 0) {
             throw new ExcepcionKinesysPaciente("El telefono no puede ser nulo");
         }
-        if(email == null || email.isEmpty()){
+        if (email == null || email.isEmpty()) {
             throw new ExcepcionKinesysPaciente("El email no puede ser nulo");
         }
     }

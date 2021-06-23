@@ -15,6 +15,7 @@ public class ProfesionalControlador {
 
     @Autowired
     private ProfesionalServicio profesionalServicio;
+
     @Autowired
     private ObraSocialServicio obraSocialServicio;
 

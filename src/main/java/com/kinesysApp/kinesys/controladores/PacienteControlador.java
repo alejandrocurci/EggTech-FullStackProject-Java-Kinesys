@@ -48,10 +48,7 @@ public class PacienteControlador {
 
     @PostMapping("/guardar")
     public String guardarPaciente(@Valid  Paciente paciente,
-                                  BindingResult resuladoPaciente,
-                                  Usuario usuario, Model model,
-                                  SessionStatus status) {
-
+                                  Usuario usuario, Model model) {
         try {
             pacienteServicio.crear(paciente.getDni(),
                     paciente.getNombre(),
@@ -60,12 +57,8 @@ public class PacienteControlador {
                     paciente.getEmail(),
                     usuario.getNombreU(),
                     usuario.getClave());
-                    status.setComplete();
             return "redirect:/";
         } catch (ExcepcionKinesysPaciente ex) {
-
-
-            if (resuladoPaciente.hasErrors()) {
 
                 System.out.println(ex.getCause());
                 ex.printStackTrace();
@@ -75,15 +68,14 @@ public class PacienteControlador {
                 model.addAttribute("titulo", "Nuevo Paciente");
                 model.addAttribute("action", "guardar");
 
-            }
             return "paciente-form";
         }
     }
     @PostMapping("/eliminar/{idPaciente}")
     public String eliminarPaciente(@PathVariable String idPaciente, Model model) {
         try {
-            pacienteServicio.elimiarPaciente(idPaciente);
-            return "redirect:/";
+            pacienteServicio.eliminarPaciente(idPaciente);
+            return "redirect:/pacientes";
         } catch (ExcepcionKinesysPaciente ex) {
             model.addAttribute(ETIQUETA_ERROR, ex.getMessage());
             return "redirect: /pacientes";
@@ -93,17 +85,38 @@ public class PacienteControlador {
    @GetMapping("/buscarPaciente")
     public ModelAndView buscarPacientePorDni(@RequestParam(required = false) Long dni) {   //ModelAndView busca un HTML
 
-        ModelAndView mav = new ModelAndView("paciente");
+       ModelAndView mav = new ModelAndView("paciente");
+
         try {
-            mav.addObject("ListaPacientes", pacienteServicio.buscarPacientePorDni(dni));  // " Libro va a ser el nombre de la variable que vamos a usar con thymleaf "
+            mav.addObject("ListaPacientes", pacienteServicio.buscarPacientePorDni(dni));
             return mav;
         } catch (ExcepcionKinesysPaciente ex) {
 
             mav.addObject("error", ex.getMessage());
-            return mav; // redirecciona la pagina de Libros
+            return mav;
 
         }
     }
+    @GetMapping("/buscarPacientePorNombre")
+    public ModelAndView buscarPacientePorNombre(@RequestParam(required = false) String nombre) {   //ModelAndView busca un HTML
+
+        ModelAndView mav = new ModelAndView("paciente");
+        if(nombre.isEmpty()){
+            mav.addObject("ListaPacientes", pacienteServicio.buscarTodos());
+            return mav;
+        }
+        try {
+            mav.addObject("ListaPacientes", pacienteServicio.buscarPacientePorNombre(nombre));
+            return mav;
+        } catch (ExcepcionKinesysPaciente ex) {
+
+            mav.addObject("error", ex.getMessage());
+
+            return mav;
+
+        }
+    }
+
     /*@GetMapping("/buscarPaciente")
     public String buscarPacientePorDni(@RequestParam(required = false) Long dni,
                                              Model model) {   //ModelAndView busca un HTML

@@ -80,8 +80,8 @@
                                 oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');"
                         >
                   </div>
-                  <div th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}" ></div>
-                  <!--th:field= "atributo" si coloccamos el th:object-->
+                  <!-- <div th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}" ></div>-->
+                   <!--th:field= "atributo" si coloccamos el th:object-->
                   <!--th:value= "objeto.atributo" -->
 
                   <!-- Nombre -->
@@ -97,7 +97,7 @@
                                 required
                         >
                   </div>
-                  <div th:if="${error != null && error.containsKey('nombre')}" th:text="${error.nombre}" ></div>
+                  <!--<div th:if="${error != null && error.containsKey('nombre')}" th:text="${error.nombre}" ></div>-->
                   <!-- Apellido -->
                   <label for="apellido">Apellido</label>
 
@@ -111,7 +111,7 @@
                               required
                         >
                   </div>
-                  <div th:if="${error != null && error.containsKey('apellido')}" th:text="${error.apellido}" ></div>
+                  <!-- <div th:if="${error != null && error.containsKey('apellido')}" th:text="${error.apellido}" ></div>-->
                   <!-- telefono -->
                   <label for="telefono">Telefono</label>
 
@@ -125,7 +125,7 @@
                               required
                         >
                   </div>
-                  <div th:if="${error != null && error.containsKey('telefono')}" th:text="${error.telefono}" ></div>
+                  <!--<div th:if="${error != null && error.containsKey('telefono')}" th:text="${error.telefono}" ></div>-->
                   <!-- email -->
                   <label for="email">Email</label>
 
@@ -139,7 +139,7 @@
                                 required
                         >
                   </div>
-                  <div th:if="${error != null && error.containsKey('email')}" th:text="${error.email}" ></div>
+                  <!--<div th:if="${error != null && error.containsKey('email')}" th:text="${error.email}" ></div>-->
 
                   <div th:object="${usuario}" >
 
