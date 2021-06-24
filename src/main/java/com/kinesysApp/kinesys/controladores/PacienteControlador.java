@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @Controller
-@SessionAttributes("paciente")
 @RequestMapping("/pacientes")
 public class PacienteControlador {
 
