@@ -7,11 +7,14 @@ import com.kinesysApp.kinesys.entidades.Zona;
 import com.kinesysApp.kinesys.enumeraciones.Provincia;
 import com.kinesysApp.kinesys.enumeraciones.Sexo;
 import com.kinesysApp.kinesys.excepciones.ExcepcionKinessysProfesional;
+import com.kinesysApp.kinesys.excepciones.ExcepcionKinesysPaciente;
 import com.kinesysApp.kinesys.servicios.ObraSocialServicio;
 import com.kinesysApp.kinesys.servicios.ProfesionalServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,6 +24,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/profesionales")
 public class ProfesionalControlador {
+
+    private final String ETIQUETA_ERROR = "error";
 
     @Autowired
     private ProfesionalServicio profesionalServicio;
@@ -46,7 +51,8 @@ public class ProfesionalControlador {
     public String guardarProfesional(Profesional profesional,
                                      List<ObraSocial> seleccionObrasSociales,
                                      Usuario usuario,
-                                     Zona zona){
+                                     Zona zona,
+                                     Model model){
         try{
             profesionalServicio.crear(
                     profesional.getDni(),
@@ -60,15 +66,32 @@ public class ProfesionalControlador {
                     zona,
                     seleccionObrasSociales,
                     usuario);
+            return "redirect:/";
         }catch(ExcepcionKinessysProfesional ex){
 
-            //para devolver los erroresde los errores
+            System.out.println(ex.getCause());
+            ex.printStackTrace();
+            model.addAttribute(ETIQUETA_ERROR, ex.getMessage());
+            model.addAttribute("profesional", profesional);
+            model.addAttribute("usuario", usuario);
+            model.addAttribute("zona",zona);
+            model.addAttribute("titulo", "Nuevo Profesional");
+            model.addAttribute("action", "guardar");
+
+            return "profesional-form";
 
         }
 
-
-         return "redirect:/";
     }
-
+    @PostMapping("/eliminar/{idProfesional}")
+    public String eliminarProfesional(@PathVariable String idProfesional, Model model) {
+        try {
+            profesionalServicio.eliminarProfesional(idProfesional);
+            return "redirect:/pacientes";
+        } catch (ExcepcionKinessysProfesional ex) {
+            model.addAttribute(ETIQUETA_ERROR, ex.getMessage());
+            return "redirect: /pacientes";
+        }
+    }
 
 }

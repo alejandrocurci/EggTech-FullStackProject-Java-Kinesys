@@ -71,7 +71,7 @@ public class ProfesionalServicio {
     }
 
     @Transactional
-    public void eliminarProfesional(String idProfesional) {
+    public void eliminarProfesional (String idProfesional)throws ExcepcionKinessysProfesional {
         profesionalRepositorio.deleteById(idProfesional);
     }
 
