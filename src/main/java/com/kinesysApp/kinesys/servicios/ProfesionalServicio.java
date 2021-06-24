@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class ProfesionalServicio {
+public class  ProfesionalServicio {
 
     @Autowired
     private ProfesionalRepositorio profesionalRepositorio;
