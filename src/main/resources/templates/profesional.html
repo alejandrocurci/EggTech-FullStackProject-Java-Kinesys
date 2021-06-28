@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta name="description" content="Kinesys"/>
+    <meta name="Pacientes" content="Leonardo Mella"/>
+    <title>Pacientes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/estilos.css}"/>
+</head>
+<body class="FondoCliente">
+
+<div class="container mt-5 main" id="ajustarpantalla" style="background-color:transparent;">
+    <h1>Listado de Pacientes</h1>
+    <hr class="mb-5"/>  <!-- "<hr></hr>" separación temática -->
+
+
+    <div th:if="${(ListaPacientes == null || ListaPacientes.isEmpty()) && error == null}"> <!-- recorre la lista clientes y si no hay me manda a cargar  un cliente -->
+
+        <h5>Todavía no hay Pacientes cargados. <a th:href="@{/pacientes/crear}"><i class="bi bi-person-plus-fill"></i> Cargar paciente.</a></h5>
+    </div>
+    <div class="d-flex " th:if="${!(ListaPacientes == null || ListaPacientes.isEmpty())}">
+        <form class="d-flex "  th:action="@{/pacientes/buscarPaciente}" method="get">
+            <input class="form-control me-2"
+                   type="search"
+                   placeholder="Dni del cliente"
+                   style="text-align: center"
+                   aria-label="Search"
+                   name="dni"
+                   autocomplete="on">
+            <button class="btn btn-outline-secondary " type="submit"  > Buscar</button>
+        </form>
+    </div>
+    <div class="d-flex " th:if="${!(ListaPacientes == null || ListaPacientes.isEmpty())}">
+        <form class="d-flex "  th:action="@{/pacientes/buscarPacientePorNombre}" method="get">
+            <input class="form-control me-2"
+                   type="search"
+                   placeholder="nombre del cliente"
+                   style="text-align: center"
+                   aria-label="Search"
+                   name="nombre"
+                   autocomplete="on">
+            <button class="btn btn-outline-secondary " type="submit"  > Buscar</button>
+        </form>
+    </div>
+    <br>
+                     <!-- "<p>..</p>" etiquta de parrafo-->
+    <div th:if="${error != null}" class="alert alert-danger" th:text="${error}"></div>                  <!-- "<p>..</p>" etiquta de parrafo-->
+
+
+    <div th:unless="${ListaPacientes == null || ListaPacientes.isEmpty()  }" class="table-responsive">
+        <table class="table table-hover table-sm table-bordered">
+            <thead class="table-secondary text-center">                                                             <!-- "<thead></thead>" agrupacion de cabecera -->
+            <tr>                                                                                                <!-- "<tr></tr>" es la fila de la tabla -->
+                <th class="col-md-4 px-md-2" scope="col"><i class="bi bi-person-lines-fill"></i> Dni</th>
+                <th class="col-md-4 px-md-2" scope="col"><i class="bi bi-person-lines-fill"></i> Nombre y Apellido </th>   <!-- "<th></th>" es la cabecera  de la tabla -->
+                <th class="col-md-4 px-md-2" scope="col"><i class="bi bi-telephone-fill"></i> Telefono</th>
+                <th class="col-md-4 px-md-2" scope="col"><i class="bi bi-house-door-fill"></i> Correo electronico</th>
+                <th class="col-md-4 px-md-2" scope="col"><i class="bi bi-grid-3x2-gap-fill"></i> Acciones</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="paciente : ${ListaPacientes}">
+                <th class="col-md-4 px-md-2 text-center"
+                    style="text-decoration: aliceblue;"
+                    scope="row"
+                    th:text="${#numbers.formatInteger(paciente.dni, 8, 'POINT')}"></th>
+                <td class="col-md-4 px-md-2 text-center"  th:text="|${paciente.nombre} ${paciente.apellido}|"></td>    <!-- "<td></td>" Datos de la tabla de la tabla -->
+                <td class="col-md-0 px-md-2 text-center"  th:text="${paciente.telefono}"></td>
+                <td class="col-md-4 px-md-2 text-center"  th:text="${paciente.email}"></td>
+                <td class="col-md-4 px-md-2 d-flex justify-content-around w-100">    <!-- "<td></td>" Datos de la tabla de la tabla -->
+                    <a class="btn btn-secondary btn-sm" th:href="@{/pacientes/editar/__${paciente.idPaciente}__}"><i class="bi bi-vector-pen"></i> Editar</a>
+                    <form th:action="@{/pacientes/eliminar/__${paciente.idPaciente}__}" method="post">
+                        <button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-trash"></i> Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+</body>
+</html>

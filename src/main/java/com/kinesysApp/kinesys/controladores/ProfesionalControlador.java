@@ -33,12 +33,20 @@ public class ProfesionalControlador {
     @Autowired
     private ObraSocialServicio obraSocialServicio;
 
-    @GetMapping(name ="/crear")
+    @GetMapping()
+    public ModelAndView mostrarProfesionales() {  //ModelAndView busca un HTML
+        ModelAndView mav = new ModelAndView("profesional");
+        mav.addObject("ListaProfesionales", profesionalServicio.buscarTodos());
+        return mav;
+    }
+
+    @GetMapping("/crear")
     public ModelAndView crearProfesional(){
         ModelAndView mav =new ModelAndView("profesional-form");
         mav.addObject("profesional",new Profesional());
         mav.addObject("usuario",new Usuario());
-        mav.addObject("sexos", Sexo.values());
+        mav.addObject("zona",new Zona());
+        mav.addObject("sexos",Sexo.values());
         mav.addObject("provincias", Provincia.values());
         mav.addObject("listObraS",obraSocialServicio.buscarTodasObrasSocial());
         mav.addObject("titulo","Formulario Profesionales");
@@ -47,7 +55,7 @@ public class ProfesionalControlador {
         return mav;
     }
 
-    @PostMapping(name ="/guardar")
+    @PostMapping("/guardar")
     public String guardarProfesional(Profesional profesional,
                                      List<ObraSocial> seleccionObrasSociales,
                                      Usuario usuario,
