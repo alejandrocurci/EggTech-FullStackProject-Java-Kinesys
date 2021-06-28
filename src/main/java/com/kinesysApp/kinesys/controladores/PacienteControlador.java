@@ -36,7 +36,6 @@ public class PacienteControlador {
     public ModelAndView crearPaciente() {
         ModelAndView mav = new ModelAndView("paciente-form");
         mav.addObject("paciente", new Paciente());
-        mav.addObject("ListaPacientes", pacienteServicio.buscarTodos());
         mav.addObject("usuario", new Usuario());
         mav.addObject("titulo", "Nuevo Paciente");
         mav.addObject("action", "guardar");
@@ -44,8 +43,9 @@ public class PacienteControlador {
     }
 
     @PostMapping("/guardar")
-    public String guardarPaciente(@Valid  Paciente paciente,
-                                  Usuario usuario, Model model) {
+    public String guardarPaciente(Paciente paciente,
+                                  Usuario usuario,
+                                  Model model) {
         try {
             pacienteServicio.crear(paciente.getDni(),
                     paciente.getNombre(),
@@ -61,8 +61,7 @@ public class PacienteControlador {
                 ex.printStackTrace();
                 model.addAttribute(ETIQUETA_ERROR, ex.getMessage());
                 model.addAttribute("paciente", paciente);
-                model.addAttribute("usuario", usuario);
-                model.addAttribute("titulo", "Nuevo Paciente");
+                //model.addAttribute("usuario", usuario);
                 model.addAttribute("action", "guardar");
 
             return "paciente-form";
@@ -113,21 +112,4 @@ public class PacienteControlador {
 
         }
     }
-
-    /*@GetMapping("/buscarPaciente")
-    public String buscarPacientePorDni(@RequestParam(required = false) Long dni,
-                                             Model model) {   //ModelAndView busca un HTML
-
-        try {
-            model.addAttribute("paciente", pacienteServicio.buscarPacientePorDni(dni));
-            return "redirect: /pacientes";
-        } catch (ExcepcionKinesysPaciente ex) {
-
-            model.addAttribute("error", ex.getMessage());
-            return "redirect: /pacientes";
-
-        }
-    }*/
-
-
 }

@@ -200,3 +200,36 @@ form.addEventListener("submit", (event) => {
 
 </body>
 </html>
+
+
+
+
+<div id="login" >
+    <h1>Bienvenido a Kinesys</h1>
+
+    <form action="/" 
+    id="formulario2"
+      th:object="${usuario}"
+      method="post">
+
+          <div class="field-wrap">
+                <label>
+                      Usuario<span class="req">*</span>
+                </label>
+                <input type="text" required autocomplete="off" th:field="*{nombreU}"/>
+          </div>
+
+          <div class="field-wrap">
+                <label>
+                      Contraseña<span class="req">*</span>
+                </label>
+                <input type="password" required autocomplete="off" th:field="*{clave}"/>
+          </div>
+
+          <p class="forgot"><a href="#">Olvidé la contraseña</a></p>
+
+          <button type="submit" class="button button-block" >Ingresar</button>
+
+    </form>
+
+</div>
