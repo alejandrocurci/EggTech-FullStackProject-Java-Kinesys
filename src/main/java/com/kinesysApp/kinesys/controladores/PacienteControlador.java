@@ -8,8 +8,10 @@ import com.kinesysApp.kinesys.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 
@@ -43,9 +45,14 @@ public class PacienteControlador {
     }
 
     @PostMapping("/guardar")
-    public String guardarPaciente(Paciente paciente,
-                                  Usuario usuario,
+    public String guardarPaciente(@Valid Paciente paciente, BindingResult resultPaciente,
+                                  @Valid Usuario usuario,BindingResult resultUsuario,
                                   Model model) {
+
+        if(resultPaciente.hasErrors() || resultUsuario.hasErrors()){
+            model.addAttribute("titulo", "Nuevo Paciente");
+            return "paciente-form";
+        }
         try {
             pacienteServicio.crear(paciente.getDni(),
                     paciente.getNombre(),
@@ -57,8 +64,6 @@ public class PacienteControlador {
             return "redirect:/";
         } catch (ExcepcionKinesysPaciente ex) {
 
-                System.out.println(ex.getCause());
-                ex.printStackTrace();
                 model.addAttribute(ETIQUETA_ERROR, ex.getMessage());
                 model.addAttribute("paciente", paciente);
                 //model.addAttribute("usuario", usuario);
@@ -78,11 +83,43 @@ public class PacienteControlador {
         }
     }
 
+    @GetMapping("/editar/{idPaciente}")
+    public ModelAndView editarPaciente(@PathVariable(value ="idPaciente") String idPaciente){
+        ModelAndView mav = new ModelAndView("paciente-form");
+        Paciente paciente=pacienteServicio.buscarPorId(idPaciente);
+        mav.addObject("paciente",paciente);
+        mav.addObject("usuario", paciente.getUsuarioPaciente());
+        mav.addObject("titulo", "editar Paciente");
+        mav.addObject("action", "modificar");
+        return mav;
+
+    }
+    @PostMapping("/modificar")
+    public RedirectView modificarPaciente(@ModelAttribute("paciente") Paciente paciente, Usuario usuario,Model model){
+        try {
+            pacienteServicio.modificar(
+                    paciente.getIdPaciente(),
+                    paciente.getDni(),
+                    paciente.getNombre(),
+                    paciente.getApellido(),
+                    paciente.getTelefono(),
+                    paciente.getEmail());
+            return new RedirectView("/pacientes");
+        }catch (ExcepcionKinesysPaciente ex){
+
+            model.addAttribute(ETIQUETA_ERROR, ex.getMessage());
+            model.addAttribute("paciente", paciente);
+            //model.addAttribute("usuario", usuario);
+            model.addAttribute("action", "guardar");
+
+            return new RedirectView("/");
+        }
+
+
+    }
    @GetMapping("/buscarPaciente")
-    public ModelAndView buscarPacientePorDni(@RequestParam(required = false) Long dni) {   //ModelAndView busca un HTML
-
+    public ModelAndView buscarPacientePorDni(@RequestParam(required = false) Long dni) {   //ModelAndView busca un HTml
        ModelAndView mav = new ModelAndView("paciente");
-
         try {
             mav.addObject("ListaPacientes", pacienteServicio.buscarPacientePorDni(dni));
             return mav;

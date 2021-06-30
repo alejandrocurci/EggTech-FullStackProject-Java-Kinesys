@@ -19,20 +19,21 @@ public class Paciente implements Serializable {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String idPaciente;
 
-
+    //@NotEmpty
     @Column(unique = true)
     private Long dni ;
 
-    //@NotEmpty(message = "El nombre no pude ser vacio ")
+    @NotEmpty
     private String nombre;
 
-
+    @NotEmpty
     private String apellido;
 
-
+    @NotEmpty
     private String  telefono;
 
-    //@Email(message = "El mail no puede ser vacion")
+    @NotEmpty
+    @Email
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL)

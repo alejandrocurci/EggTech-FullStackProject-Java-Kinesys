@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <meta name="description" content="Kinesys"/>
-    <meta name="Pacientes" content="Leonardo Mella"/>
-    <title>Pacientes</title>
+    <meta name="Profesional" content="Leonardo Mella"/>
+    <title>Profesional</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
@@ -18,19 +18,19 @@
 <body class="FondoCliente">
 
 <div class="container mt-5 main" id="ajustarpantalla" style="background-color:transparent;">
-    <h1>Listado de Pacientes</h1>
+    <h1>Listado de Profesionales</h1>
     <hr class="mb-5"/>  <!-- "<hr></hr>" separación temática -->
 
 
-    <div th:if="${(ListaPacientes == null || ListaPacientes.isEmpty()) && error == null}"> <!-- recorre la lista clientes y si no hay me manda a cargar  un cliente -->
+    <div th:if="${(ListaProfesionales == null || ListaProfesionales.isEmpty()) && error == null}"> <!-- recorre la lista clientes y si no hay me manda a cargar  un cliente -->
 
-        <h5>Todavía no hay Pacientes cargados. <a th:href="@{/pacientes/crear}"><i class="bi bi-person-plus-fill"></i> Cargar paciente.</a></h5>
+        <h5>Todavía no hay Profesionales cargados. <a th:href="@{/profesionales/crear}"><i class="bi bi-person-plus-fill"></i> Cargar profesional.</a></h5>
     </div>
-    <div class="d-flex " th:if="${!(ListaPacientes == null || ListaPacientes.isEmpty())}">
-        <form class="d-flex "  th:action="@{/pacientes/buscarPaciente}" method="get">
+    <div class="d-flex " th:if="${!(ListaProfesionales == null || ListaProfesionales.isEmpty())}">
+        <form class="d-flex "  th:action="@{/profesionales/buscarProfesional}" method="get">
             <input class="form-control me-2"
                    type="search"
-                   placeholder="Dni del cliente"
+                   placeholder="Dni del profesional"
                    style="text-align: center"
                    aria-label="Search"
                    name="dni"
@@ -38,11 +38,11 @@
             <button class="btn btn-outline-secondary " type="submit"  > Buscar</button>
         </form>
     </div>
-    <div class="d-flex " th:if="${!(ListaPacientes == null || ListaPacientes.isEmpty())}">
-        <form class="d-flex "  th:action="@{/pacientes/buscarPacientePorNombre}" method="get">
+    <div class="d-flex " th:if="${!(ListaProfesionales == null || ListaProfesionales.isEmpty())}">
+        <form class="d-flex "  th:action="@{/profesionales/buscarProfesionalPorNombre}" method="get">
             <input class="form-control me-2"
                    type="search"
-                   placeholder="nombre del cliente"
+                   placeholder="nombre del profesional"
                    style="text-align: center"
                    aria-label="Search"
                    name="nombre"
@@ -55,30 +55,34 @@
     <div th:if="${error != null}" class="alert alert-danger" th:text="${error}"></div>                  <!-- "<p>..</p>" etiquta de parrafo-->
 
 
-    <div th:unless="${ListaPacientes == null || ListaPacientes.isEmpty()  }" class="table-responsive">
+    <div th:unless="${ListaProfesionales == null || ListaProfesionales.isEmpty()  }" class="table-responsive">
         <table class="table table-hover table-sm table-bordered">
             <thead class="table-secondary text-center">                                                             <!-- "<thead></thead>" agrupacion de cabecera -->
             <tr>                                                                                                <!-- "<tr></tr>" es la fila de la tabla -->
                 <th class="col-md-4 px-md-2" scope="col"><i class="bi bi-person-lines-fill"></i> Dni</th>
                 <th class="col-md-4 px-md-2" scope="col"><i class="bi bi-person-lines-fill"></i> Nombre y Apellido </th>   <!-- "<th></th>" es la cabecera  de la tabla -->
                 <th class="col-md-4 px-md-2" scope="col"><i class="bi bi-telephone-fill"></i> Telefono</th>
+                <th class="col-md-4 px-md-2" scope="col"><i class="bi bi-telephone-fill"></i> Edad</th>
                 <th class="col-md-4 px-md-2" scope="col"><i class="bi bi-house-door-fill"></i> Correo electronico</th>
+                <th class="col-md-4 px-md-2" scope="col"><i class="bi bi-telephone-fill"></i> Matricula</th>
                 <th class="col-md-4 px-md-2" scope="col"><i class="bi bi-grid-3x2-gap-fill"></i> Acciones</th>
             </tr>
             </thead>
 
             <tbody>
-            <tr th:each="paciente : ${ListaPacientes}">
+            <tr th:each="profesional : ${ListaProfesionales}">
                 <th class="col-md-4 px-md-2 text-center"
                     style="text-decoration: aliceblue;"
                     scope="row"
-                    th:text="${#numbers.formatInteger(paciente.dni, 8, 'POINT')}"></th>
-                <td class="col-md-4 px-md-2 text-center"  th:text="|${paciente.nombre} ${paciente.apellido}|"></td>    <!-- "<td></td>" Datos de la tabla de la tabla -->
-                <td class="col-md-0 px-md-2 text-center"  th:text="${paciente.telefono}"></td>
-                <td class="col-md-4 px-md-2 text-center"  th:text="${paciente.email}"></td>
+                    th:text="${#numbers.formatInteger(profesional.dni, 8, 'POINT')}"></th>
+                <td class="col-md-4 px-md-2 text-center"  th:text="|${profesional.nombre} ${profesional.apellido}|"></td>    <!-- "<td></td>" Datos de la tabla de la tabla -->
+                <td class="col-md-0 px-md-2 text-center"  th:text="${profesional.telefono}"></td>
+                <td class="col-md-4 px-md-2 text-center"  th:text="${profesional.edad}"></td>
+                <td class="col-md-4 px-md-2 text-center"  th:text="${profesional.email}"></td>
+                <td class="col-md-4 px-md-2 text-center"  th:text="${profesional.matricula}"></td>
                 <td class="col-md-4 px-md-2 d-flex justify-content-around w-100">    <!-- "<td></td>" Datos de la tabla de la tabla -->
-                    <a class="btn btn-secondary btn-sm" th:href="@{/pacientes/editar/__${paciente.idPaciente}__}"><i class="bi bi-vector-pen"></i> Editar</a>
-                    <form th:action="@{/pacientes/eliminar/__${paciente.idPaciente}__}" method="post">
+                    <a class="btn btn-secondary btn-sm" th:href="@{/profesionales/editar/__${profesional.idProfesional}__}"><i class="bi bi-vector-pen"></i> Editar</a>
+                    <form th:action="@{/profesionales/eliminar/__${profesional.idProfesional}__}" method="post">
                         <button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-trash"></i> Eliminar</button>
                     </form>
                 </td>

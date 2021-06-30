@@ -62,77 +62,93 @@
             <div id="signup">
                   <h1>Registro Paciente</h1>
 
-                  <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+                  <!--<div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>-->
                   <form th:action="@{/pacientes/__${action}__}"
                         method="post"
                         th:object="${paciente}"
                         id="formulario"
                         novalidate>
+                        <input type="hidden" th:field="*{idPaciente}"/>
 
                         <div class="top-row">
                               <div class="field-wrap">
-                                    <!--<label>
-                                          Nombre<span class="req">*</span>
-                                    </label>-->
+
                                     <input type="text" 
                                     required 
                                     placeholder="Nombre"
                                     autocomplete="off" 
-                                    th:field="*{nombre}"/>
+                                    th:field="*{nombre}"
+                                    th:errorclass="'form-control alert-danger'"/>
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
                               </div>
 
                               <div class="field-wrap">
-                                    <!--<label>
-                                          Apellido<span class="req">*</span>
-                                    </label>-->
+
                                     <input type="text"
                                      required 
                                      autocomplete="off" 
                                      placeholder="Apellido"
-                                     th:field="*{apellido}"/>
+                                     th:field="*{apellido}"
+                                    th:errorclass="'form-control alert-danger'"/>
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></small>
                               </div>
                         </div>
 
                         <div class="field-wrap">
-                              <!--<label>
-                                    DNI <span class="req">*</span>
-                              </label>-->
+
                               <input type="number"
                                      required autocomplete="off"
                                      th:field="*{dni}"
+                                     th:errorclass="'form-control alert-danger'"
                                      placeholder="Dni"
                                      maxlength="8"
                                      oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');"/>
+                              <small class="form-text text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small>
                         </div>
 
                         <div class="field-wrap">
-                             <!-- <label>
-                                    Email <span class="req">*</span>
-                              </label>-->
-                              <input type="email"  autocomplete="off" th:field="*{email}" placeholder="Email" aria-required="true"/>
+
+                              <input type="email"
+                                     autocomplete="off"
+                                     th:field="*{email}"
+                                     th:errorclass="'form-control alert-danger'"
+                                     placeholder="Email"
+                                     aria-required="true"/>
+                              <small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
                         </div>
 
                         <div class="field-wrap">
-                              <!--<label>
-                                    Telefono <span class="req">*</span>
-                              </label>-->
-                              <input type="text" required autocomplete="off" th:field="*{telefono}" placeholder="telefono"/>
+
+                              <input type="text"
+                                     required autocomplete="off"
+                                     th:field="*{telefono}"
+                                     th:errorclass="'form-control alert-danger'"
+                                     placeholder="telefono"/>
+                              <small class="form-text text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></small>
                         </div>
 
                         <div class="top-row" th:object="${usuario}">
 
                               <div class="field-wrap">
-                                    <!--<label>
-                                          Usuario<span class="req">*</span>
-                                    </label>-->
-                                    <input type="text" required autocomplete="off" th:field="*{nombreU}" placeholder="Usuario"/>
+
+                                    <input type="text"
+                                           required
+                                           autocomplete="off"
+                                           th:field="*{nombreU}"
+                                           th:errorclass="'form-control alert-danger'"
+                                           placeholder="Usuario"/>
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('nombreU')}" th:errors="*{nombreU}"></small>
                               </div>
 
                               <div class="field-wrap">
-                                    <!--<label>
-                                          Contraseña<span class="req">*</span>
-                                    </label>-->
-                                    <input type="password" required autocomplete="off" th:field="*{clave}" placeholder="Contraseña"/>
+
+                                    <input type="password"
+                                           required
+                                           autocomplete="off"
+                                           th:field="*{clave}"
+                                           th:errorclass="'form-control alert-danger'"
+                                           placeholder="Contraseña"/>
+                                    <small class="form-text text-danger" th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></small>
                               </div>
                         </div>
 

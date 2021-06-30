@@ -11,12 +11,10 @@ import com.kinesysApp.kinesys.excepciones.ExcepcionKinesysPaciente;
 import com.kinesysApp.kinesys.servicios.ObraSocialServicio;
 import com.kinesysApp.kinesys.servicios.ProfesionalServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -48,7 +46,7 @@ public class ProfesionalControlador {
         mav.addObject("zona",new Zona());
         mav.addObject("sexos",Sexo.values());
         mav.addObject("provincias", Provincia.values());
-        mav.addObject("listObraS",obraSocialServicio.buscarTodasObrasSocial());
+        mav.addObject("obrasSociales",obraSocialServicio.buscarTodasObrasSocial());
         mav.addObject("titulo","Formulario Profesionales");
         mav.addObject("action","guardar");
 
@@ -57,7 +55,7 @@ public class ProfesionalControlador {
 
     @PostMapping("/guardar")
     public String guardarProfesional(Profesional profesional,
-                                     List<ObraSocial> seleccionObrasSociales,
+                                     String idObraSocial,
                                      Usuario usuario,
                                      Zona zona,
                                      Model model){
@@ -72,9 +70,9 @@ public class ProfesionalControlador {
                     profesional.getMatricula(),
                     profesional.getSexo(),
                     zona,
-                    seleccionObrasSociales,
+                    obraSocialServicio.buscarPorId(idObraSocial),
                     usuario);
-            return "redirect:/";
+            return "redirect:/profesionales";
         }catch(ExcepcionKinessysProfesional ex){
 
             System.out.println(ex.getCause());
