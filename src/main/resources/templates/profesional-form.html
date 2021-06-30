@@ -68,7 +68,7 @@
             th:object="${profesional}"
             id="formulario"
             novalidate>
-
+                <input type="hidden" th:field="*{idProfesional}"/>
                 <div class="top-row">
                        <div class="field-wrap">
                                     <!--<label>
@@ -144,7 +144,7 @@
                 </div>
                 
                 <!--Sexo profesional-->
-                <label for="Elija Sexo"><i class="bi bi-gender-ambiguous"></i> Sexo</label>
+                <label for="sexo"><i class="bi bi-gender-ambiguous"></i> Sexo</label>
                 <div class="form-floating mb-2 col-xl-3">
                     <select id="sexo"
                             type="text"
@@ -160,9 +160,11 @@
                           th:selected="${sexo != null}"></option>
                     </select>
                 </div>
-                <div class="top-row" th:object="${zona}"> 
+
+                <!--ZONA-->
+                <div class="top-row" th:object="${zona}">
                 <!--provincia profesional-->
-                <label for="Elija provincia"><i class="bi bi-gender-ambiguous"></i> provincia</label>
+                <label for="provincia"><i class="bi bi-gender-ambiguous"></i> provincia</label>
                 <div class="form-floating mb-2 col-xl-3">
                     <select id="provincia"
                             type="text"
@@ -195,9 +197,41 @@
                     autocomplete="off"
                     th:field="*{domicilio}" 
                     placeholder="Domicilio"/>
-              </div>
+                 </div>
                 </div>
 
+
+                    <!--ObraSoacial profesional-->
+                    <label for="obraSocial"><i class="bi bi-gender-ambiguous"></i> Obrasocial</label>
+                    <div class="form-floating mb-2 col-xl-3">
+                        <select id="obraSocial"
+                                class="form-select"
+                                placeholder="Elija obrasocial"
+
+                                required >
+                            <option value="" selected>Elegir una obra Social</option>
+                            <option  th:each ="obrasocial : ${obrasSociales}"
+                                     th:text="${obrasocial.nombre}"
+                                     th:value="${obrasocial.idObraSocial}"></option>
+                        </select>
+                    </div>
+
+
+            <!--<div class="col-md-12 col-sm-12" style="display: none" id="tipoCargas">
+                     <div class="form-group">
+                       <label for="selectCargas" >
+                         <span th:text="#{text.vehiculo.form.tipo.cargas}"></span>
+                           <span class="danger"> * </span>
+                            </label>
+                            <select class="form-control"
+                             th:field="*{idCargas}" multiple
+                             id="selectCargas" disabled>
+                            <option th:each="tr : ${tipoCargas}"
+                              th:text="${tr.caracteristicas}" th:value="${tr.id}"
+                            th:select="${vehiculo.idCargas == tr.id}">
+              </select>
+             </div>-->
+            <!--USUARIO-->>
                 <div class="top-row" th:object="${usuario}">
 
                     <div class="field-wrap">

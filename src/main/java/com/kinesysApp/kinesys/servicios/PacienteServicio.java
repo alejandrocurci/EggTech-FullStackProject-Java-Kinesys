@@ -53,8 +53,7 @@ public class PacienteServicio {
 
     @Transactional
     public void modificar(String idPaciente, Long dni, String nombre,
-                          String apellido, String telefono, String email
-    ) {
+                          String apellido, String telefono, String email) throws ExcepcionKinesysPaciente{
 
         Paciente paciente = pacienteRepositorio.findById(idPaciente).orElse(null);
         if (paciente != null) {

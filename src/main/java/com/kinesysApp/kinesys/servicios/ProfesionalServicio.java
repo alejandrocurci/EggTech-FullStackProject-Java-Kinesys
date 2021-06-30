@@ -39,7 +39,7 @@ public class  ProfesionalServicio {
                       Integer matricula,
                       Sexo sexo,
                       Zona zona,
-                      List<ObraSocial> obraSocial,
+                      ObraSocial obraSocial,
                       Usuario usuario) throws ExcepcionKinessysProfesional {
 
         validarProfesional(dni, nombre, apellido, edad, telefono, email, matricula, sexo, zona, obraSocial, usuario);
@@ -60,7 +60,7 @@ public class  ProfesionalServicio {
 
         profesional.setZonaProfesionales(Arrays.asList(zona));
 
-        profesional.setObraSocialProfesionales(obraSocial);
+        profesional.setObraSocialProfesionales(Arrays.asList(obraSocial));
 
         profesionalRepositorio.save(profesional);
     }
@@ -89,7 +89,7 @@ public class  ProfesionalServicio {
                                    Integer matricula,
                                    Sexo sexo,
                                    Zona zona,
-                                   List<ObraSocial> obraSocial,
+                                   ObraSocial obraSocial,
                                    Usuario usuario) throws ExcepcionKinessysProfesional {
 
         if (dni == null || dni <= 0) {
