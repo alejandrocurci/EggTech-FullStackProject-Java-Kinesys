@@ -1,3 +1,17 @@
-.body{
 
+.index-fondo {
+    background-image: url(imagen-fondo.jpg);
+    background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 600px;
+        overflow: hidden;
+}
+
+@media (max-width: 992px) {
+    .index-fondo {
+        background-position: top;
+        width: 100%;
+        height: 500px;
+    }
 }
