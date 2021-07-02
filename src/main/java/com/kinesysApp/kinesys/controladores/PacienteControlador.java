@@ -114,8 +114,6 @@ public class PacienteControlador {
 
             return new RedirectView("/");
         }
-
-
     }
    @GetMapping("/buscarPaciente")
     public ModelAndView buscarPacientePorDni(@RequestParam(required = false) Long dni) {   //ModelAndView busca un HTml
