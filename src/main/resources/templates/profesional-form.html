@@ -71,9 +71,6 @@
                 <input type="hidden" th:field="*{idProfesional}"/>
                 <div class="top-row">
                        <div class="field-wrap">
-                                    <!--<label>
-                                          Nombre<span class="req">*</span>
-                                    </label>-->
                                     <input type="text" 
                                     required 
                                     placeholder="Nombre"
@@ -83,9 +80,6 @@
 
                    
                             <div class="field-wrap">
-                                <!--<label>
-                                      Apellido<span class="req">*</span>
-                                </label>-->
                                 <input type="text"
                                  required 
                                  autocomplete="off" 
@@ -96,9 +90,6 @@
                 
 
                 <div class="field-wrap">
-                    <!--<label>
-                          DNI <span class="req">*</span>
-                    </label>-->
                     <input type="number"
                            required autocomplete="off"
                            th:field="*{dni}"
@@ -116,7 +107,6 @@
                 </div>
 
                 <div class="field-wrap">
-                    
                     <input type="text" 
                     required
                     autocomplete="off" 
@@ -172,7 +162,6 @@
                             class="form-control"
                             placeholder="Elija provincia"
                             th:field= "*{provincia}"
-                            th:value="${provincia}"
                             required >
                         <option  th:each ="provincia : ${provincias}" 
                         th:value="${provincia}" 
@@ -201,13 +190,23 @@
                 </div>
 
 
-                    <!--ObraSoacial profesional-->
+                    <!--ObraSoacial profesional
+                    id="sexo"
+                            type="text"
+                            name="sexo"
+                            class="form-control"
+                            placeholder="Elija Sexo"
+                            th:field= "*{sexo}"
+                            th:value="${sexo}"
+
+                    -->
                     <label for="obraSocial"><i class="bi bi-gender-ambiguous"></i> Obrasocial</label>
                     <div class="form-floating mb-2 col-xl-3">
                         <select id="obraSocial"
-                                class="form-select"
+                                type="text"
+                                class="field-wrap"
                                 placeholder="Elija obrasocial"
-
+                                th:field="*{obraSocialProfesionales}"
                                 required >
                             <option value="" selected>Elegir una obra Social</option>
                             <option  th:each ="obrasocial : ${obrasSociales}"
