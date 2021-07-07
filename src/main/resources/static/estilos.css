@@ -45,3 +45,13 @@
     top: -10px;
     left: calc(50% - 50px);
 }
+.texto-encima {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: monospace;
+    font-size: 35px;
+    font-style: italic;
+    color: black;
+    }
