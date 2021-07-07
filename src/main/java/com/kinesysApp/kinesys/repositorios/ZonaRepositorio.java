@@ -7,14 +7,12 @@ package com.kinesysApp.kinesys.repositorios;
 
 
 import com.kinesysApp.kinesys.entidades.Zona;
+import com.kinesysApp.kinesys.enumeraciones.Provincia;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author flor
- */
 @Repository
 public interface ZonaRepositorio extends JpaRepository<Zona,String> {
-    
+
 }

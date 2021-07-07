@@ -1,17 +1,47 @@
-
-.index-fondo {
-    background-image: url(imagen-fondo.jpg);
+.fondo {
+    background: url(/img/imagen-fondo.jpg) #ccc no-repeat;
     background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
         height: 600px;
-        overflow: hidden;
+        margin: auto;
+        padding: auto;
+        font-family: sans-serif;
+        overflow: scroll;
+         -webkit-background-size: cover;
+            -moz-background-size: cover;
 }
 
+.fondoProfesional {
+    background: url(/img/imagen-fondo.jpg) #ccc no-repeat;
+    background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+        height: 600px;
+        margin: auto;
+        padding: auto;
+        font-family: sans-serif;
+        overflow: scroll;
+         -webkit-background-size: cover;
+            -moz-background-size: cover;
+}
 @media (max-width: 992px) {
     .index-fondo {
         background-position: top;
         width: 100%;
         height: 500px;
     }
+}
+
+.avatar{
+    width: 50px;
+    height: 50px;
+    border-radius: 10%;
+    position: relative fixed;
+    top: -10px;
+    left: calc(50% - 50px);
 }

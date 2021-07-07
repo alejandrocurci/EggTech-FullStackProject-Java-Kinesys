@@ -47,7 +47,7 @@ public class PacienteControlador {
     @PostMapping("/guardar")
     public String guardarPaciente(@Valid Paciente paciente, BindingResult resultPaciente,
                                   @Valid Usuario usuario,BindingResult resultUsuario,
-                                  Model model) {
+                                  Model model)throws ExcepcionKinesysPaciente {
 
         if(resultPaciente.hasErrors() || resultUsuario.hasErrors()){
             model.addAttribute("titulo", "Nuevo Paciente");

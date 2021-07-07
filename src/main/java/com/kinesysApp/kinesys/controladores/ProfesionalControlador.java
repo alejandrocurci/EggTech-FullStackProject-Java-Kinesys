@@ -1,20 +1,22 @@
 package com.kinesysApp.kinesys.controladores;
 
 import com.kinesysApp.kinesys.entidades.*;
+import com.kinesysApp.kinesys.enumeraciones.Especialidad;
 import com.kinesysApp.kinesys.enumeraciones.Provincia;
 import com.kinesysApp.kinesys.enumeraciones.Sexo;
 import com.kinesysApp.kinesys.excepciones.ExcepcionKinessysProfesional;
 import com.kinesysApp.kinesys.excepciones.ExcepcionKinesysPaciente;
+import com.kinesysApp.kinesys.modelos.busqueda.BusquedaProfesional;
 import com.kinesysApp.kinesys.servicios.ObraSocialServicio;
 import com.kinesysApp.kinesys.servicios.ProfesionalServicio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,9 +32,23 @@ public class ProfesionalControlador {
     private ObraSocialServicio obraSocialServicio;
 
     @GetMapping()
-    public ModelAndView mostrarProfesionales() {  //ModelAndView busca un HTML
+    public ModelAndView mostrarProfesionales(@ModelAttribute BusquedaProfesional busqueda,
+                                             Model model) throws ExcepcionKinessysProfesional {  //ModelAndView busca un HTML
         ModelAndView mav = new ModelAndView("profesional");
-        mav.addObject("ListaProfesionales", profesionalServicio.buscarTodos());
+        List<Profesional> profesionales=null;
+        try{
+            profesionales=profesionalServicio.buscarPorFiltro(busqueda);
+
+        }catch(ExcepcionKinessysProfesional ex){
+            profesionales=new ArrayList<>();
+            model.addAttribute("errorfiltro",ex.getMessage());
+        }
+        mav.addObject("ListaProfesionales", profesionales);
+        mav.addObject("provincias", Provincia.values());
+        mav.addObject("especialidades", Especialidad.values());
+        mav.addObject("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
+        mav.addObject("busqueda",busqueda );
+
         return mav;
     }
 
@@ -44,6 +60,7 @@ public class ProfesionalControlador {
         mav.addObject("zona", new Zona());
         mav.addObject("sexos", Sexo.values());
         mav.addObject("provincias", Provincia.values());
+        mav.addObject("especialidades", Especialidad.values());
         mav.addObject("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
         mav.addObject("titulo", "Formulario Profesionales");
         mav.addObject("action", "guardar");
@@ -65,6 +82,7 @@ public class ProfesionalControlador {
                     profesional.getEdad(),
                     profesional.getTelefono(),
                     profesional.getEmail(),
+                    profesional.getEspecialidad(),
                     profesional.getMatricula(),
                     profesional.getSexo(),
                     zona,
@@ -81,6 +99,8 @@ public class ProfesionalControlador {
             model.addAttribute("zona", zona);
             model.addAttribute("sexos", Sexo.values());
             model.addAttribute("provincias", Provincia.values());
+            model.addAttribute("especialidades", Especialidad.values());
+            model.addAttribute("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
             model.addAttribute("titulo", "Nuevo Profesional");
             model.addAttribute("action", "guardar");
 
@@ -89,7 +109,6 @@ public class ProfesionalControlador {
         }
 
     }
-
     @GetMapping("/editar/{idProfesional}")
     public ModelAndView editarProfesional(@PathVariable(value = "idProfesional") String idProfesional) {
         ModelAndView mav = new ModelAndView("profesional-form");
@@ -98,6 +117,7 @@ public class ProfesionalControlador {
         mav.addObject("usuario", profesional.getUsuarioProfesional());
         mav.addObject("zona", profesional.getZonaProfesionales().get(0));
         mav.addObject("provincias", Provincia.values());
+        mav.addObject("especialidades", Especialidad.values());
         mav.addObject("sexos", Sexo.values());
         mav.addObject("obrasSociales", profesional.getObraSocialProfesionales());
         mav.addObject("titulo", "Editar Profesional");
@@ -109,9 +129,6 @@ public class ProfesionalControlador {
     @PostMapping("/modificar")
     public RedirectView modificarProfesional(@ModelAttribute("profesional") Profesional profesional,
                                              Usuario usuario, Zona zona, Sexo sexo, Model model) {
-        System.out.println(profesional.toString());
-        System.out.println("");
-        System.out.println(zona.toString());
         try {
             profesionalServicio.modificar(
                     profesional.getIdProfesional(),
@@ -119,6 +136,7 @@ public class ProfesionalControlador {
                     profesional.getNombre(),
                     profesional.getApellido(),
                     profesional.getEdad(),
+                    profesional.getEspecialidad(),
                     profesional.getTelefono(),
                     profesional.getEmail(),
                     profesional.getMatricula(),
@@ -133,6 +151,7 @@ public class ProfesionalControlador {
             model.addAttribute("zona", zona);
             model.addAttribute("sexos", Sexo.values());
             model.addAttribute("provincias", Provincia.values());
+            model.addAttribute("obrasSociales", profesional.getObraSocialProfesionales());
             model.addAttribute("titulo", "Nuevo Profesional");
             model.addAttribute("action", "guardar");
             return new RedirectView ("/modificar");
