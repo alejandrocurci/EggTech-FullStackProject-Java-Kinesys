@@ -6,6 +6,7 @@ import com.kinesysApp.kinesys.excepciones.ExcepcionKinessysProfesional;
 import com.kinesysApp.kinesys.excepciones.ExcepcionKinesysPaciente;
 import com.kinesysApp.kinesys.repositorios.ProfesionalRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,9 @@ public class ProfesionalServicio {
     private RolServicio rolServicio;
     @Autowired
     private ObraSocialServicio obraSocialServicio;
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     @Transactional
     public void crear(Long dni,
@@ -134,4 +138,114 @@ public class ProfesionalServicio {
             profesionalRepositorio.save(profesional);
         }
     }
+
+    // FUNCIONALIDAD PARA PERFIL
+
+    @Transactional
+    public void actualizarNombre(String idProfesional, String nombreNuevo) {
+        Profesional profesional = profesionalRepositorio.findById(idProfesional).orElse(null);
+        profesional.setNombre(nombreNuevo);
+        profesionalRepositorio.save(profesional);
+    }
+
+    @Transactional
+    public void actualizarApellido(String idProfesional, String apellidoNuevo) {
+        Profesional profesional = profesionalRepositorio.findById(idProfesional).orElse(null);
+        profesional.setApellido(apellidoNuevo);
+        profesionalRepositorio.save(profesional);
+    }
+
+    @Transactional
+    public void actualizarDni(String idProfesional, Long dniNuevo) {
+        Profesional profesional = profesionalRepositorio.findById(idProfesional).orElse(null);
+        profesional.setDni(dniNuevo);
+        profesionalRepositorio.save(profesional);
+    }
+
+    @Transactional
+    public void actualizarTelefono(String idProfesional, Long telefonoNuevo) {
+        Profesional profesional = profesionalRepositorio.findById(idProfesional).orElse(null);
+        profesional.setTelefono(telefonoNuevo);
+        profesionalRepositorio.save(profesional);
+    }
+
+    @Transactional
+    public void actualizarEdad(String idProfesional, Integer edadNueva) {
+        Profesional profesional = profesionalRepositorio.findById(idProfesional).orElse(null);
+        profesional.setEdad(edadNueva);
+        profesionalRepositorio.save(profesional);
+    }
+
+    @Transactional
+    public void actualizarSexo(String idProfesional, Sexo sexo) {
+        Profesional profesional = profesionalRepositorio.findById(idProfesional).orElse(null);
+        profesional.setSexo(sexo);
+        profesionalRepositorio.save(profesional);
+    }
+
+    @Transactional
+    public void actualizarEmail(String idProfesional, String emailNuevo) {
+        Profesional profesional = profesionalRepositorio.findById(idProfesional).orElse(null);
+        profesional.setEmail(emailNuevo);
+        profesionalRepositorio.save(profesional);
+    }
+
+    @Transactional
+    public void actualizarMatricula(String idProfesional, Integer matriculaNueva) {
+        Profesional profesional = profesionalRepositorio.findById(idProfesional).orElse(null);
+        profesional.setMatricula(matriculaNueva);
+        profesionalRepositorio.save(profesional);
+    }
+
+    @Transactional
+    public void actualizarUsuario(String idProfesional, String usuarioNuevo) {
+        Profesional profesional = profesionalRepositorio.findById(idProfesional).orElse(null);
+        profesional.getUsuarioProfesional().setNombreU(usuarioNuevo);
+        profesionalRepositorio.save(profesional);
+    }
+
+    @Transactional
+    public void actualizarClave(String idProfesional, String claveNueva) {
+        Profesional profesional = profesionalRepositorio.findById(idProfesional).orElse(null);
+        profesional.getUsuarioProfesional().setClave(encoder.encode(claveNueva));
+        profesionalRepositorio.save(profesional);
+    }
+
+    // ZONAS
+    @Transactional
+    public void agregarZona(String idProfesional, Zona zonaNueva) {
+        Profesional profesional = profesionalRepositorio.findById(idProfesional).orElse(null);
+        profesional.getZonaProfesionales().add(zonaNueva);
+        profesionalRepositorio.save(profesional);
+    }
+
+    @Transactional
+    public void eliminarZona(String idProfesional, String idZona) {
+        Profesional profesional = profesionalRepositorio.findById(idProfesional).orElse(null);
+        Zona zonaParaEliminar = zonaServicio.buscarPorId(idZona);
+        List<Zona> zonas = profesional.getZonaProfesionales();
+        zonas.remove(zonaParaEliminar);
+        profesional.setZonaProfesionales(zonas);
+        profesionalRepositorio.save(profesional);
+    }
+
+    // OBRAS SOCIALES
+    @Transactional
+    public void agregarObraSocial(String idProfesional, String idObraSocial) {
+        Profesional profesional = profesionalRepositorio.findById(idProfesional).orElse(null);
+        ObraSocial obraParaAgregar = obraSocialServicio.buscarPorId(idObraSocial);
+        profesional.getObraSocialProfesionales().add(obraParaAgregar);
+        profesionalRepositorio.save(profesional);
+    }
+
+    @Transactional
+    public void eliminarObraSocial(String idProfesional, String idObraSocial) {
+        Profesional profesional = profesionalRepositorio.findById(idProfesional).orElse(null);
+        ObraSocial obraParaEliminar = obraSocialServicio.buscarPorId(idObraSocial);
+        List<ObraSocial> obras = profesional.getObraSocialProfesionales();
+        obras.remove(obraParaEliminar);
+        profesional.setObraSocialProfesionales(obras);
+        profesionalRepositorio.save(profesional);
+    }
+
 }
