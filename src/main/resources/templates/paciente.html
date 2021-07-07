@@ -54,7 +54,6 @@
                      <!-- "<p>..</p>" etiquta de parrafo-->
     <div th:if="${error != null}" class="alert alert-danger" th:text="${error}"></div>                  <!-- "<p>..</p>" etiquta de parrafo-->
 
-
     <div th:unless="${ListaPacientes == null || ListaPacientes.isEmpty()  }" class="table-responsive">
         <table class="table table-hover table-sm table-bordered">
             <thead class="table-secondary text-center">                                                             <!-- "<thead></thead>" agrupacion de cabecera -->
@@ -66,7 +65,6 @@
                 <th class="col-md-4 px-md-2" scope="col"><i class="bi bi-grid-3x2-gap-fill"></i> Acciones</th>
             </tr>
             </thead>
-
             <tbody>
             <tr th:each="paciente : ${ListaPacientes}">
                 <th class="col-md-4 px-md-2 text-center"
