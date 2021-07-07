@@ -46,132 +46,47 @@
             rel="stylesheet"
             th:href="@{/login.css}"
       >
-     <script src="./login.js"></script>
+
 </head>
 
-<body>
+<body class="fondo">
 
-<div class="form">
-      
-    <ul class="tab-group">
-      <li class="tab active"><a th:action="@{/pacientes/__${action}__}">Sign Up</a></li>
-      <li class="tab"><a th:href="@{/login}">Log In</a></li>
-    </ul>
-
-    <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></Div>
-    <div class="tab-content">
-      <div id="signup">   
-        <h1>Registro Gratuito</h1>
-
-          <form th:action="@{/pacientes/__${action}__}"
+<div class="login-box">
+    <a th:href="@{/}"><img class="avatar" src="/img/logoKinesys.png" alt="logo"></a>
+    <h1>login Here</h1>
+        <form
+                for="login " action="/logincheck"
                 method="post"
-                th:object="${paciente}"
-                id="formulario"
-                novalidate>
+                autocomplete="on">
 
-              <div class="top-row">
-                  <div class="field-wrap">
-                      <label>
-                          Nombre<span class="req">*</span>
-                      </label>
-                      <input type="text"
-                             required
-                             autocomplete="off"
-                             th:field="*{nombre}"
-                      />
-                  </div>
+            <!-- usuario-->
+            <label>Usuario</label>
+            <!-- name="username" si o si para que spring los reconozca-->
+            <input
+                    name="nombreU"
+                    placeholder=" ususario"
+                    type="text"
+                    for="nombreU"
+                    required  >
+            <div class="invalid-feedback">El usuario es obligatorio</div>
 
-                  <div class="field-wrap">
-                      <label>
-                          Apellido<span class="req">*</span>
-                      </label>
-                      <input type="text" required autocomplete="off" th:field="*{apellido}" />
-                  </div>
-              </div>
+            <!--password-->
+            <label>contraseña</label>
 
-              <div class="field-wrap">
-                  <label>
-                      DNI <span class="req">*</span>
-                  </label>
-                  <input type="number"
-                         required autocomplete="off"
-                         th:field="*{dni}"
-                         maxlength="8"
-                         oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');"/>
-              </div>
+            <input
+                    name="password"
+                    type="password"
+                    for="clave"
+                    placeholder="contraseña"
+                    required >
+            <div class="invalid-feedback">La contraseña es obligatoria</div>
 
-              <div class="field-wrap">
-                  <label>
-                      Email <span class="req">*</span>
-                  </label>
-                  <input type="email" required autocomplete="off" th:field="*{email}"/>
-              </div>
+            <button class="btn btn-secondary" type="submit">Log In</button>
 
-              <div class="field-wrap">
-                  <label>
-                      Telefono <span class="req">*</span>
-                  </label>
-                  <input type="text" required autocomplete="off" th:field="*{telefono}"/>
-              </div>
+            <p class="forgot"><a href="#">Olvido su contraseña?</a></p>
 
-              <div class="top-row" th:object="${usuario}">
-
-                  <div class="field-wrap">
-                      <label>
-                          Usuario<span class="req">*</span>
-                      </label>
-                      <input type="text" required autocomplete="off" th:field="*{nombreU}"/>
-                  </div>
-
-                  <div class="field-wrap">
-                      <label>
-                          Contraseña<span class="req">*</span>
-                      </label>
-                      <input type="password" required autocomplete="off" th:field="*{clave}"/>
-                  </div>
-              </div>
-
-              <button type="submit" class="button button-block">Enviar formulario</button>
-
-          </form>
-
-      </div>
-
-      <div id="login">   
-        <h1>Bienvenido a Kinesys</h1>
-        
-        <form action="/logincheck" 
-        method="post"
-        autocomplete="on">
-        
-          <div class="field-wrap">
-          <label>
-            Usuario<span class="req">*</span>
-          </label>
-          <input type="text"
-          name="nombreU"
-          for="nombreU"
-          required 
-          autocomplete="on"/>
-        </div>
-        
-        <div class="field-wrap">
-          <label>
-            Contraseña<span class="req">*</span>
-          </label>
-          <input type="password"
-          name="password"
-          for="clave"
-          required
-           autocomplete="off"/>
-        </div>
-        
-        <p class="forgot"><a href="#">Olvido su contraseña?</a></p>
-        
-        <button class="button button-block" type="submit">Log In</button>
-        
         </form>
-
+        <a href="#">Desea registrarse?</a>
       </div>
       
     </div><!-- tab-content -->
@@ -204,7 +119,7 @@ form.addEventListener("submit", (event) => {
 
 
 
-<div id="login" >
+<!--<div id="login" >
     <h1>Bienvenido a Kinesys</h1>
 
     <form action="/" 
@@ -232,4 +147,4 @@ form.addEventListener("submit", (event) => {
 
     </form>
 
-</div>
+</div>-->

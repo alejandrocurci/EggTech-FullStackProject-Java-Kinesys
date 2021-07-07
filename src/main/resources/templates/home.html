@@ -32,59 +32,8 @@
           th:href="@{/estilos.css}">
 </head>
 
-<body>
-
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/}">Home</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div id="navbarSupportedContent" class="collapse navbar-collapse">
-            <ul class="navbar-nav mb-2 mb-md-0 w-100">
-                <!--DROPDOWN PACIENTES-->
-                <li class="nav-item dropdown">
-                    <a id="dropdown-pacientes" class="nav-link dropdown-toggle" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Pacientes
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdown-pacientes">
-                        <li>
-                            <a class="dropdown-item" th:href="@{/pacientes}">Mostrar pacientes</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" th:href="@{/pacientes/crear}">Registrar nuevo</a>
-                        </li>
-                    </ul>
-                </li>
-                <!--DROPDOWN PROFESIONALES-->
-                <li class="nav-item dropdown">
-                    <a id="dropdown-profesionales" class="nav-link dropdown-toggle" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Profesionales
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdown-profesionales">
-                        <li><a class="dropdown-item" th:href="@{/profesionales}">Mostrar profesionales</a></li>
-                        <li>
-                            <a class="dropdown-item" th:href="@{/profesionales/crear}">Registrar nuevo</a>
-                        </li>
-                    </ul>
-                </li>
-                <!--???????????????????????????????????-->
-                <!--LOG OUT-->
-                <li class="nav-item dropdown ms-auto">
-                    <a class="btn btn-sm btn-outline-secondary" th:href="@{/login(logout)}">Log Out</a>
-                </li>
-                <!--???????????????????????????????????-->
-
-            </ul>
-            </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<body class="fondo">
+<nav th:replace="fragmentnavbar :: navbar "></nav>
 
 <!-- CONTENIDO CENTRAL -->
 <div class="index-fondo">
