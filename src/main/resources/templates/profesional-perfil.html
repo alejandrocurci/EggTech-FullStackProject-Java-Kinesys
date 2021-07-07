@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="Kinesys" />
+    <title>Mi Perfil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <script src="/perfil.js"></script>
+</head>
+
+<body>
+    <div class="container mt-5 main" th:object="${profesional}">
+        <h1>Datos personales</h1>
+        <div>
+            <!-- NOMBRE -->
+            <div class="d-block">
+                <p class="d-inline">Nombre: <span th:text="${profesional.nombre}"></span></p>
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-nombre')">Actualizar</button>
+            </div>
+            <div class="d-none" id="cambio-nombre">
+                <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/nombre}" method="post"
+                    class="d-inline">
+                    <label for="nombre"><i class="bi bi-gender-ambiguous"></i>Nuevo nombre: </label>
+                    <input type="text" id="nombre" placeholder="Nuevo nombre" autocomplete="off" th:field="*{nombre}" />
+                    <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-nombre')">Cancelar</button>
+            </div>
+
+            <!-- APELLIDO -->
+            <div class="d-block">
+                <p class="d-inline">Apellido: <span th:text="${profesional.apellido}"></span></p>
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-apellido')">Actualizar</button>
+            </div>
+            <div class="d-none" id="cambio-apellido">
+                <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/apellido}" method="post"
+                    class="d-inline">
+                    <label for="apellido"><i class="bi bi-gender-ambiguous"></i>Nuevo apellido: </label>
+                    <input type="text" id="apellido" autocomplete="off" th:field="*{apellido}" />
+                    <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-apellido')">Cancelar</button>
+            </div>
+
+            <!-- DNI -->
+            <div class="d-block">
+                <p class="d-inline">DNI: <span th:text="${profesional.dni}"></span></p>
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-dni')">Actualizar</button>
+            </div>
+            <div class="d-none" id="cambio-dni">
+                <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/dni}" method="post"
+                    class="d-inline">
+                    <label for="dni"><i class="bi bi-gender-ambiguous"></i>Nuevo DNI: </label>
+                    <input type="text" id="dni" autocomplete="off" th:field="*{dni}" />
+                    <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-dni')">Cancelar</button>
+            </div>
+
+            <!-- TELEFONO -->
+            <div class="d-block">
+                <p class="d-inline">Telefono: <span th:text="${profesional.telefono}"></span></p>
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-telefono')">Actualizar</button>
+            </div>
+            <div class="d-none" id="cambio-telefono">
+                <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/telefono}" method="post"
+                    class="d-inline">
+                    <label for="telefono"><i class="bi bi-gender-ambiguous"></i>Nuevo telefono: </label>
+                    <input type="text" id="telefono" autocomplete="off" th:field="*{telefono}" />
+                    <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-telefono')">Cancelar</button>
+            </div>
+
+            <!-- EDAD -->
+            <div class="d-block">
+                <p class="d-inline">Edad: <span th:text="${profesional.edad}"></span></p>
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-edad')">Actualizar</button>
+            </div>
+            <div class="d-none" id="cambio-edad">
+                <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/edad}" method="post"
+                    class="d-inline">
+                    <label for="edad"><i class="bi bi-gender-ambiguous"></i>Nueva edad: </label>
+                    <input type="text" id="edad" autocomplete="off" th:field="*{edad}" />
+                    <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-edad')">Cancelar</button>
+            </div>
+
+            <!-- SEXO -->
+            <div class="d-block">
+                <p class="d-inline">Sexo: <span th:text="${profesional.sexo}"></span></p>
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-sexo')">Actualizar</button>
+            </div>
+            <div class="d-none" id="cambio-sexo">
+                <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/sexo}" method="post"
+                    class="d-inline">
+                    <label for="sexo"><i class="bi bi-gender-ambiguous"></i>Nuevo sexo: </label>
+                    <select id="sexo" type="text" name="sexo" class="form-control" placeholder="Sexo"
+                        th:field="*{sexo}" required>
+                        <option th:each="sexo : ${sexos}" th:value="${sexo}" th:text="${sexo}"
+                            th:selected="${sexo != null}"></option>
+                    </select>
+                    <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-sexo')">Cancelar</button>
+            </div>
+
+
+            <!-- EMAIL -->
+            <div class="d-block">
+                <p class="d-inline">Email: <span th:text="${profesional.email}"></span></p>
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-email')">Actualizar</button>
+            </div>
+            <div class="d-none" id="cambio-email">
+                <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/email}" method="post"
+                    class="d-inline">
+                    <label for="email"><i class="bi bi-gender-ambiguous"></i>Nuevo email: </label>
+                    <input type="text" id="email" autocomplete="off" th:field="*{email}" />
+                    <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-email')">Cancelar</button>
+            </div>
+
+            <!-- MATRICULA -->
+            <div class="d-block">
+                <p class="d-inline">Matricula: <span th:text="${profesional.matricula}"></span></p>
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-matricula')">Actualizar</button>
+            </div>
+            <div class="d-none" id="cambio-matricula">
+                <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/matricula}" method="post"
+                    class="d-inline">
+                    <label for="matricula"><i class="bi bi-gender-ambiguous"></i>Nueva matricula: </label>
+                    <input type="text" id="matricula" autocomplete="off" th:field="*{matricula}" />
+                    <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-matricula')">Cancelar</button>
+            </div>
+        </div>
+
+        <hr class="mb-5" /> <!-- "<hr></hr>" separación temática -->
+        <div>
+            <!-- ZONAS -->
+            <div class="d-block">
+                <h2>Zonas: </h2>
+                <div>
+                    <!-- Se muestran las zonas existentes con un boton para eliminar cada una -->
+                    <div th:each="z : ${profesional.zonaProfesionales}">
+                        <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/zona/eliminar}"
+                            method="post" class="d-inline">
+                            <input type="hidden" th:value="${z.idZona}" name="idZona" />
+                            <p class="d-inline">Provincia: <span th:text="${z.provincia}"></span> |</p>
+                            <p class="d-inline">Localidad: <span th:text="${z.localidad}"></span> |</p>
+                            <p class="d-inline">Domicilio: <span th:text="${z.domicilio}"></span></p>
+                            <button class="btn btn-danger btn-sm" type="submit">Quitar</button>
+                        </form>
+                    </div>
+
+                    <!-- Al apretar actualizar, aparece un menu para agregar una nueva zona -->
+                    <button type="button" class="btn btn-primary d-inline btn-sm"
+                        onclick="mostrar('cambio-zona')">Actualizar</button>
+                    <div class="d-none" id="cambio-zona" th:object="${zona}">
+                        <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/zona/agregar}"
+                            method="post" class="d-inline">
+                            <!-- provincia -->
+                            <h3>Nueva zona:</h3>
+                            <label for="provincia"><i class="bi bi-gender-ambiguous"></i>Provincia: </label>
+                            <select id="provincia" type="text" name="provincia" class="form-control"
+                                placeholder="Provincia" th:field="*{provincia}" required>
+                                <option th:each="provincia : ${provincias}" th:value="${provincia}"
+                                    th:text="${provincia}" th:selected="${provincia != null}"></option>
+                            </select>
+                            <!-- localidad -->
+                            <label for="localidad"><i class="bi bi-gender-ambiguous"></i>Localidad: </label>
+                            <input type="text" id="localidad" autocomplete="off" th:field="*{localidad}" />
+                            <!-- domicilio -->
+                            <label for="domicilio"><i class="bi bi-gender-ambiguous"></i>Domicilio: </label>
+                            <input type="text" id="domicilio" autocomplete="off" th:field="*{domicilio}" />
+                            <button class="btn btn-success btn-sm" type="submit">Agregar</button>
+                        </form>
+                        <button type="button" class="btn btn-danger d-inline btn-sm"
+                            onclick="ocultar('cambio-zona')">Cancelar</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- OBRAS SOCIALES ADHERIDAS -->
+            <div class="d-block">
+                <h2>Obras Sociales: </h2>
+                <div>
+                    <!-- Se muestran las obras sociales existentes con un boton para eliminar cada una -->
+                    <div th:each="os : ${profesional.obraSocialProfesionales}">
+                        <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/obras/eliminar}"
+                            method="post" class="d-inline">
+                            <input type="hidden" th:value="${os.idObraSocial}" name="idObraSocial" />
+                            <p class="d-inline">Nombre: <span th:text="${os.nombre}"></span> |</p>
+                            <p class="d-inline">Plan: <span th:text="${os.Plan}"></span> |</p>
+                            <p class="d-inline">Telefono: <span th:text="${os.telefono}"></span></p>
+                            <button class="btn btn-danger btn-sm" type="submit">Quitar</button>
+                        </form>
+                    </div>
+
+                    <!-- Al apretar actualizar, aparece un menu para agregar una nueva zona -->
+                    <button type="button" class="btn btn-primary d-inline btn-sm"
+                        onclick="mostrar('cambio-obra')">Actualizar</button>
+                    <div class="d-none" id="cambio-obra">
+                        <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/obras/agregar}"
+                            method="post" class="d-inline">
+                            <h3>Nueva obra social:</h3>
+                            <!-- obra social -->
+                            <label for="obra-social"><i class="bi bi-gender-ambiguous"></i>Obra Social: </label>
+                            <select id="obra-social" type="text" name="idObraSocial" class="form-control"
+                                placeholder="Obra Social" required>
+                                <option th:each="os : ${obrasSociales}" th:value="${os.idObraSocial}"
+                                    th:text="${os.nombre}" th:selected="${os != null}"></option>
+                            </select>
+                            <button class="btn btn-success btn-sm" type="submit">Agregar</button>
+                        </form>
+                        <button type="button" class="btn btn-danger d-inline btn-sm"
+                            onclick="ocultar('cambio-obra')">Cancelar</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <hr class="mb-5" /> <!-- "<hr></hr>" separación temática -->
+
+        <h1>Datos de sesión</h1>
+        <div>
+            <!-- USUARIO -->
+            <div class="d-block">
+                <p class="d-inline">Usuario: <span th:text="${profesional.usuarioProfesional.nombreU}"></span></p>
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-usuario')">Actualizar</button>
+            </div>
+            <div class="d-none" id="cambio-usuario">
+                <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/usuario}" method="post"
+                    class="d-inline">
+                    <label for="usuario"><i class="bi bi-gender-ambiguous"></i>Nuevo usuario: </label>
+                    <input type="text" id="usuario" autocomplete="off" th:field="*{usuarioProfesional.nombreU}" />
+                    <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-usuario')">Cancelar</button>
+            </div>
+
+            <!-- CLAVE -->
+            <div class="d-block">
+                <!-- 
+                <p class="d-inline">Clave: <span th:text="${profesional.usuarioProfesional.clave}"></span></p>
+                -->
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-clave')">Actualizar contraseña</button>
+            </div>
+            <div class="d-none" id="cambio-clave">
+                <form id="validacion-clave" th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/clave}"
+                    method="post" class="d-inline">
+
+                    <label for="clave"><i class="bi bi-gender-ambiguous"></i>Nueva clave: </label>
+                    <input type="text" id="clave" autocomplete="off" th:field="*{usuarioProfesional.clave}" />
+
+                    <label for="confirmar-clave"><i class="bi bi-gender-ambiguous"></i>Confirmar clave: </label>
+                    <input type="text" id="confirmar-clave" autocomplete="off" th:value="${confirmacionClave}" />
+                    <button class="btn btn-success btn-sm" onclick="validarClave(event)">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-clave')">Cancelar</button>
+                <div class="d-none" id="error-clave">
+                    <p>Las claves no coinciden!</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

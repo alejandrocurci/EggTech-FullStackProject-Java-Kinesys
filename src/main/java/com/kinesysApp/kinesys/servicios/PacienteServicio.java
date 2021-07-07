@@ -4,6 +4,7 @@ import com.kinesysApp.kinesys.entidades.Paciente;
 import com.kinesysApp.kinesys.excepciones.ExcepcionKinesysPaciente;
 import com.kinesysApp.kinesys.repositorios.PacienteRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,9 @@ public class PacienteServicio {
 
     @Autowired
     private RolServicio rolServicio;
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     @Transactional
     public void crear(Long dni, String nombre, String apellido,
@@ -137,6 +141,57 @@ public class PacienteServicio {
         if (email == null || email.isEmpty()) {
             throw new ExcepcionKinesysPaciente("El email no puede ser nulo");
         }
+    }
+
+    // FUNCIONALIDAD PARA PERFIL
+
+    @Transactional
+    public void actualizarNombre(String idPaciente, String nombreNuevo) {
+        Paciente paciente = pacienteRepositorio.findById(idPaciente).orElse(null);
+        paciente.setNombre(nombreNuevo);
+        pacienteRepositorio.save(paciente);
+    }
+
+    @Transactional
+    public void actualizarApellido(String idPaciente, String apellidoNuevo) {
+        Paciente paciente = pacienteRepositorio.findById(idPaciente).orElse(null);
+        paciente.setApellido(apellidoNuevo);
+        pacienteRepositorio.save(paciente);
+    }
+
+    @Transactional
+    public void actualizarDni(String idPaciente, Long dniNuevo) {
+        Paciente paciente = pacienteRepositorio.findById(idPaciente).orElse(null);
+        paciente.setDni(dniNuevo);
+        pacienteRepositorio.save(paciente);
+    }
+
+    @Transactional
+    public void actualizarTelefono(String idPaciente, String telefonoNuevo) {
+        Paciente paciente = pacienteRepositorio.findById(idPaciente).orElse(null);
+        paciente.setTelefono(telefonoNuevo);
+        pacienteRepositorio.save(paciente);
+    }
+
+    @Transactional
+    public void actualizarEmail(String idPaciente, String emailNuevo) {
+        Paciente paciente = pacienteRepositorio.findById(idPaciente).orElse(null);
+        paciente.setEmail(emailNuevo);
+        pacienteRepositorio.save(paciente);
+    }
+
+    @Transactional
+    public void actualizarUsuario(String idPaciente, String usuarioNuevo) {
+        Paciente paciente = pacienteRepositorio.findById(idPaciente).orElse(null);
+        paciente.getUsuarioPaciente().setNombreU(usuarioNuevo);
+        pacienteRepositorio.save(paciente);
+    }
+
+    @Transactional
+    public void actualizarClave(String idPaciente, String claveNueva) {
+        Paciente paciente = pacienteRepositorio.findById(idPaciente).orElse(null);
+        paciente.getUsuarioPaciente().setClave(encoder.encode(claveNueva));
+        pacienteRepositorio.save(paciente);
     }
 
 

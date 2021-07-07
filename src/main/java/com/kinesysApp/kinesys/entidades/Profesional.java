@@ -1,5 +1,6 @@
 package com.kinesysApp.kinesys.entidades;
 
+import com.kinesysApp.kinesys.enumeraciones.Especialidad;
 import com.kinesysApp.kinesys.enumeraciones.Sexo;
 
 import java.io.Serializable;
@@ -28,6 +29,7 @@ public class Profesional implements Serializable {
     private Long telefono;
     private String email;
     private Integer matricula;
+    private Especialidad especialidad;
 
 
     @OneToMany(cascade = CascadeType.ALL)

@@ -41,3 +41,7 @@ $('.tab a').on('click', function (e) {
   $(target).fadeIn(600);
 
 });
+
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
