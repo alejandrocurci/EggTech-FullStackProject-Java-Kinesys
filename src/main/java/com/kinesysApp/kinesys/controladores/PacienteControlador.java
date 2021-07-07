@@ -147,4 +147,57 @@ public class PacienteControlador {
 
         }
     }
+
+    // FUNCIONALIDAD PARA PERFIL
+
+    @GetMapping("/perfil/{idPaciente}")
+    public ModelAndView mostrarPerfil(@PathVariable(value ="idPaciente") String idPaciente){
+        ModelAndView mav = new ModelAndView("paciente-perfil");
+        Paciente paciente=pacienteServicio.buscarPorId(idPaciente);
+        mav.addObject("paciente", paciente);
+        return mav;
+    }
+
+    @PostMapping("/perfil/{idPaciente}/nombre")
+    public RedirectView actualizarNombre(@PathVariable(value ="idPaciente") String idPaciente, Paciente paciente){
+        pacienteServicio.actualizarNombre(idPaciente, paciente.getNombre());
+        return new RedirectView("/pacientes/perfil/{idPaciente}");
+    }
+
+    @PostMapping("/perfil/{idPaciente}/apellido")
+    public RedirectView actualizarApellido(@PathVariable(value ="idPaciente") String idPaciente, Paciente paciente){
+        pacienteServicio.actualizarApellido(idPaciente, paciente.getApellido());
+        return new RedirectView("/pacientes/perfil/{idPaciente}");
+    }
+
+    @PostMapping("/perfil/{idPaciente}/dni")
+    public RedirectView actualizarDni(@PathVariable(value ="idPaciente") String idPaciente, Paciente paciente){
+        pacienteServicio.actualizarDni(idPaciente, paciente.getDni());
+        return new RedirectView("/pacientes/perfil/{idPaciente}");
+    }
+
+    @PostMapping("/perfil/{idPaciente}/telefono")
+    public RedirectView actualizarTelefono(@PathVariable(value ="idPaciente") String idPaciente, Paciente paciente){
+        pacienteServicio.actualizarTelefono(idPaciente, paciente.getTelefono());
+        return new RedirectView("/pacientes/perfil/{idPaciente}");
+    }
+
+    @PostMapping("/perfil/{idPaciente}/email")
+    public RedirectView actualizarEmail(@PathVariable(value ="idPaciente") String idPaciente, Paciente paciente){
+        pacienteServicio.actualizarEmail(idPaciente, paciente.getEmail());
+        return new RedirectView("/pacientes/perfil/{idPaciente}");
+    }
+
+    @PostMapping("/perfil/{idPaciente}/usuario")
+    public RedirectView actualizarUsuario(@PathVariable(value ="idPaciente") String idPaciente, Paciente paciente){
+        pacienteServicio.actualizarUsuario(idPaciente, paciente.getUsuarioPaciente().getNombreU());
+        return new RedirectView("/pacientes/perfil/{idPaciente}");
+    }
+
+    @PostMapping("/perfil/{idPaciente}/clave")
+    public RedirectView actualizarClave(@PathVariable(value ="idPaciente") String idPaciente, Paciente paciente){
+        pacienteServicio.actualizarClave(idPaciente, paciente.getUsuarioPaciente().getClave());
+        return new RedirectView("/pacientes/perfil/{idPaciente}");
+    }
+
 }

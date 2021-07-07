@@ -169,4 +169,107 @@ public class ProfesionalControlador {
         }
     }
 
+    // FUNCIONALIDAD PARA PERFIL
+
+    @GetMapping("/perfil/{idProfesional}")
+    public ModelAndView mostrarPerfil(@PathVariable(value ="idProfesional") String idProfesional){
+        ModelAndView mav = new ModelAndView("profesional-perfil");
+        Profesional profesional=profesionalServicio.buscarPorId(idProfesional);
+        mav.addObject("profesional", profesional);
+        mav.addObject("zona", new Zona());
+        mav.addObject("provincias", Provincia.values());
+        mav.addObject("sexos", Sexo.values());
+        mav.addObject("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
+        return mav;
+    }
+
+    @PostMapping("/perfil/{idProfesional}/nombre")
+    public RedirectView actualizarNombre(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+        profesionalServicio.actualizarNombre(idProfesional, profesional.getNombre());
+        return new RedirectView("/profesionales/perfil/{idProfesional}");
+    }
+
+    @PostMapping("/perfil/{idProfesional}/apellido")
+    public RedirectView actualizarApellido(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+        profesionalServicio.actualizarApellido(idProfesional, profesional.getApellido());
+        return new RedirectView("/profesionales/perfil/{idProfesional}");
+    }
+
+    @PostMapping("/perfil/{idProfesional}/dni")
+    public RedirectView actualizarDni(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+        profesionalServicio.actualizarDni(idProfesional, profesional.getDni());
+        return new RedirectView("/profesionales/perfil/{idProfesional}");
+    }
+
+    @PostMapping("/perfil/{idProfesional}/telefono")
+    public RedirectView actualizarTelefono(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+        profesionalServicio.actualizarTelefono(idProfesional, profesional.getTelefono());
+        return new RedirectView("/profesionales/perfil/{idProfesional}");
+    }
+
+    @PostMapping("/perfil/{idProfesional}/edad")
+    public RedirectView actualizarEdad(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+        profesionalServicio.actualizarEdad(idProfesional, profesional.getEdad());
+        return new RedirectView("/profesionales/perfil/{idProfesional}");
+    }
+
+    @PostMapping("/perfil/{idProfesional}/sexo")
+    public RedirectView actualizarSexo(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+        profesionalServicio.actualizarSexo(idProfesional, profesional.getSexo());
+        return new RedirectView("/profesionales/perfil/{idProfesional}");
+    }
+
+    @PostMapping("/perfil/{idProfesional}/email")
+    public RedirectView actualizarEmail(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+        profesionalServicio.actualizarEmail(idProfesional, profesional.getEmail());
+        return new RedirectView("/profesionales/perfil/{idProfesional}");
+    }
+
+    @PostMapping("/perfil/{idProfesional}/matricula")
+    public RedirectView actualizarMatricula(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+        profesionalServicio.actualizarMatricula(idProfesional, profesional.getMatricula());
+        return new RedirectView("/profesionales/perfil/{idProfesional}");
+    }
+
+    @PostMapping("/perfil/{idProfesional}/usuario")
+    public RedirectView actualizarUsuario(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+        profesionalServicio.actualizarUsuario(idProfesional, profesional.getUsuarioProfesional().getNombreU());
+        return new RedirectView("/profesionales/perfil/{idProfesional}");
+    }
+
+    @PostMapping("/perfil/{idProfesional}/clave")
+    public RedirectView actualizarClave(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+        profesionalServicio.actualizarClave(idProfesional, profesional.getUsuarioProfesional().getClave());
+        return new RedirectView("/profesionales/perfil/{idProfesional}");
+    }
+
+    // ZONAS
+    @PostMapping("/perfil/{idProfesional}/zona/agregar")
+    public RedirectView actualizarZona(@PathVariable(value ="idProfesional") String idProfesional, Zona zonaNueva){
+        profesionalServicio.agregarZona(idProfesional, zonaNueva);
+        return new RedirectView("/profesionales/perfil/{idProfesional}");
+    }
+
+    @PostMapping("/perfil/{idProfesional}/zona/eliminar")
+    public RedirectView eliminarZona(@PathVariable(value ="idProfesional") String idProfesional,
+                                     @RequestParam String idZona){
+        profesionalServicio.eliminarZona(idProfesional, idZona);
+        return new RedirectView("/profesionales/perfil/{idProfesional}");
+    }
+
+    // OBRAS SOCIALES
+    @PostMapping("/perfil/{idProfesional}/obras/agregar")
+    public RedirectView actualizarObraSocial(@PathVariable(value ="idProfesional") String idProfesional,
+                                             @RequestParam String idObraSocial){
+        profesionalServicio.agregarObraSocial(idProfesional, idObraSocial);
+        return new RedirectView("/profesionales/perfil/{idProfesional}");
+    }
+
+    @PostMapping("/perfil/{idProfesional}/obras/eliminar")
+    public RedirectView eliminarObraSocial(@PathVariable(value ="idProfesional") String idProfesional,
+                                           @RequestParam String idObraSocial){
+        profesionalServicio.eliminarObraSocial(idProfesional, idObraSocial);
+        return new RedirectView("/profesionales/perfil/{idProfesional}");
+    }
+
 }

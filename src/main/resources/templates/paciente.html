@@ -79,6 +79,8 @@
                     <form th:action="@{/pacientes/eliminar/__${paciente.idPaciente}__}" method="post">
                         <button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-trash"></i> Eliminar</button>
                     </form>
+                    <!-- BOTON PERFIL-->
+                    <a class="btn btn-secondary btn-sm" th:href="@{/pacientes/perfil/__${paciente.idPaciente}__}"><i class="bi bi-vector-pen"></i> Perfil</a>
                 </td>
             </tr>
             </tbody>

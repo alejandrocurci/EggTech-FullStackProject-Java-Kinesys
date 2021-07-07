@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="Kinesys" />
+    <title>Mi Perfil</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <script src="/perfil.js"></script>
+</head>
+
+<body>
+    <div class="container mt-5 main" th:object="${paciente}">
+        <h1>Datos personales</h1>
+        <div>
+            <!-- NOMBRE -->
+            <div class="d-block">
+                <p class="d-inline">Nombre: <span th:text="${paciente.nombre}"></span></p>
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-nombre')">Actualizar</button>
+            </div>
+            <div class="d-none" id="cambio-nombre">
+                <form th:action="@{/pacientes/perfil/__${paciente.idPaciente}__/nombre}" method="post" class="d-inline">
+                    <label for="nombre"><i class="bi bi-gender-ambiguous"></i>Nuevo nombre: </label>
+                    <input type="text" id="nombre" placeholder="Nuevo nombre" autocomplete="off" th:field="*{nombre}" />
+                    <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-nombre')">Cancelar</button>
+            </div>
+
+            <!-- APELLIDO -->
+            <div class="d-block">
+                <p class="d-inline">Apellido: <span th:text="${paciente.apellido}"></span></p>
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-apellido')">Actualizar</button>
+            </div>
+            <div class="d-none" id="cambio-apellido">
+                <form th:action="@{/pacientes/perfil/__${paciente.idPaciente}__/apellido}" method="post"
+                    class="d-inline">
+                    <label for="apellido"><i class="bi bi-gender-ambiguous"></i>Nuevo apellido: </label>
+                    <input type="text" id="apellido" autocomplete="off" th:field="*{apellido}" />
+                    <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-apellido')">Cancelar</button>
+            </div>
+
+            <!-- DNI -->
+            <div class="d-block">
+                <p class="d-inline">DNI: <span th:text="${paciente.dni}"></span></p>
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-dni')">Actualizar</button>
+            </div>
+            <div class="d-none" id="cambio-dni">
+                <form th:action="@{/pacientes/perfil/__${paciente.idPaciente}__/dni}" method="post" class="d-inline">
+                    <label for="dni"><i class="bi bi-gender-ambiguous"></i>Nuevo DNI: </label>
+                    <input type="text" id="dni" autocomplete="off" th:field="*{dni}" />
+                    <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-dni')">Cancelar</button>
+            </div>
+
+            <!-- TELEFONO -->
+            <div class="d-block">
+                <p class="d-inline">Telefono: <span th:text="${paciente.telefono}"></span></p>
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-telefono')">Actualizar</button>
+            </div>
+            <div class="d-none" id="cambio-telefono">
+                <form th:action="@{/pacientes/perfil/__${paciente.idPaciente}__/telefono}" method="post"
+                    class="d-inline">
+                    <label for="telefono"><i class="bi bi-gender-ambiguous"></i>Nuevo telefono: </label>
+                    <input type="text" id="telefono" autocomplete="off" th:field="*{telefono}" />
+                    <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-telefono')">Cancelar</button>
+            </div>
+
+
+            <!-- EMAIL -->
+            <div class="d-block">
+                <p class="d-inline">Email: <span th:text="${paciente.email}"></span></p>
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-email')">Actualizar</button>
+            </div>
+            <div class="d-none" id="cambio-email">
+                <form th:action="@{/pacientes/perfil/__${paciente.idPaciente}__/email}" method="post" class="d-inline">
+                    <label for="email"><i class="bi bi-gender-ambiguous"></i>Nuevo email: </label>
+                    <input type="text" id="email" autocomplete="off" th:field="*{email}" />
+                    <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-email')">Cancelar</button>
+            </div>
+        </div>
+
+
+        <hr class="mb-5" /> <!-- "<hr></hr>" separación temática -->
+
+        <h1>Datos de sesión</h1>
+        <div>
+            <!-- USUARIO -->
+            <div class="d-block">
+                <p class="d-inline">Usuario: <span th:text="${paciente.usuarioPaciente.nombreU}"></span></p>
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-usuario')">Actualizar</button>
+            </div>
+            <div class="d-none" id="cambio-usuario">
+                <form th:action="@{/pacientes/perfil/__${paciente.idPaciente}__/usuario}" method="post"
+                    class="d-inline">
+                    <label for="usuario"><i class="bi bi-gender-ambiguous"></i>Nuevo usuario: </label>
+                    <input type="text" id="usuario" autocomplete="off" th:field="*{usuarioPaciente.nombreU}" />
+                    <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-usuario')">Cancelar</button>
+            </div>
+
+            <!-- CLAVE -->
+            <div class="d-block">
+                <!-- 
+                <p class="d-inline">Clave: <span th:text="${paciente.usuarioPaciente.clave}"></span></p>
+                -->
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-clave')">Actualizar contraseña</button>
+            </div>
+            <div class="d-none" id="cambio-clave">
+                <form id="validacion-clave" th:action="@{/pacientes/perfil/__${paciente.idPaciente}__/clave}"
+                    method="post" class="d-inline">
+
+                    <label for="clave"><i class="bi bi-gender-ambiguous"></i>Nueva clave: </label>
+                    <input type="text" id="clave" autocomplete="off" th:field="*{usuarioPaciente.clave}" />
+                    
+                    <label for="confirmar-clave"><i class="bi bi-gender-ambiguous"></i>Confirmar clave: </label>
+                    <input type="text" id="confirmar-clave" autocomplete="off" th:value="${confirmacionClave}" />
+                    <button class="btn btn-success btn-sm" onclick="validarClave(event)">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-clave')">Cancelar</button>
+                <div class="d-none" id="error-clave">
+                    <p>Las claves no coinciden!</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
