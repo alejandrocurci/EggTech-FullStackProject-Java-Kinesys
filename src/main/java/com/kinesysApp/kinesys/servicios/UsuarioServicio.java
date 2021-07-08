@@ -2,6 +2,7 @@ package com.kinesysApp.kinesys.servicios;
 
 import com.kinesysApp.kinesys.entidades.Usuario;
 import com.kinesysApp.kinesys.repositorios.UsuarioRepositorio;
+import com.kinesysApp.kinesys.roles.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,13 +28,14 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
-    public Usuario crear(String nombreU, String clave) {
+    public Usuario crear(String nombreU, String clave,Rol rol) {
 
         Usuario usuario= new Usuario();
+        usuario.setRol(rol);
         usuario.setNombreU(nombreU);
         usuario.setClave(encoder.encode(clave));
 
-        //usuarioRepositorio.save(usuario);
+        usuarioRepositorio.save(usuario);
 
         return usuario;
     }

@@ -17,9 +17,5 @@ public class Rol {
     @Column(unique = true)
     private String nombre;
 
-    /*
-    @OneToMany
-    private List<Usuario> usuarios;
-     */
 
 }

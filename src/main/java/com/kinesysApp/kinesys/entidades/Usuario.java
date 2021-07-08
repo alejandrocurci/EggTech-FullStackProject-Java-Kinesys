@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Data
 @Entity
 public class Usuario implements Serializable {
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")   //(strategy = GenerationType.IDENTITY) <--- solo para tipos numericos

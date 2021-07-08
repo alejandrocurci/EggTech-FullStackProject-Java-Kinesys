@@ -7,6 +7,7 @@ import com.kinesysApp.kinesys.enumeraciones.Sexo;
 import com.kinesysApp.kinesys.servicios.ProfesionalServicio;
 import com.kinesysApp.kinesys.servicios.ZonaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,7 @@ public class ZonaControlador {
     private ProfesionalServicio profesionalServicio;
 
     @GetMapping("/crear")
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView crearZona() {
         ModelAndView mav = new ModelAndView("zona-form");  // asi deberia llamarse el nombre del formulario HTML.
         mav.addObject("zona", new Zona());
@@ -40,7 +41,7 @@ public class ZonaControlador {
     }
 
     @PostMapping("/guardar")
-    //@PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public RedirectView guardarZona(Zona zona) {
         //try {
             zonaServicio.crear(zona);
