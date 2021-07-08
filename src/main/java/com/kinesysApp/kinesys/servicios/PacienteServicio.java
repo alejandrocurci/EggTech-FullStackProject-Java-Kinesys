@@ -3,6 +3,7 @@ package com.kinesysApp.kinesys.servicios;
 import com.kinesysApp.kinesys.entidades.Paciente;
 import com.kinesysApp.kinesys.excepciones.ExcepcionKinesysPaciente;
 import com.kinesysApp.kinesys.repositorios.PacienteRepositorio;
+import com.kinesysApp.kinesys.roles.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,13 +36,15 @@ public class PacienteServicio {
         validarPaciente(dni, nombre, apellido, telefono, email, nombreU, clave);
 
         Paciente paciente = new Paciente();
-        paciente.setRolPaciente(rolServicio.buscarPorNombre("PACIENTE"));
+        String rolnombre = "PACIENTE";
+        Rol rol=rolServicio.buscarPorNombre(rolnombre);
+        paciente.setRolPaciente(rol);
         paciente.setDni(dni);
         paciente.setNombre(nombre);
         paciente.setApellido(apellido);
         paciente.setTelefono(telefono);
         paciente.setEmail(email);
-        paciente.setUsuarioPaciente(usuarioServicio.crear(nombreU, clave));
+        paciente.setUsuarioPaciente(usuarioServicio.crear(nombreU, clave,rol));
         pacienteRepositorio.save(paciente);
     }
 

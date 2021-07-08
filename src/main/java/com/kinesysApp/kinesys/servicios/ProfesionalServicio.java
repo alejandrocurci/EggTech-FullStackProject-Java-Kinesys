@@ -11,10 +11,12 @@ import com.kinesysApp.kinesys.excepciones.ExcepcionKinesysPaciente;
 import com.kinesysApp.kinesys.modelos.busqueda.BusquedaProfesional;
 import com.kinesysApp.kinesys.repositorios.ProfesionalRepositorio;
 import com.kinesysApp.kinesys.repositorios.ZonaRepositorio;
+import com.kinesysApp.kinesys.roles.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,7 +60,9 @@ public class ProfesionalServicio {
         validarProfesional(dni, nombre, apellido, edad,especialidad, telefono, email, matricula, sexo, zona, obraSocial, usuario);
 
         Profesional profesional = new Profesional();
-        profesional.setRolProfesional(rolServicio.buscarPorNombre("PROFESIONAL"));
+        String rolnombre = "PROFESIONAL";
+        Rol rol=rolServicio.buscarPorNombre(rolnombre);
+        profesional.setRolProfesional(rol);
         profesional.setDni(dni);
         profesional.setNombre(nombre);
         profesional.setApellido(apellido);
@@ -70,7 +74,7 @@ public class ProfesionalServicio {
         profesional.setSexo(sexo);
 
         //seteamos el usuario
-        profesional.setUsuarioProfesional(usuarioServicio.crear(usuario.getNombreU(), usuario.getClave()));
+        profesional.setUsuarioProfesional(usuarioServicio.crear(usuario.getNombreU(), usuario.getClave(),rol));
 
         profesional.setZonaProfesionales(Arrays.asList(zona));
 

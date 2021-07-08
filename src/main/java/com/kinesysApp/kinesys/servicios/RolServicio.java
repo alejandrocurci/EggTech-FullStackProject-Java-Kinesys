@@ -22,14 +22,19 @@ public class RolServicio {
     }
 
     @Transactional(readOnly = true)
-    public Rol buscarPorNombre(String nombre){
-        Rol rol = rolRepositorio.findBynombre(nombre);
+    public Rol buscarPorNombre(String nombreRol){
+        Rol rol = rolRepositorio.findByNombre(nombreRol);
         return rol;
     }
 
     @Transactional
-    public void elimiarRol(String idRol){
-        rolRepositorio.deleteById(idRol);
+    public void elimiarRol(String idRol)throws Exception{
+        Rol respRol=rolRepositorio.findById(idRol).orElse(null);
+        if(respRol == null){
+            throw new Exception("El nombre del Rol no se encuentra en la BBDD");
+        }else{
+            rolRepositorio.delete(respRol);
+        }
     }
 
     @Transactional

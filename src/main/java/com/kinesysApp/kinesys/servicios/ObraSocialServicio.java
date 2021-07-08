@@ -1,17 +1,13 @@
 package com.kinesysApp.kinesys.servicios;
 
 import com.kinesysApp.kinesys.entidades.ObraSocial;
-import com.kinesysApp.kinesys.entidades.Paciente;
 import com.kinesysApp.kinesys.excepciones.ExcepcionKinessysObraSocial;
-import com.kinesysApp.kinesys.excepciones.ExcepcionKinesysPaciente;
 import com.kinesysApp.kinesys.repositorios.ObraSocialRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ObraSocialServicio {
