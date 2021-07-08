@@ -19,21 +19,24 @@ public class RolControlador {
     @Autowired
     private RolServicio rolServicio;
 
+    @GetMapping()
+    public ModelAndView mostrarRoles() {
+        ModelAndView mav = new ModelAndView("rol");
+        mav.addObject("listaRoles", rolServicio.buscarTodos());
+        return mav;
+    }
+
     @GetMapping("/crear")
     public ModelAndView crearRol(){
         ModelAndView mav= new ModelAndView("rol-form");
         mav.addObject("rol",new Rol());
-        mav.addObject("titulo","crear rol");
-        mav.addObject("action","guardar");
         return mav;
     }
 
     @PostMapping("/guardar")
     public RedirectView guardarRol(@ModelAttribute("rol") Rol rol){
-
         rolServicio.crear(rol.getNombre());
-
-        return new RedirectView("/");
+        return new RedirectView("/roles");
 }
 
 

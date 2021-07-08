@@ -3,9 +3,7 @@ package com.kinesysApp.kinesys.roles;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -16,5 +14,12 @@ public class Rol {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String idRol;
 
+    @Column(unique = true)
     private String nombre;
+
+    /*
+    @OneToMany
+    private List<Usuario> usuarios;
+     */
+
 }

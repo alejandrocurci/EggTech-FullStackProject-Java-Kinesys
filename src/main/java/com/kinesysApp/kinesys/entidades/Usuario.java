@@ -1,5 +1,6 @@
 package com.kinesysApp.kinesys.entidades;
 
+import com.kinesysApp.kinesys.roles.Rol;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
@@ -26,5 +27,8 @@ public class Usuario implements Serializable {
 
     @OneToOne
     private Profesional listaProfesional;
+
+    @ManyToOne
+    private Rol rol;
 
 }

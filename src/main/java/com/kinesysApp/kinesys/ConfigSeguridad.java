@@ -21,8 +21,12 @@ public class ConfigSeguridad extends WebSecurityConfigurerAdapter {
         httpSeguridad.headers().frameOptions().sameOrigin()
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/img").permitAll()
-                    .antMatchers("/**").permitAll()//.authenticated()
+                    .antMatchers("/img/*","/*.jpeg","/*.jpg","/*.png","/*.css",
+                            "/pacientes/crear","/pacientes/guardar",
+                            "/profesionales/crear","/profesionales/guardar", "/").permitAll()
+
+                    //.antMatchers("/**").permitAll()
+                    .antMatchers("/**").authenticated()
                 .and()
                    .formLogin()
                    .loginPage("/login").loginProcessingUrl("/logincheck")
@@ -33,12 +37,12 @@ public class ConfigSeguridad extends WebSecurityConfigurerAdapter {
                 .and()
                     .logout()
                     .logoutUrl("/logout")
-                    .logoutSuccessUrl("/home")
+                    .logoutSuccessUrl("/")
                     .permitAll()
                     .deleteCookies("JSESSIOND")
                 .and()
                     .exceptionHandling().accessDeniedPage("/error")
-                    .and()
+                .and()
                     .csrf().disable();
 
     }

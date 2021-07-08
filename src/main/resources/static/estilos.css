@@ -1,17 +1,4 @@
 
-
-
-
-.texto-encima {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: monospace;
-    font-size: 35px;
-    font-style: italic;
-    color: black;
-
 .fondo {
     background: url(/img/imagen-fondo.jpg) #ccc no-repeat;
     background-position: center;
