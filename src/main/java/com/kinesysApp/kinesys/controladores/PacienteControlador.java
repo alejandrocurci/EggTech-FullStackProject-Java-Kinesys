@@ -47,31 +47,25 @@ public class PacienteControlador {
     @PostMapping("/guardar")
     public String guardarPaciente(@Valid Paciente paciente, BindingResult resultPaciente,
                                   @Valid Usuario usuario,BindingResult resultUsuario,
-                                  Model model)throws ExcepcionKinesysPaciente {
+                                  Model model) {
 
         if(resultPaciente.hasErrors() || resultUsuario.hasErrors()){
+            model.addAttribute("paciente", paciente);
+            model.addAttribute("usuario", usuario);
             model.addAttribute("titulo", "Nuevo Paciente");
+            model.addAttribute("action", "guardar");
             return "paciente-form";
         }
-        try {
-            pacienteServicio.crear(paciente.getDni(),
-                    paciente.getNombre(),
-                    paciente.getApellido(),
-                    paciente.getTelefono(),
-                    paciente.getEmail(),
-                    usuario.getNombreU(),
-                    usuario.getClave());
-            return "redirect:/";
-        } catch (ExcepcionKinesysPaciente ex) {
-
-                model.addAttribute(ETIQUETA_ERROR, ex.getMessage());
-                model.addAttribute("paciente", paciente);
-                //model.addAttribute("usuario", usuario);
-                model.addAttribute("action", "guardar");
-
-            return "paciente-form";
-        }
+        pacienteServicio.crear(paciente.getDni(),
+                paciente.getNombre(),
+                paciente.getApellido(),
+                paciente.getTelefono(),
+                paciente.getEmail(),
+                usuario.getNombreU(),
+                usuario.getClave());
+        return "redirect:/";
     }
+
     @PostMapping("/eliminar/{idPaciente}")
     public String eliminarPaciente(@PathVariable String idPaciente, Model model) {
         try {

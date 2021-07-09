@@ -16,11 +16,11 @@ public class Usuario implements Serializable {
     @GenericGenerator(name = "uuid", strategy = "uuid2")   //(strategy = GenerationType.IDENTITY) <--- solo para tipos numericos
     private String id;
 
-    @NotBlank
+    @NotBlank(message = "El usuario es requerido")
     @Column(unique = true)    // Para que no se pueda repetir el nombre de usuario...
     private String nombreU;
 
-    @NotBlank
+    @NotBlank(message = "La contraseña es requerida")
     private String clave;
 
     @OneToOne

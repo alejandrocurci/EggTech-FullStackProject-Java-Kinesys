@@ -4,9 +4,7 @@ import java.io.Serializable;
 import com.kinesysApp.kinesys.roles.Rol;
 import lombok.Data;
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -19,21 +17,21 @@ public class Paciente implements Serializable {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String idPaciente;
 
-    //@NotEmpty
     @Column(unique = true)
+    @NotNull(message = "El dni es requerido")
     private Long dni ;
 
-    @NotEmpty
+    @NotBlank(message = "El nombre es requerido")
     private String nombre;
 
-    @NotEmpty
+    @NotBlank(message = "El apellido es requerido")
     private String apellido;
 
-    @NotEmpty
+    @Size(min = 7, max = 10, message = "Debe contener entre 7 y 10 digitos")
     private String  telefono;
 
-    @NotEmpty
-    @Email
+    @NotBlank(message = "El email es requerido")
+    @Email(message = "Email invalido")
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL)

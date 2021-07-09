@@ -29,7 +29,7 @@ public class RolControlador {
     }
 
     @GetMapping("/crear")
-
+    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView crearRol(){
         ModelAndView mav= new ModelAndView("rol-form");
         mav.addObject("rol",new Rol());

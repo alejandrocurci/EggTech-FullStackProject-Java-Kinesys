@@ -55,9 +55,7 @@ public class ProfesionalServicio {
                       Sexo sexo,
                       Zona zona,
                       ObraSocial obraSocial,
-                      Usuario usuario) throws ExcepcionKinessysProfesional {
-
-        validarProfesional(dni, nombre, apellido, edad,especialidad, telefono, email, matricula, sexo, zona, obraSocial, usuario);
+                      Usuario usuario) {
 
         Profesional profesional = new Profesional();
         String rolnombre = "PROFESIONAL";

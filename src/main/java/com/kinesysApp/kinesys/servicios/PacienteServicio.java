@@ -31,9 +31,9 @@ public class PacienteServicio {
     @Transactional
     public void crear(Long dni, String nombre, String apellido,
                       String telefono, String email,
-                      String nombreU, String clave) throws ExcepcionKinesysPaciente {
+                      String nombreU, String clave) {
 
-        validarPaciente(dni, nombre, apellido, telefono, email, nombreU, clave);
+        //validarPaciente(dni, nombre, apellido, telefono, email, nombreU, clave);
 
         Paciente paciente = new Paciente();
         String rolnombre = "PACIENTE";

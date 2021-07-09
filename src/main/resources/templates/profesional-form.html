@@ -1,261 +1,213 @@
 <!DOCTYPE html>
-<html
-        lang="es"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns="http://www.w3.org/1999/xhtml"
->
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-      <meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-      <meta name="viewport"
-            content="width=device-width, initial-scale=1.0"
-      >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      <meta
-              http-equiv="X-UA-Compatible"
-              content="ie=edge"
-      >
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-      <meta
-              name="description"
-              content="Kinesys"
-      >
+    <meta name="description" content="Kinesys">
 
-      <meta
-              name="Mesa 9"
-              content="Leonardo Mella"
-      >
+    <meta name="Mesa 9" content="Leonardo Mella">
 
-      <title>Paciente-Formulario</title>
+    <title>Paciente-Formulario</title>
 
-      <link
-              href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
-              rel="stylesheet"
-              integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
-              crossorigin="anonymous"
-      >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
 
-      <link rel="stylesheet" th:href="@{/formularios.css}">
-      
+    <link rel="stylesheet" th:href="@{/formularios.css}">
+
 </head>
 
 <body>
 
-<div class="form">
+    <div class="form">
 
-    <div class="tab-content">
-        <div id="signup">
-            <h1>Registro profesional</h1>
+        <div class="tab-content">
+            <div id="signup">
+                <h1>Registro profesional</h1>
 
-            <div class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+                <form th:action="@{/profesionales/__${action}__}" method="post" th:object="${profesional}"
+                    id="formulario" novalidate>
+                    <input type="hidden" th:field="*{idProfesional}" />
+                    <div class="top-row">
+                        <!-- NOMBRE -->
+                        <div class="field-wrap">
+                            <input type="text" placeholder="Nombre" autocomplete="off" th:field="*{nombre}"
+                                th:errorclass="'form-control alert-danger'" />
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}"
+                                th:errors="*{nombre}"></small>
+                        </div>
+                        <!-- APELLIDO -->
+                        <div class="field-wrap">
+                            <input type="text" autocomplete="off" placeholder="Apellido" th:field="*{apellido}"
+                                th:errorclass="'form-control alert-danger'" />
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}"
+                                th:errors="*{apellido}"></small>
+                        </div>
+                    </div>
 
-            <form th:action="@{/profesionales/__${action}__}"
-            method="post"
-            th:object="${profesional}"
-            id="formulario"
-            novalidate>
-                <input type="hidden" th:field="*{idProfesional}"/>
-                <div class="top-row">
-                       <div class="field-wrap">
-                                    <input type="text" 
-                                    required 
-                                    placeholder="Nombre"
-                                    autocomplete="off" 
-                                    th:field="*{nombre}"/>
-                              </div>
-
-                            <div class="field-wrap">
-                                <input type="text"
-                                 required 
-                                 autocomplete="off" 
-                                 placeholder="Apellido"
-                                 th:field="*{apellido}"/>
-                          </div> 
-                </div>
-                
-
-                <div class="field-wrap">
-                    <input type="number"
-                           required
-                           autocomplete="off"
-                           th:field="*{dni}"
-                           placeholder="Dni"
-                           maxlength="8"
-                           oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');"/>
-              </div>
-
-                <div class="field-wrap">
-                    <input type="number"
-                     required 
-                     autocomplete="off" 
-                     placeholder="Edad"
-                     th:field="*{edad}" />
-                </div>
-
-                <div class="field-wrap">
-                    <input type="text" 
-                    required
-                    autocomplete="off" 
-                    placeholder="Telefono" 
-                    th:field="*{telefono}"/>
-                </div>
-
-                <div class="field-wrap">
-                    
-                    <input type="email"
-                    required 
-                    autocomplete="off" 
-                    placeholder="Email"
-                    th:field="*{email}"/>
-                    
-                </div>
-
-                <div class="field-wrap">
-                   
-                    <input type="text" 
-                    required 
-                    autocomplete="off" 
-                    placeholder="Matricula"
-                    th:field="*{matricula}"/>
-                </div>
-                <!--especialidad profesional-->
-                <div class="field-wrap">
-                    <select id="especialidad"
-                            type="text"
-                            name="especialidad"
-                            class="form-control "
-                            placeholder="Elija especialidad"
-                            th:field= "*{especialidad}"
-                            th:value="${especialidad}"
-                            required >
-                        <option value="" selected>Seleccione especialdiad</option>
-                        <option  th:each ="especialidad: ${especialidades}"
-                                 th:value="${especialidad}"
-                                 th:text="${especialidad}"
-                                 th:selected="${especialidad != null}"></option>
-                    </select>
-                </div>
-                
-                <!--Sexo profesional-->
-                <div class="field-wrap">
-                    <select id="sexo"
-                            type="text"
-                            name="sexo"
-                            class="form-control "
-                            placeholder="Elija Sexo"
-                            th:field= "*{sexo}"
-                            th:value="${sexo}"
-                            required >
-                        <option value="" selected>Seleccione Sexo</option>
-                        <option  th:each ="sexo : ${sexos}"
-                         th:value="${sexo}"
-                          th:text="${sexo}" 
-                          th:selected="${sexo != null}"></option>
-                    </select>
-                </div>
-
-                <!--ZONA-->
-                <div class="top-row" th:object="${zona}">
-                <!--provincia profesional-->
-                <div class="field-wrap">
-                    <select id="provincia"
-                            type="text"
-                            name="provincia"
-                            class="form-control"
-                            placeholder="Elija provincia"
-                            th:field= "*{provincia}"
-                            required >
-                        <option value="" selected>Seleccione Provincia</option>
-                        <option  th:each ="provincia : ${provincias}" 
-                        th:value="${provincia}" 
-                        th:text="${provincia}" 
-                        th:selected="${provincia != null}"></option>
-                    </select>
-                </div>
-                <!--localidad profesional-->
-                <div class="field-wrap">
-                        
-                    <input type="text" 
-                    required 
-                    autocomplete="off"
-                    th:field="*{localidad}" 
-                    placeholder="Localidad"/>
-               </div>
-                  <!--domicilio profesional-->
-                  <div class="field-wrap">
-                        
-                    <input type="text" 
-                    required 
-                    autocomplete="off"
-                    th:field="*{domicilio}" 
-                    placeholder="Domicilio"/>
-                 </div>
-                </div>
-
+                    <!-- DNI -->
                     <div class="field-wrap">
-                        <select id="obraSocial"
-                                type="text"
-                                class="form-control"
-                                placeholder="Elija obrasocial"
-                                th:field="*{obraSocialProfesionales}"
-                                required >
+                        <input type="number" autocomplete="off" th:field="*{dni}" placeholder="Dni" maxlength="8"
+                            oninput="event.target.value = event.target.value.replace(/[^0-9]*/g,'');"
+                            th:errorclass="'form-control alert-danger'" />
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('dni')}"
+                            th:errors="*{dni}"></small>
+                    </div>
+
+                    <!-- EDAD -->
+                    <div class="field-wrap">
+                        <input type="number" autocomplete="off" placeholder="Edad" th:field="*{edad}"
+                            th:errorclass="'form-control alert-danger'" />
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('edad')}"
+                            th:errors="*{edad}"></small>
+                    </div>
+
+                    <!-- TELEFONO -->
+                    <div class="field-wrap">
+                        <input type="text" autocomplete="off" placeholder="Telefono" th:field="*{telefono}"
+                            th:errorclass="'form-control alert-danger'" />
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('telefono')}"
+                            th:errors="*{telefono}"></small>
+                    </div>
+
+                    <!-- EMAIL -->
+                    <div class="field-wrap">
+                        <input type="email" autocomplete="off" placeholder="Email" th:field="*{email}"
+                            th:errorclass="'form-control alert-danger'" />
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('email')}"
+                            th:errors="*{email}"></small>
+
+                    </div>
+
+                    <!-- MATRICULA -->
+                    <div class="field-wrap">
+                        <input type="text" autocomplete="off" placeholder="Matricula" th:field="*{matricula}"
+                            th:errorclass="'form-control alert-danger'" />
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('matricula')}"
+                            th:errors="*{matricula}"></small>
+                    </div>
+
+                    <!--ESPECIALIDAD-->
+                    <div class="field-wrap">
+                        <select id="especialidad" type="text" name="especialidad" class="form-control "
+                            placeholder="Elija especialidad" th:field="*{especialidad}" th:value="${especialidad}">
+                            <option value="" selected th:errorclass="'form-control alert-danger'">Seleccione
+                                especialidad</option>
+                            <option th:each="especialidad: ${especialidades}" th:value="${especialidad}"
+                                th:text="${especialidad}" th:selected="${especialidad != null}"></option>
+                        </select>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('especialidad')}"
+                            th:errors="*{especialidad}"></small>
+                    </div>
+
+                    <!--SEXO-->
+                    <div class="field-wrap">
+                        <select id="sexo" type="text" name="sexo" class="form-control " placeholder="Elija Sexo"
+                            th:field="*{sexo}" th:value="${sexo}">
+                            <option value="" selected th:errorclass="'form-control alert-danger'">Seleccione Sexo
+                            </option>
+                            <option th:each="sexo : ${sexos}" th:value="${sexo}" th:text="${sexo}"
+                                th:selected="${sexo != null}"></option>
+                        </select>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('sexo')}"
+                            th:errors="*{sexo}"></small>
+                    </div>
+
+                    <!--ZONA-->
+                    <div class="top-row" th:object="${zona}">
+                        <!--provincia profesional-->
+                        <div class="field-wrap">
+                            <select id="provincia" type="text" name="provincia" class="form-control"
+                                placeholder="Elija provincia" th:field="*{provincia}">
+                                <option value="" selected th:errorclass="'form-control alert-danger'">Seleccione
+                                    Provincia</option>
+                                <option th:each="provincia : ${provincias}" th:value="${provincia}"
+                                    th:text="${provincia}" th:selected="${provincia != null}"></option>
+                            </select>
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('provincia')}"
+                                th:errors="*{provincia}"></small>
+                        </div>
+                        <!--localidad profesional-->
+                        <div class="field-wrap">
+
+                            <input type="text" autocomplete="off" th:field="*{localidad}" placeholder="Localidad"
+                                th:errorclass="'form-control alert-danger'" />
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('localidad')}"
+                                th:errors="*{localidad}"></small>
+                        </div>
+                        <!--domicilio profesional-->
+                        <div class="field-wrap">
+
+                            <input type="text" autocomplete="off" th:field="*{domicilio}" placeholder="Domicilio"
+                                th:errorclass="'form-control alert-danger'" />
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('domicilio')}"
+                                th:errors="*{domicilio}"></small>
+                        </div>
+                    </div>
+
+                    <!--OBRA SOCIAL-->
+                    <div class="field-wrap">
+                        <select id="obraSocial" type="text" class="form-control" placeholder="Elija obrasocial"
+                            th:field="*{obraSocialProfesionales}">
                             <option value="" selected>Seleccione Obra Social</option>
-                            <option  th:each ="obrasocial : ${obrasSociales}"
-                                     th:text="${obrasocial.nombre}"
-                                     th:value="${obrasocial.idObraSocial}"></option>
+                            <option th:each="obrasocial : ${obrasSociales}" th:text="${obrasocial.nombre}"
+                                th:value="${obrasocial.idObraSocial}"></option>
                         </select>
                     </div>
-            <!--USUARIO-->
-                <div class="top-row" th:object="${usuario}">
-                    <div class="field-wrap">
-                          <input type="text" 
-                          required 
-                          autocomplete="off"
-                           th:field="*{nombreU}" 
-                           placeholder="Usuario"/>
+
+                    <!--USUARIO-->
+                    <div class="top-row" th:object="${usuario}">
+                        <div class="field-wrap">
+                            <input type="text" autocomplete="off" th:field="*{nombreU}" placeholder="Usuario"
+                                th:errorclass="'form-control alert-danger'" />
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('nombreU')}"
+                                th:errors="*{nombreU}"></small>
+                        </div>
+
+                        <div class="field-wrap">
+                            <input type="password" autocomplete="off" th:field="*{clave}" placeholder="Contraseña"
+                                th:errorclass="'form-control alert-danger'" />
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('clave')}"
+                                th:errors="*{clave}"></small>
+                        </div>
                     </div>
 
-                    <div class="field-wrap">
-                          <input type="password"
-                           required 
-                           autocomplete="off" 
-                           th:field="*{clave}" 
-                           placeholder="Contraseña"/>
-                    </div>
-              </div>
+                    <button type="submit" class="button button-block">Enviar Fomulario</button>
 
-                <button type="submit" class="button button-block">Enviar Fomulario</button>
+                </form>
 
-            </form>
+            </div>
 
         </div>
-
     </div>
-</div> 
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
-        crossorigin="anonymous">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous">
 
-</script>
-<script>
-(() => {
-"use strict";
-const form = document.getElementById("formulario");
-form.addEventListener("submit", (event) => {
-    if (!form.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-    }
+        </script>
+    <script>
+        (() => {
+            "use strict";
+            const form = document.getElementById("formulario");
+            form.addEventListener("submit", (event) => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
 
-    form.classList.add("was-validated");
-}, false);
-})();
-</script>
-<script src="./login.js"></script>
+                form.classList.add("was-validated");
+            }, false);
+        })();
+    </script>
+    <script src="./login.js"></script>
 </body>
+
 </html>

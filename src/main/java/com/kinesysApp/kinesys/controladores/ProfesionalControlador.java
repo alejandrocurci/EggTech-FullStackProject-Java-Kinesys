@@ -12,10 +12,12 @@ import com.kinesysApp.kinesys.servicios.ProfesionalServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,31 +71,11 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/guardar")
-    public String guardarProfesional(Profesional profesional,
-                                     //@RequestParam String idObraSocial,
-                                     Usuario usuario,
-                                     Zona zona,
+    public String guardarProfesional(@Valid Profesional profesional, BindingResult resultProfesional,
+                                     @Valid Usuario usuario, BindingResult resultUsuario,
+                                     @Valid Zona zona, BindingResult resultZona,
                                      Model model) {
-        try {
-            profesionalServicio.crear(
-                    profesional.getDni(),
-                    profesional.getNombre(),
-                    profesional.getApellido(),
-                    profesional.getEdad(),
-                    profesional.getTelefono(),
-                    profesional.getEmail(),
-                    profesional.getEspecialidad(),
-                    profesional.getMatricula(),
-                    profesional.getSexo(),
-                    zona,
-                    //obraSocialServicio.buscarPorId(idObraSocial),
-                    profesional.getObraSocialProfesionales().get(0),
-                    usuario);
-            return "redirect:/profesionales";
-        } catch (ExcepcionKinessysProfesional ex) {
-
-            // ex.printStackTrace();
-            model.addAttribute(ETIQUETA_ERROR, ex.getMessage());
+        if (resultProfesional.hasErrors() || resultUsuario.hasErrors() || resultZona.hasErrors()) {
             model.addAttribute("profesional", profesional);
             model.addAttribute("usuario", usuario);
             model.addAttribute("zona", zona);
@@ -103,12 +85,24 @@ public class ProfesionalControlador {
             model.addAttribute("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
             model.addAttribute("titulo", "Nuevo Profesional");
             model.addAttribute("action", "guardar");
-
             return "profesional-form";
-
         }
-
+        profesionalServicio.crear(
+                profesional.getDni(),
+                profesional.getNombre(),
+                profesional.getApellido(),
+                profesional.getEdad(),
+                profesional.getTelefono(),
+                profesional.getEmail(),
+                profesional.getEspecialidad(),
+                profesional.getMatricula(),
+                profesional.getSexo(),
+                zona,
+                profesional.getObraSocialProfesionales().get(0),
+                usuario);
+        return "redirect:/";
     }
+
     @GetMapping("/editar/{idProfesional}")
     public ModelAndView editarProfesional(@PathVariable(value = "idProfesional") String idProfesional) {
         ModelAndView mav = new ModelAndView("profesional-form");

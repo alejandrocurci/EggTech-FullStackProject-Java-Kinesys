@@ -39,8 +39,8 @@ public class ConfigSeguridad extends WebSecurityConfigurerAdapter {
                             "/pacientes/crear","/pacientes/guardar",
                             "/profesionales/crear","/profesionales/guardar", "/").permitAll()
 
-                // .antMatchers("/**").permitAll()
-               .antMatchers("/**").authenticated()
+                .antMatchers("/**").permitAll()
+               //.antMatchers("/**").authenticated()
                 .and()
                    .formLogin()
                    .loginPage("/login")
