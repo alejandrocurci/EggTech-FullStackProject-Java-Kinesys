@@ -173,75 +173,227 @@ public class ProfesionalControlador {
         mav.addObject("zona", new Zona());
         mav.addObject("provincias", Provincia.values());
         mav.addObject("sexos", Sexo.values());
+        mav.addObject("especialidades", Especialidad.values());
         mav.addObject("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
         return mav;
     }
 
     @PostMapping("/perfil/{idProfesional}/nombre")
-    public RedirectView actualizarNombre(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+    public String actualizarNombre(@PathVariable(value ="idProfesional") String idProfesional,
+                                   @Valid Profesional profesional, BindingResult result, Model model){
+        if(result.hasErrors()){
+            profesional = profesionalServicio.buscarPorId(idProfesional);
+            model.addAttribute("profesional", profesional);
+            model.addAttribute("zona", new Zona());
+            model.addAttribute("provincias", Provincia.values());
+            model.addAttribute("sexos", Sexo.values());
+            model.addAttribute("especialidades", Especialidad.values());
+            model.addAttribute("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
+            model.addAttribute("errorNombre", "No se ha podido modificar el nombre");
+            return "profesional-perfil";
+        }
         profesionalServicio.actualizarNombre(idProfesional, profesional.getNombre());
-        return new RedirectView("/profesionales/perfil/{idProfesional}");
+        return "redirect:/profesionales/perfil/{idProfesional}";
     }
 
     @PostMapping("/perfil/{idProfesional}/apellido")
-    public RedirectView actualizarApellido(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+    public String actualizarApellido(@PathVariable(value ="idProfesional") String idProfesional,
+                                     @Valid Profesional profesional, BindingResult result, Model model){
+        if(result.hasErrors()){
+            profesional = profesionalServicio.buscarPorId(idProfesional);
+            model.addAttribute("profesional", profesional);
+            model.addAttribute("zona", new Zona());
+            model.addAttribute("provincias", Provincia.values());
+            model.addAttribute("sexos", Sexo.values());
+            model.addAttribute("especialidades", Especialidad.values());
+            model.addAttribute("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
+            model.addAttribute("errorApellido", "No se ha podido modificar el apellido");
+            return "profesional-perfil";
+        }
         profesionalServicio.actualizarApellido(idProfesional, profesional.getApellido());
-        return new RedirectView("/profesionales/perfil/{idProfesional}");
+        return "redirect:/profesionales/perfil/{idProfesional}";
     }
 
     @PostMapping("/perfil/{idProfesional}/dni")
-    public RedirectView actualizarDni(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+    public String actualizarDni(@PathVariable(value ="idProfesional") String idProfesional,
+                                @Valid Profesional profesional, BindingResult result, Model model){
+        if(result.hasErrors()){
+            profesional = profesionalServicio.buscarPorId(idProfesional);
+            model.addAttribute("profesional", profesional);
+            model.addAttribute("zona", new Zona());
+            model.addAttribute("provincias", Provincia.values());
+            model.addAttribute("sexos", Sexo.values());
+            model.addAttribute("especialidades", Especialidad.values());
+            model.addAttribute("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
+            model.addAttribute("errorDni", "No se ha podido modificar el DNI");
+            return "profesional-perfil";
+        }
         profesionalServicio.actualizarDni(idProfesional, profesional.getDni());
-        return new RedirectView("/profesionales/perfil/{idProfesional}");
+        return "redirect:/profesionales/perfil/{idProfesional}";
     }
 
     @PostMapping("/perfil/{idProfesional}/telefono")
-    public RedirectView actualizarTelefono(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+    public String actualizarTelefono(@PathVariable(value ="idProfesional") String idProfesional,
+                                     @Valid Profesional profesional, BindingResult result, Model model){
+        if(result.hasErrors()){
+            profesional = profesionalServicio.buscarPorId(idProfesional);
+            model.addAttribute("profesional", profesional);
+            model.addAttribute("zona", new Zona());
+            model.addAttribute("provincias", Provincia.values());
+            model.addAttribute("sexos", Sexo.values());
+            model.addAttribute("especialidades", Especialidad.values());
+            model.addAttribute("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
+            model.addAttribute("errorTelefono", "No se ha podido modificar el telefono");
+            return "profesional-perfil";
+        }
         profesionalServicio.actualizarTelefono(idProfesional, profesional.getTelefono());
-        return new RedirectView("/profesionales/perfil/{idProfesional}");
+        return "redirect:/profesionales/perfil/{idProfesional}";
     }
 
     @PostMapping("/perfil/{idProfesional}/edad")
-    public RedirectView actualizarEdad(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+    public String actualizarEdad(@PathVariable(value ="idProfesional") String idProfesional,
+                                 @Valid Profesional profesional, BindingResult result, Model model){
+        if(result.hasErrors()){
+            profesional = profesionalServicio.buscarPorId(idProfesional);
+            model.addAttribute("profesional", profesional);
+            model.addAttribute("zona", new Zona());
+            model.addAttribute("provincias", Provincia.values());
+            model.addAttribute("sexos", Sexo.values());
+            model.addAttribute("especialidades", Especialidad.values());
+            model.addAttribute("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
+            model.addAttribute("errorEdad", "No se ha podido modificar la edad");
+            return "profesional-perfil";
+        }
         profesionalServicio.actualizarEdad(idProfesional, profesional.getEdad());
-        return new RedirectView("/profesionales/perfil/{idProfesional}");
+        return "redirect:/profesionales/perfil/{idProfesional}";
     }
 
     @PostMapping("/perfil/{idProfesional}/sexo")
-    public RedirectView actualizarSexo(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+    public String actualizarSexo(@PathVariable(value ="idProfesional") String idProfesional,
+                                 @Valid Profesional profesional, BindingResult result, Model model){
+        if(result.hasErrors()){
+            profesional = profesionalServicio.buscarPorId(idProfesional);
+            model.addAttribute("profesional", profesional);
+            model.addAttribute("zona", new Zona());
+            model.addAttribute("provincias", Provincia.values());
+            model.addAttribute("sexos", Sexo.values());
+            model.addAttribute("especialidades", Especialidad.values());
+            model.addAttribute("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
+            model.addAttribute("errorSexo", "No se ha podido modificar el sexo");
+            return "profesional-perfil";
+        }
         profesionalServicio.actualizarSexo(idProfesional, profesional.getSexo());
-        return new RedirectView("/profesionales/perfil/{idProfesional}");
+        return "redirect:/profesionales/perfil/{idProfesional}";
+    }
+
+    @PostMapping("/perfil/{idProfesional}/especialidad")
+    public String actualizarEspecialidad(@PathVariable(value ="idProfesional") String idProfesional,
+                                         @Valid Profesional profesional, BindingResult result, Model model){
+        if(result.hasErrors()){
+            profesional = profesionalServicio.buscarPorId(idProfesional);
+            model.addAttribute("profesional", profesional);
+            model.addAttribute("zona", new Zona());
+            model.addAttribute("provincias", Provincia.values());
+            model.addAttribute("sexos", Sexo.values());
+            model.addAttribute("especialidades", Especialidad.values());
+            model.addAttribute("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
+            model.addAttribute("errorEspecialidad", "No se ha podido modificar la especialidad");
+            return "profesional-perfil";
+        }
+        profesionalServicio.actualizarEspecialidad(idProfesional, profesional.getEspecialidad());
+        return "redirect:/profesionales/perfil/{idProfesional}";
     }
 
     @PostMapping("/perfil/{idProfesional}/email")
-    public RedirectView actualizarEmail(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+    public String actualizarEmail(@PathVariable(value ="idProfesional") String idProfesional,
+                                  @Valid Profesional profesional, BindingResult result, Model model){
+        if(result.hasErrors()){
+            profesional = profesionalServicio.buscarPorId(idProfesional);
+            model.addAttribute("profesional", profesional);
+            model.addAttribute("zona", new Zona());
+            model.addAttribute("provincias", Provincia.values());
+            model.addAttribute("sexos", Sexo.values());
+            model.addAttribute("especialidades", Especialidad.values());
+            model.addAttribute("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
+            model.addAttribute("errorEmail", "No se ha podido modificar el email");
+            return "profesional-perfil";
+        }
         profesionalServicio.actualizarEmail(idProfesional, profesional.getEmail());
-        return new RedirectView("/profesionales/perfil/{idProfesional}");
+        return "redirect:/profesionales/perfil/{idProfesional}";
     }
 
     @PostMapping("/perfil/{idProfesional}/matricula")
-    public RedirectView actualizarMatricula(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+    public String actualizarMatricula(@PathVariable(value ="idProfesional") String idProfesional,
+                                      @Valid Profesional profesional, BindingResult result, Model model){
+        if(result.hasErrors()){
+            profesional = profesionalServicio.buscarPorId(idProfesional);
+            model.addAttribute("profesional", profesional);
+            model.addAttribute("zona", new Zona());
+            model.addAttribute("provincias", Provincia.values());
+            model.addAttribute("sexos", Sexo.values());
+            model.addAttribute("especialidades", Especialidad.values());
+            model.addAttribute("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
+            model.addAttribute("errorMatricula", "No se ha podido modificar la matricula");
+            return "profesional-perfil";
+        }
         profesionalServicio.actualizarMatricula(idProfesional, profesional.getMatricula());
-        return new RedirectView("/profesionales/perfil/{idProfesional}");
+        return "redirect:/profesionales/perfil/{idProfesional}";
     }
 
+    // SESION
     @PostMapping("/perfil/{idProfesional}/usuario")
-    public RedirectView actualizarUsuario(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+    public String actualizarUsuario(@PathVariable(value ="idProfesional") String idProfesional,
+                                    @Valid Profesional profesional, BindingResult result, Model model){
+        if(result.hasErrors()){
+            profesional = profesionalServicio.buscarPorId(idProfesional);
+            model.addAttribute("profesional", profesional);
+            model.addAttribute("zona", new Zona());
+            model.addAttribute("provincias", Provincia.values());
+            model.addAttribute("sexos", Sexo.values());
+            model.addAttribute("especialidades", Especialidad.values());
+            model.addAttribute("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
+            model.addAttribute("errorUsuario", "No se ha podido modificar el nombre de usuario");
+            return "profesional-perfil";
+        }
         profesionalServicio.actualizarUsuario(idProfesional, profesional.getUsuarioProfesional().getNombreU());
-        return new RedirectView("/profesionales/perfil/{idProfesional}");
+        return "redirect:/profesionales/perfil/{idProfesional}";
     }
 
     @PostMapping("/perfil/{idProfesional}/clave")
-    public RedirectView actualizarClave(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional){
+    public String actualizarClave(@PathVariable(value ="idProfesional") String idProfesional,
+                                  @Valid Profesional profesional, BindingResult result, Model model){
+        if(result.hasErrors()){
+            profesional = profesionalServicio.buscarPorId(idProfesional);
+            model.addAttribute("profesional", profesional);
+            model.addAttribute("zona", new Zona());
+            model.addAttribute("provincias", Provincia.values());
+            model.addAttribute("sexos", Sexo.values());
+            model.addAttribute("especialidades", Especialidad.values());
+            model.addAttribute("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
+            model.addAttribute("errorClave", "No se ha podido modificar la clave de usuario");
+            return "profesional-perfil";
+        }
         profesionalServicio.actualizarClave(idProfesional, profesional.getUsuarioProfesional().getClave());
-        return new RedirectView("/profesionales/perfil/{idProfesional}");
+        return "redirect:/profesionales/perfil/{idProfesional}";
     }
 
     // ZONAS
     @PostMapping("/perfil/{idProfesional}/zona/agregar")
-    public RedirectView actualizarZona(@PathVariable(value ="idProfesional") String idProfesional, Zona zonaNueva){
+    public String actualizarZona(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional,
+                                 @Valid Zona zonaNueva, BindingResult result, Model model){
+        if(result.hasErrors()){
+            profesional = profesionalServicio.buscarPorId(idProfesional);
+            model.addAttribute("profesional", profesional);
+            model.addAttribute("zona", new Zona());
+            model.addAttribute("provincias", Provincia.values());
+            model.addAttribute("sexos", Sexo.values());
+            model.addAttribute("especialidades", Especialidad.values());
+            model.addAttribute("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
+            model.addAttribute("errorZona", "No se ha podido agregar la nueva zona");
+            return "profesional-perfil";
+        }
         profesionalServicio.agregarZona(idProfesional, zonaNueva);
-        return new RedirectView("/profesionales/perfil/{idProfesional}");
+        return "redirect:/profesionales/perfil/{idProfesional}";
     }
 
     @PostMapping("/perfil/{idProfesional}/zona/eliminar")

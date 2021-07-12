@@ -9,6 +9,7 @@ import com.kinesysApp.kinesys.roles.Rol;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.List;
 
@@ -66,6 +67,7 @@ public class Profesional implements Serializable {
     @NotNull(message = "El sexo es requerido")
     private Sexo sexo;
 
+    @Valid
     @OneToOne(cascade = CascadeType.ALL) // cascade = CascadeType.ALL es para indicar que se guarde automaticamente en la tabla
     private Usuario usuarioProfesional;
 

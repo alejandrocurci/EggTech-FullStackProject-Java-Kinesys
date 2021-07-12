@@ -202,6 +202,13 @@ public class ProfesionalServicio {
     }
 
     @Transactional
+    public void actualizarEspecialidad(String idProfesional, Especialidad especialidad) {
+        Profesional profesional = profesionalRepositorio.findById(idProfesional).orElse(null);
+        profesional.setEspecialidad(especialidad);
+        profesionalRepositorio.save(profesional);
+    }
+
+    @Transactional
     public void actualizarEmail(String idProfesional, String emailNuevo) {
         Profesional profesional = profesionalRepositorio.findById(idProfesional).orElse(null);
         profesional.setEmail(emailNuevo);

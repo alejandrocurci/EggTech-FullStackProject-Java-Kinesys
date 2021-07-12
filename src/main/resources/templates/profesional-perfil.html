@@ -21,6 +21,8 @@
             <!-- NOMBRE -->
             <div class="d-block">
                 <p class="d-inline">Nombre: <span th:text="${profesional.nombre}"></span></p>
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorNombre != null}" th:text="${errorNombre}"></div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-nombre')">Actualizar</button>
             </div>
@@ -29,6 +31,18 @@
                     class="d-inline">
                     <label for="nombre"><i class="bi bi-gender-ambiguous"></i>Nuevo nombre: </label>
                     <input type="text" id="nombre" placeholder="Nuevo nombre" autocomplete="off" th:field="*{nombre}" />
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{apellido}" />
+                    <input type="hidden" th:field="*{dni}" />
+                    <input type="hidden" th:field="*{telefono}" />
+                    <input type="hidden" th:field="*{edad}" />
+                    <input type="hidden" th:field="*{sexo}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{matricula}" />
+                    <input type="hidden" th:field="*{especialidad}" />
+                    <input type="hidden" th:field="*{zonaProfesionales}" />
+                    <input type="hidden" th:field="*{obraSocialProfesionales}" />
+                    <input type="hidden" th:field="*{usuarioProfesional}" />
                     <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
                 </form>
                 <button type="button" class="btn btn-danger d-inline btn-sm"
@@ -38,6 +52,8 @@
             <!-- APELLIDO -->
             <div class="d-block">
                 <p class="d-inline">Apellido: <span th:text="${profesional.apellido}"></span></p>
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorApellido != null}" th:text="${errorApellido}"></div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-apellido')">Actualizar</button>
             </div>
@@ -46,6 +62,18 @@
                     class="d-inline">
                     <label for="apellido"><i class="bi bi-gender-ambiguous"></i>Nuevo apellido: </label>
                     <input type="text" id="apellido" autocomplete="off" th:field="*{apellido}" />
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{nombre}" />
+                    <input type="hidden" th:field="*{dni}" />
+                    <input type="hidden" th:field="*{telefono}" />
+                    <input type="hidden" th:field="*{edad}" />
+                    <input type="hidden" th:field="*{sexo}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{matricula}" />
+                    <input type="hidden" th:field="*{especialidad}" />
+                    <input type="hidden" th:field="*{zonaProfesionales}" />
+                    <input type="hidden" th:field="*{obraSocialProfesionales}" />
+                    <input type="hidden" th:field="*{usuarioProfesional}" />
                     <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
                 </form>
                 <button type="button" class="btn btn-danger d-inline btn-sm"
@@ -55,6 +83,8 @@
             <!-- DNI -->
             <div class="d-block">
                 <p class="d-inline">DNI: <span th:text="${profesional.dni}"></span></p>
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorDni != null}" th:text="${errorDni}"></div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-dni')">Actualizar</button>
             </div>
@@ -63,6 +93,18 @@
                     class="d-inline">
                     <label for="dni"><i class="bi bi-gender-ambiguous"></i>Nuevo DNI: </label>
                     <input type="text" id="dni" autocomplete="off" th:field="*{dni}" />
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{nombre}" />
+                    <input type="hidden" th:field="*{apellido}" />
+                    <input type="hidden" th:field="*{telefono}" />
+                    <input type="hidden" th:field="*{edad}" />
+                    <input type="hidden" th:field="*{sexo}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{matricula}" />
+                    <input type="hidden" th:field="*{especialidad}" />
+                    <input type="hidden" th:field="*{zonaProfesionales}" />
+                    <input type="hidden" th:field="*{obraSocialProfesionales}" />
+                    <input type="hidden" th:field="*{usuarioProfesional}" />
                     <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
                 </form>
                 <button type="button" class="btn btn-danger d-inline btn-sm"
@@ -72,6 +114,8 @@
             <!-- TELEFONO -->
             <div class="d-block">
                 <p class="d-inline">Telefono: <span th:text="${profesional.telefono}"></span></p>
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorTelefono != null}" th:text="${errorTelefono}"></div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-telefono')">Actualizar</button>
             </div>
@@ -80,6 +124,18 @@
                     class="d-inline">
                     <label for="telefono"><i class="bi bi-gender-ambiguous"></i>Nuevo telefono: </label>
                     <input type="text" id="telefono" autocomplete="off" th:field="*{telefono}" />
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{nombre}" />
+                    <input type="hidden" th:field="*{apellido}" />
+                    <input type="hidden" th:field="*{dni}" />
+                    <input type="hidden" th:field="*{edad}" />
+                    <input type="hidden" th:field="*{sexo}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{matricula}" />
+                    <input type="hidden" th:field="*{especialidad}" />
+                    <input type="hidden" th:field="*{zonaProfesionales}" />
+                    <input type="hidden" th:field="*{obraSocialProfesionales}" />
+                    <input type="hidden" th:field="*{usuarioProfesional}" />
                     <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
                 </form>
                 <button type="button" class="btn btn-danger d-inline btn-sm"
@@ -89,6 +145,8 @@
             <!-- EDAD -->
             <div class="d-block">
                 <p class="d-inline">Edad: <span th:text="${profesional.edad}"></span></p>
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorEdad != null}" th:text="${errorEdad}"></div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-edad')">Actualizar</button>
             </div>
@@ -97,6 +155,18 @@
                     class="d-inline">
                     <label for="edad"><i class="bi bi-gender-ambiguous"></i>Nueva edad: </label>
                     <input type="text" id="edad" autocomplete="off" th:field="*{edad}" />
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{nombre}" />
+                    <input type="hidden" th:field="*{apellido}" />
+                    <input type="hidden" th:field="*{dni}" />
+                    <input type="hidden" th:field="*{telefono}" />
+                    <input type="hidden" th:field="*{sexo}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{matricula}" />
+                    <input type="hidden" th:field="*{especialidad}" />
+                    <input type="hidden" th:field="*{zonaProfesionales}" />
+                    <input type="hidden" th:field="*{obraSocialProfesionales}" />
+                    <input type="hidden" th:field="*{usuarioProfesional}" />
                     <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
                 </form>
                 <button type="button" class="btn btn-danger d-inline btn-sm"
@@ -106,6 +176,8 @@
             <!-- SEXO -->
             <div class="d-block">
                 <p class="d-inline">Sexo: <span th:text="${profesional.sexo}"></span></p>
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorSexo != null}" th:text="${errorSexo}"></div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-sexo')">Actualizar</button>
             </div>
@@ -113,11 +185,23 @@
                 <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/sexo}" method="post"
                     class="d-inline">
                     <label for="sexo"><i class="bi bi-gender-ambiguous"></i>Nuevo sexo: </label>
-                    <select id="sexo" type="text" name="sexo" class="form-control" placeholder="Sexo"
-                        th:field="*{sexo}" required>
+                    <select id="sexo" type="text" name="sexo" class="form-control" placeholder="Sexo" th:field="*{sexo}"
+                        required>
                         <option th:each="sexo : ${sexos}" th:value="${sexo}" th:text="${sexo}"
                             th:selected="${sexo != null}"></option>
                     </select>
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{nombre}" />
+                    <input type="hidden" th:field="*{apellido}" />
+                    <input type="hidden" th:field="*{dni}" />
+                    <input type="hidden" th:field="*{telefono}" />
+                    <input type="hidden" th:field="*{edad}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{matricula}" />
+                    <input type="hidden" th:field="*{especialidad}" />
+                    <input type="hidden" th:field="*{zonaProfesionales}" />
+                    <input type="hidden" th:field="*{obraSocialProfesionales}" />
+                    <input type="hidden" th:field="*{usuarioProfesional}" />
                     <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
                 </form>
                 <button type="button" class="btn btn-danger d-inline btn-sm"
@@ -128,6 +212,8 @@
             <!-- EMAIL -->
             <div class="d-block">
                 <p class="d-inline">Email: <span th:text="${profesional.email}"></span></p>
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorEmail != null}" th:text="${errorEmail}"></div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-email')">Actualizar</button>
             </div>
@@ -136,6 +222,18 @@
                     class="d-inline">
                     <label for="email"><i class="bi bi-gender-ambiguous"></i>Nuevo email: </label>
                     <input type="text" id="email" autocomplete="off" th:field="*{email}" />
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{nombre}" />
+                    <input type="hidden" th:field="*{apellido}" />
+                    <input type="hidden" th:field="*{dni}" />
+                    <input type="hidden" th:field="*{telefono}" />
+                    <input type="hidden" th:field="*{edad}" />
+                    <input type="hidden" th:field="*{sexo}" />
+                    <input type="hidden" th:field="*{matricula}" />
+                    <input type="hidden" th:field="*{especialidad}" />
+                    <input type="hidden" th:field="*{zonaProfesionales}" />
+                    <input type="hidden" th:field="*{obraSocialProfesionales}" />
+                    <input type="hidden" th:field="*{usuarioProfesional}" />
                     <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
                 </form>
                 <button type="button" class="btn btn-danger d-inline btn-sm"
@@ -145,6 +243,8 @@
             <!-- MATRICULA -->
             <div class="d-block">
                 <p class="d-inline">Matricula: <span th:text="${profesional.matricula}"></span></p>
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorMatricula != null}" th:text="${errorMatricula}"></div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-matricula')">Actualizar</button>
             </div>
@@ -153,10 +253,58 @@
                     class="d-inline">
                     <label for="matricula"><i class="bi bi-gender-ambiguous"></i>Nueva matricula: </label>
                     <input type="text" id="matricula" autocomplete="off" th:field="*{matricula}" />
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{nombre}" />
+                    <input type="hidden" th:field="*{apellido}" />
+                    <input type="hidden" th:field="*{dni}" />
+                    <input type="hidden" th:field="*{telefono}" />
+                    <input type="hidden" th:field="*{edad}" />
+                    <input type="hidden" th:field="*{sexo}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{especialidad}" />
+                    <input type="hidden" th:field="*{zonaProfesionales}" />
+                    <input type="hidden" th:field="*{obraSocialProfesionales}" />
+                    <input type="hidden" th:field="*{usuarioProfesional}" />
                     <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
                 </form>
                 <button type="button" class="btn btn-danger d-inline btn-sm"
                     onclick="ocultar('cambio-matricula')">Cancelar</button>
+            </div>
+
+            <!-- ESPECIALIDAD -->
+            <div class="d-block">
+                <p class="d-inline">Especialidad: <span th:text="${profesional.especialidad}"></span></p>
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorEspecialidad != null}" th:text="${errorEspecialidad}">
+                </div>
+                <button type="button" class="btn btn-primary d-inline btn-sm"
+                    onclick="mostrar('cambio-especialidad')">Actualizar</button>
+            </div>
+            <div class="d-none" id="cambio-especialidad">
+                <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/especialidad}" method="post"
+                    class="d-inline">
+                    <label for="especialidad"><i class="bi bi-gender-ambiguous"></i>Nueva especialidad: </label>
+                    <select id="especialidad" type="text" name="especialidad" class="form-control"
+                        placeholder="Especialidad" th:field="*{especialidad}" required>
+                        <option th:each="esp : ${especialidades}" th:value="${esp}" th:text="${esp}"
+                            th:selected="${esp != null}"></option>
+                    </select>
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{nombre}" />
+                    <input type="hidden" th:field="*{apellido}" />
+                    <input type="hidden" th:field="*{dni}" />
+                    <input type="hidden" th:field="*{telefono}" />
+                    <input type="hidden" th:field="*{edad}" />
+                    <input type="hidden" th:field="*{sexo}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{matricula}" />
+                    <input type="hidden" th:field="*{zonaProfesionales}" />
+                    <input type="hidden" th:field="*{obraSocialProfesionales}" />
+                    <input type="hidden" th:field="*{usuarioProfesional}" />
+                    <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
+                </form>
+                <button type="button" class="btn btn-danger d-inline btn-sm"
+                    onclick="ocultar('cambio-especialidad')">Cancelar</button>
             </div>
         </div>
 
@@ -176,6 +324,9 @@
                             <p class="d-inline">Domicilio: <span th:text="${z.domicilio}"></span></p>
                             <button class="btn btn-danger btn-sm" type="submit">Quitar</button>
                         </form>
+                    </div>
+                    <!-- Mensaje de error -->
+                    <div class="alert alert-danger" th:if="${errorZona != null}" th:text="${errorZona}">
                     </div>
 
                     <!-- Al apretar actualizar, aparece un menu para agregar una nueva zona -->
@@ -258,6 +409,8 @@
             <!-- USUARIO -->
             <div class="d-block">
                 <p class="d-inline">Usuario: <span th:text="${profesional.usuarioProfesional.nombreU}"></span></p>
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorUsuario != null}" th:text="${errorUsuario}"></div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-usuario')">Actualizar</button>
             </div>
@@ -266,6 +419,20 @@
                     class="d-inline">
                     <label for="usuario"><i class="bi bi-gender-ambiguous"></i>Nuevo usuario: </label>
                     <input type="text" id="usuario" autocomplete="off" th:field="*{usuarioProfesional.nombreU}" />
+
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{nombre}" />
+                    <input type="hidden" th:field="*{apellido}" />
+                    <input type="hidden" th:field="*{dni}" />
+                    <input type="hidden" th:field="*{telefono}" />
+                    <input type="hidden" th:field="*{edad}" />
+                    <input type="hidden" th:field="*{sexo}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{matricula}" />
+                    <input type="hidden" th:field="*{especialidad}" />
+                    <input type="hidden" th:field="*{zonaProfesionales}" />
+                    <input type="hidden" th:field="*{obraSocialProfesionales}" />
+                    <input type="hidden" th:field="*{usuarioProfesional.clave}" />
                     <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
                 </form>
                 <button type="button" class="btn btn-danger d-inline btn-sm"
@@ -277,6 +444,8 @@
                 <!-- 
                 <p class="d-inline">Clave: <span th:text="${profesional.usuarioProfesional.clave}"></span></p>
                 -->
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorClave != null}" th:text="${errorClave}"></div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-clave')">Actualizar contraseña</button>
             </div>
@@ -286,6 +455,20 @@
 
                     <label for="clave"><i class="bi bi-gender-ambiguous"></i>Nueva clave: </label>
                     <input type="text" id="clave" autocomplete="off" th:field="*{usuarioProfesional.clave}" />
+
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{nombre}" />
+                    <input type="hidden" th:field="*{apellido}" />
+                    <input type="hidden" th:field="*{dni}" />
+                    <input type="hidden" th:field="*{telefono}" />
+                    <input type="hidden" th:field="*{edad}" />
+                    <input type="hidden" th:field="*{sexo}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{matricula}" />
+                    <input type="hidden" th:field="*{especialidad}" />
+                    <input type="hidden" th:field="*{zonaProfesionales}" />
+                    <input type="hidden" th:field="*{obraSocialProfesionales}" />
+                    <input type="hidden" th:field="*{usuarioProfesional.nombreU}" />
 
                     <label for="confirmar-clave"><i class="bi bi-gender-ambiguous"></i>Confirmar clave: </label>
                     <input type="text" id="confirmar-clave" autocomplete="off" th:value="${confirmacionClave}" />
