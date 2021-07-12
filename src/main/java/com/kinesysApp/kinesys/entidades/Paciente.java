@@ -4,6 +4,7 @@ import java.io.Serializable;
 import com.kinesysApp.kinesys.roles.Rol;
 import lombok.Data;
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -34,6 +35,7 @@ public class Paciente implements Serializable {
     @Email(message = "Email invalido")
     private String email;
 
+    @Valid
     @OneToOne(cascade = CascadeType.ALL)
     private Usuario usuarioPaciente;
 

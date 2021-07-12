@@ -21,6 +21,9 @@
             <!-- NOMBRE -->
             <div class="d-block">
                 <p class="d-inline">Nombre: <span th:text="${paciente.nombre}"></span></p>
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorNombre != null}" th:text="${errorNombre}">
+                </div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-nombre')">Actualizar</button>
             </div>
@@ -28,6 +31,12 @@
                 <form th:action="@{/pacientes/perfil/__${paciente.idPaciente}__/nombre}" method="post" class="d-inline">
                     <label for="nombre"><i class="bi bi-gender-ambiguous"></i>Nuevo nombre: </label>
                     <input type="text" id="nombre" placeholder="Nuevo nombre" autocomplete="off" th:field="*{nombre}" />
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{apellido}" />
+                    <input type="hidden" th:field="*{dni}" />
+                    <input type="hidden" th:field="*{telefono}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{usuarioPaciente}" />
                     <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
                 </form>
                 <button type="button" class="btn btn-danger d-inline btn-sm"
@@ -37,6 +46,9 @@
             <!-- APELLIDO -->
             <div class="d-block">
                 <p class="d-inline">Apellido: <span th:text="${paciente.apellido}"></span></p>
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorApellido != null}" th:text="${errorApellido}">
+                </div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-apellido')">Actualizar</button>
             </div>
@@ -45,6 +57,12 @@
                     class="d-inline">
                     <label for="apellido"><i class="bi bi-gender-ambiguous"></i>Nuevo apellido: </label>
                     <input type="text" id="apellido" autocomplete="off" th:field="*{apellido}" />
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{nombre}" />
+                    <input type="hidden" th:field="*{dni}" />
+                    <input type="hidden" th:field="*{telefono}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{usuarioPaciente}" />
                     <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
                 </form>
                 <button type="button" class="btn btn-danger d-inline btn-sm"
@@ -54,6 +72,9 @@
             <!-- DNI -->
             <div class="d-block">
                 <p class="d-inline">DNI: <span th:text="${paciente.dni}"></span></p>
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorDni != null}" th:text="${errorDni}">
+                </div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-dni')">Actualizar</button>
             </div>
@@ -61,6 +82,12 @@
                 <form th:action="@{/pacientes/perfil/__${paciente.idPaciente}__/dni}" method="post" class="d-inline">
                     <label for="dni"><i class="bi bi-gender-ambiguous"></i>Nuevo DNI: </label>
                     <input type="text" id="dni" autocomplete="off" th:field="*{dni}" />
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{nombre}" />
+                    <input type="hidden" th:field="*{apellido}" />
+                    <input type="hidden" th:field="*{telefono}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{usuarioPaciente}" />
                     <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
                 </form>
                 <button type="button" class="btn btn-danger d-inline btn-sm"
@@ -70,6 +97,9 @@
             <!-- TELEFONO -->
             <div class="d-block">
                 <p class="d-inline">Telefono: <span th:text="${paciente.telefono}"></span></p>
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorTelefono != null}" th:text="${errorTelefono}">
+                </div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-telefono')">Actualizar</button>
             </div>
@@ -78,6 +108,12 @@
                     class="d-inline">
                     <label for="telefono"><i class="bi bi-gender-ambiguous"></i>Nuevo telefono: </label>
                     <input type="text" id="telefono" autocomplete="off" th:field="*{telefono}" />
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{nombre}" />
+                    <input type="hidden" th:field="*{apellido}" />
+                    <input type="hidden" th:field="*{dni}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{usuarioPaciente}" />
                     <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
                 </form>
                 <button type="button" class="btn btn-danger d-inline btn-sm"
@@ -88,6 +124,9 @@
             <!-- EMAIL -->
             <div class="d-block">
                 <p class="d-inline">Email: <span th:text="${paciente.email}"></span></p>
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorEmail != null}" th:text="${errorEmail}">
+                </div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-email')">Actualizar</button>
             </div>
@@ -95,6 +134,12 @@
                 <form th:action="@{/pacientes/perfil/__${paciente.idPaciente}__/email}" method="post" class="d-inline">
                     <label for="email"><i class="bi bi-gender-ambiguous"></i>Nuevo email: </label>
                     <input type="text" id="email" autocomplete="off" th:field="*{email}" />
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{nombre}" />
+                    <input type="hidden" th:field="*{apellido}" />
+                    <input type="hidden" th:field="*{dni}" />
+                    <input type="hidden" th:field="*{telefono}" />
+                    <input type="hidden" th:field="*{usuarioPaciente}" />
                     <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
                 </form>
                 <button type="button" class="btn btn-danger d-inline btn-sm"
@@ -110,6 +155,9 @@
             <!-- USUARIO -->
             <div class="d-block">
                 <p class="d-inline">Usuario: <span th:text="${paciente.usuarioPaciente.nombreU}"></span></p>
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorUsuario != null}" th:text="${errorUsuario}">
+                </div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-usuario')">Actualizar</button>
             </div>
@@ -118,6 +166,13 @@
                     class="d-inline">
                     <label for="usuario"><i class="bi bi-gender-ambiguous"></i>Nuevo usuario: </label>
                     <input type="text" id="usuario" autocomplete="off" th:field="*{usuarioPaciente.nombreU}" />
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{nombre}" />
+                    <input type="hidden" th:field="*{apellido}" />
+                    <input type="hidden" th:field="*{dni}" />
+                    <input type="hidden" th:field="*{telefono}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{usuarioPaciente.clave}" />
                     <button class="btn btn-success btn-sm" type="submit">Confirmar</button>
                 </form>
                 <button type="button" class="btn btn-danger d-inline btn-sm"
@@ -126,9 +181,9 @@
 
             <!-- CLAVE -->
             <div class="d-block">
-                <!-- 
-                <p class="d-inline">Clave: <span th:text="${paciente.usuarioPaciente.clave}"></span></p>
-                -->
+                <!-- Mensaje de error -->
+                <div class="alert alert-danger" th:if="${errorClave != null}" th:text="${errorClave}">
+                </div>
                 <button type="button" class="btn btn-primary d-inline btn-sm"
                     onclick="mostrar('cambio-clave')">Actualizar contraseña</button>
             </div>
@@ -138,7 +193,14 @@
 
                     <label for="clave"><i class="bi bi-gender-ambiguous"></i>Nueva clave: </label>
                     <input type="text" id="clave" autocomplete="off" th:field="*{usuarioPaciente.clave}" />
-                    
+                    <!-- Atributos de relleno para que no lleguen null a la validacion -->
+                    <input type="hidden" th:field="*{nombre}" />
+                    <input type="hidden" th:field="*{apellido}" />
+                    <input type="hidden" th:field="*{dni}" />
+                    <input type="hidden" th:field="*{telefono}" />
+                    <input type="hidden" th:field="*{email}" />
+                    <input type="hidden" th:field="*{usuarioPaciente.nombreU}" />
+                    <!-- Confirmacion de clave -->
                     <label for="confirmar-clave"><i class="bi bi-gender-ambiguous"></i>Confirmar clave: </label>
                     <input type="text" id="confirmar-clave" autocomplete="off" th:value="${confirmacionClave}" />
                     <button class="btn btn-success btn-sm" onclick="validarClave(event)">Confirmar</button>

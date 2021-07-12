@@ -153,45 +153,94 @@ public class PacienteControlador {
     }
 
     @PostMapping("/perfil/{idPaciente}/nombre")
-    public RedirectView actualizarNombre(@PathVariable(value ="idPaciente") String idPaciente, Paciente paciente){
+    public String actualizarNombre(@PathVariable(value ="idPaciente") String idPaciente,
+                                         @Valid Paciente paciente, BindingResult result, Model model){
+        if(result.hasErrors()){
+            paciente = pacienteServicio.buscarPorId(idPaciente);
+            model.addAttribute("paciente", paciente);
+            model.addAttribute("errorNombre", "No se ha podido modificar el nombre");
+            return "paciente-perfil";
+        }
         pacienteServicio.actualizarNombre(idPaciente, paciente.getNombre());
-        return new RedirectView("/pacientes/perfil/{idPaciente}");
+        return "redirect:/pacientes/perfil/{idPaciente}";
     }
 
     @PostMapping("/perfil/{idPaciente}/apellido")
-    public RedirectView actualizarApellido(@PathVariable(value ="idPaciente") String idPaciente, Paciente paciente){
+    public String actualizarApellido(@PathVariable(value ="idPaciente") String idPaciente,
+                                     @Valid Paciente paciente, BindingResult result, Model model){
+        if(result.hasErrors()){
+            paciente = pacienteServicio.buscarPorId(idPaciente);
+            model.addAttribute("paciente", paciente);
+            model.addAttribute("errorApellido", "No se ha podido modificar el apellido");
+            return "paciente-perfil";
+        }
         pacienteServicio.actualizarApellido(idPaciente, paciente.getApellido());
-        return new RedirectView("/pacientes/perfil/{idPaciente}");
+        return "redirect:/pacientes/perfil/{idPaciente}";
     }
 
     @PostMapping("/perfil/{idPaciente}/dni")
-    public RedirectView actualizarDni(@PathVariable(value ="idPaciente") String idPaciente, Paciente paciente){
+    public String actualizarDni(@PathVariable(value ="idPaciente") String idPaciente,
+                                @Valid Paciente paciente, BindingResult result, Model model){
+        if(result.hasErrors()){
+            paciente = pacienteServicio.buscarPorId(idPaciente);
+            model.addAttribute("paciente", paciente);
+            model.addAttribute("errorDni", "No se ha podido modificar el DNI");
+            return "paciente-perfil";
+        }
         pacienteServicio.actualizarDni(idPaciente, paciente.getDni());
-        return new RedirectView("/pacientes/perfil/{idPaciente}");
+        return "redirect:/pacientes/perfil/{idPaciente}";
     }
 
     @PostMapping("/perfil/{idPaciente}/telefono")
-    public RedirectView actualizarTelefono(@PathVariable(value ="idPaciente") String idPaciente, Paciente paciente){
+    public String actualizarTelefono(@PathVariable(value ="idPaciente") String idPaciente,
+                                     @Valid Paciente paciente, BindingResult result, Model model){
+        if(result.hasErrors()){
+            paciente = pacienteServicio.buscarPorId(idPaciente);
+            model.addAttribute("paciente", paciente);
+            model.addAttribute("errorTelefono", "No se ha podido modificar el telefono");
+            return "paciente-perfil";
+        }
         pacienteServicio.actualizarTelefono(idPaciente, paciente.getTelefono());
-        return new RedirectView("/pacientes/perfil/{idPaciente}");
+        return "redirect:/pacientes/perfil/{idPaciente}";
     }
 
     @PostMapping("/perfil/{idPaciente}/email")
-    public RedirectView actualizarEmail(@PathVariable(value ="idPaciente") String idPaciente, Paciente paciente){
+    public String actualizarEmail(@PathVariable(value ="idPaciente") String idPaciente,
+                                  @Valid Paciente paciente, BindingResult result, Model model){
+        if(result.hasErrors()){
+            paciente = pacienteServicio.buscarPorId(idPaciente);
+            model.addAttribute("paciente", paciente);
+            model.addAttribute("errorEmail", "No se ha podido modificar el email");
+            return "paciente-perfil";
+        }
         pacienteServicio.actualizarEmail(idPaciente, paciente.getEmail());
-        return new RedirectView("/pacientes/perfil/{idPaciente}");
+        return "redirect:/pacientes/perfil/{idPaciente}";
     }
 
     @PostMapping("/perfil/{idPaciente}/usuario")
-    public RedirectView actualizarUsuario(@PathVariable(value ="idPaciente") String idPaciente, Paciente paciente){
+    public String actualizarUsuario(@PathVariable(value ="idPaciente") String idPaciente,
+                                    @Valid Paciente paciente, BindingResult result, Model model){
+        if(result.hasErrors()){
+            paciente = pacienteServicio.buscarPorId(idPaciente);
+            model.addAttribute("paciente", paciente);
+            model.addAttribute("errorUsuario", "No se ha podido modificar el nombre de usuario");
+            return "paciente-perfil";
+        }
         pacienteServicio.actualizarUsuario(idPaciente, paciente.getUsuarioPaciente().getNombreU());
-        return new RedirectView("/pacientes/perfil/{idPaciente}");
+        return "redirect:/pacientes/perfil/{idPaciente}";
     }
 
     @PostMapping("/perfil/{idPaciente}/clave")
-    public RedirectView actualizarClave(@PathVariable(value ="idPaciente") String idPaciente, Paciente paciente){
+    public String actualizarClave(@PathVariable(value ="idPaciente") String idPaciente,
+                                  @Valid Paciente paciente, BindingResult result, Model model){
+        if(result.hasErrors()){
+            paciente = pacienteServicio.buscarPorId(idPaciente);
+            model.addAttribute("paciente", paciente);
+            model.addAttribute("errorClave", "No se ha podido modificar la clave de usuario");
+            return "paciente-perfil";
+        }
         pacienteServicio.actualizarClave(idPaciente, paciente.getUsuarioPaciente().getClave());
-        return new RedirectView("/pacientes/perfil/{idPaciente}");
+        return "redirect:/pacientes/perfil/{idPaciente}";
     }
 
 }
