@@ -41,4 +41,5 @@ public class RolServicio {
     public List<Rol> buscarTodos() {
         return rolRepositorio.findAll();
     }
+
 }

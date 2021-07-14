@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
         xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -27,12 +28,11 @@
 <body>
         <div class="container mt-5 main">
 
-                <form id="formulario" class="needs-validation" th:action="@{/roles/guardar}" method="POST"
-                        th:object="${rol}" novalidate>
-
-
-
-
+                <form id="formulario" class="needs-validation"
+                      th:action="@{/roles/guardar}"
+                      method="POST"
+                      th:object="${rol}"
+                      novalidate>
                         <!-- Nombre -->
 
                         <label for="nombre">Nombre Rol</label>

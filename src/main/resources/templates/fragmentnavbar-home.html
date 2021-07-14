@@ -14,35 +14,24 @@
                 <li class="nav-item dropdown">
                     <a id="dropdown-pacientes" class="nav-link dropdown-toggle" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Pacientes
+                        Registrar
                     </a>
-                    <ul  class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdown-pacientes">
-                        <li >
-                            <a class="dropdown-item" th:href="@{/pacientes}">Mostrar pacientes</a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdown-pacientes">
+                        <li>
+                            <a sec  class="dropdown-item" th:href="@{/profesionales/crear}">Profesional</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" th:href="@{/pacientes/crear}">Registrar nuevo</a>
+                            <a class="dropdown-item" th:href="@{/pacientes/crear}">Paciente</a>
                         </li>
-
                     </ul>
                 </li>
-                <!--DROPDOWN PROFESIONALES-->
-                <li sec:authorize="hasAnyAuthority('ADMIN','PROFESIONAL')" class="nav-item dropdown">
-                    <a id="dropdown-profesionales" class="nav-link dropdown-toggle" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">Profesionales
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdown-profesionales">
-                        <li >
-                            <a class="dropdown-item" th:href="@{/profesionales}">Mostrar profesionales</a>
-                        </li>
-                        <li sec:authorize="hasAnyAuthority('ADMIN')">
-                            <a class="dropdown-item" th:href="@{/profesionales/crear}">Registrar nuevo</a>
-                        </li>
-                    </ul>
+                <!--LOGIN-->
+                <li class="nav-item dropdown ms-auto">
+                    <a class="btn btn-sm btn-outline-secondary position-relative  end-0 translate-middle-x " th:href="@{/login}">Ingresar</a>
                 </li>
                 <!--LOG OUT-->
                 <li class="nav-item dropdown ms-auto">
-                    <a class="btn btn-sm btn-outline-secondary position-relative  end-0 translate-middle-x " th:href="@{/logout}">Log Out</a>
+                    <a class="btn btn-sm btn-outline-secondary position-relative  end-0 translate-middle-x " th:href="@{/logout}">Cerrar Sesion</a>
                 </li>
             </ul>
         </div>
