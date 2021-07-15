@@ -10,6 +10,8 @@ import com.kinesysApp.kinesys.modelos.busqueda.BusquedaProfesional;
 import com.kinesysApp.kinesys.servicios.ObraSocialServicio;
 import com.kinesysApp.kinesys.servicios.ProfesionalServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +21,11 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/profesionales")
@@ -33,9 +39,11 @@ public class ProfesionalControlador {
     @Autowired
     private ObraSocialServicio obraSocialServicio;
 
+    // REEMPLAZADO POR LA PAGINACION (Al final del archivo)
+    /*
     @GetMapping()
     public ModelAndView mostrarProfesionales(@ModelAttribute BusquedaProfesional busqueda,
-                                             Model model) throws ExcepcionKinessysProfesional {  //ModelAndView busca un HTML
+                                             Model model) {
         ModelAndView mav = new ModelAndView("profesional");
         List<Profesional> profesionales=null;
         try{
@@ -53,6 +61,7 @@ public class ProfesionalControlador {
 
         return mav;
     }
+     */
 
     @GetMapping("/crear")
     public ModelAndView crearProfesional() {
@@ -418,4 +427,41 @@ public class ProfesionalControlador {
         return new RedirectView("/profesionales/perfil/{idProfesional}");
     }
 
+    // PAGINACION  (reemplaza al mostrarProfesionales original)
+    @GetMapping
+    public String paginarProfesionales(@ModelAttribute BusquedaProfesional busqueda,
+                                       Model model, @RequestParam("pagina") Optional<Integer> pagina,
+                                       @RequestParam("tamano") Optional<Integer> tamano) {
+        // proceso de filtrado
+        List<Profesional> profesionales = null;
+        try{
+            profesionales = profesionalServicio.buscarPorFiltro(busqueda);
+        }catch(ExcepcionKinessysProfesional ex){
+            profesionales=new ArrayList<>();
+            model.addAttribute("errorfiltro",ex.getMessage());
+        }
+
+        // proceso de paginacion
+        int paginaActual = pagina.orElse(1);
+        int tamanoPagina = tamano.orElse(4);
+
+        Page<Profesional> paginaProfesionales = profesionalServicio.buscarPagina(PageRequest.of(paginaActual - 1, tamanoPagina), profesionales);
+
+        model.addAttribute("ListaProfesionales", paginaProfesionales);
+
+        int totalPaginas = paginaProfesionales.getTotalPages();
+        if(totalPaginas > 0) {
+            List<Integer> numeros = IntStream.rangeClosed(1, totalPaginas)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("numeros", numeros);
+        }
+
+        model.addAttribute("provincias", Provincia.values());
+        model.addAttribute("especialidades", Especialidad.values());
+        model.addAttribute("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
+        model.addAttribute("busqueda",busqueda );
+
+        return "profesional";
+    }
 }
