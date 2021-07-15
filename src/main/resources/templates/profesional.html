@@ -60,7 +60,7 @@
                         <select class="form-control" id="obraSocial" th:field="*{idObraSocial}">
                             <option th:text="#{text.list.filtro.tipo.todas}" value="" selected></option>
                             <option th:each="obraSocial : ${obrasSociales}"
-                                    th:text="${obraSocial.nombre}"
+                                    th:text="|${obraSocial.nombre} ${obraSocial.Plan}|"
                                     th:value="${obraSocial.idObraSocial}" ></option>
                         </select>
                     </div>
@@ -115,6 +115,14 @@
             </tr>
             </tbody>
         </table>
+        <!-- PAGINACION -->
+        <!-- FALTAN ESTILOS !!!!!-->
+        <div th:if="${ListaProfesionales.totalPages > 0}" class="pagination"
+            th:each="num : ${numeros}">
+            <a th:href="@{/profesionales(tamano=${ListaProfesionales.size}, pagina=${num})}"
+                th:text=${num}
+                th:class="${num==ListaProfesionales.number + 1} ? active"></a>
+        </div>
     </div>
 </section>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

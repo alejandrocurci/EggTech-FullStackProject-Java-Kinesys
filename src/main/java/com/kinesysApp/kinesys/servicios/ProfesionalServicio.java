@@ -13,6 +13,10 @@ import com.kinesysApp.kinesys.repositorios.ProfesionalRepositorio;
 import com.kinesysApp.kinesys.repositorios.ZonaRepositorio;
 import com.kinesysApp.kinesys.roles.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -285,8 +290,8 @@ public class ProfesionalServicio {
             profesionales.removeIf((p)-> !p.getObraSocialProfesionales().contains(oS));
 
         }
-        if(!busqueda.getEspecialidad().isEmpty()){
-            profesionales.removeIf((p)-> !p.getEspecialidad().equals(busqueda.getEspecialidad()));
+        if(busqueda.getEspecialidad() != null){
+            profesionales.removeIf((p)-> !p.getEspecialidad().name().equals(busqueda.getEspecialidad().name()));
         }
 
         if(busqueda.getProvincia() != null){
@@ -312,5 +317,23 @@ public class ProfesionalServicio {
         }
 
 
+    }
+
+    // PAGINACION
+    public Page<Profesional> buscarPagina(Pageable pageable, List<Profesional> profesionales) {
+        int tamano = pageable.getPageSize();
+        int paginaActual = pageable.getPageNumber();
+        int itemInicial = tamano * paginaActual;
+        List<Profesional> lista;
+
+        if (profesionales.size() < itemInicial) {
+            lista = Collections.emptyList();
+        } else {
+            int indiceHasta = Math.min(itemInicial + tamano, profesionales.size());
+            lista = profesionales.subList(itemInicial, indiceHasta);
+        }
+
+        Page<Profesional> paginacion = new PageImpl<>(lista, PageRequest.of(paginaActual, tamano), profesionales.size());
+        return paginacion;
     }
 }
