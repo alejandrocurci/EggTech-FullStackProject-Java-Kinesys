@@ -183,3 +183,20 @@ textarea {
   margin-top: -20px;
   text-align: right;
 }
+
+.fondo {
+  background: url(/img/imagen-fondo.jpg) #ccc no-repeat;
+  background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      height: 600px;
+      margin: auto;
+      padding: auto;
+      font-family: sans-serif;
+      overflow: auto;
+       -webkit-background-size: cover;
+          -moz-background-size: cover;
+
+}
