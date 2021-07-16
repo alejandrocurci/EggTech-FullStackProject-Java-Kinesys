@@ -11,8 +11,12 @@ import com.kinesysApp.kinesys.modelos.busqueda.BusquedaProfesional;
 import com.kinesysApp.kinesys.servicios.PacienteServicio;
 import com.kinesysApp.kinesys.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,6 +46,7 @@ public class PacienteControlador {
     // REEMPLAZO POR LA PAGINACION
     /*
     @GetMapping()
+    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public ModelAndView mostrarPacientes() {  //ModelAndView busca un HTML
         ModelAndView mav = new ModelAndView("paciente");
         mav.addObject("ListaPacientes", pacienteServicio.buscarTodos());
@@ -82,6 +87,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/eliminar/{idPaciente}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String eliminarPaciente(@PathVariable String idPaciente, Model model) {
         try {
             pacienteServicio.eliminarPaciente(idPaciente);
@@ -93,6 +99,7 @@ public class PacienteControlador {
     }
 
     @GetMapping("/editar/{idPaciente}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ModelAndView editarPaciente(@PathVariable(value ="idPaciente") String idPaciente){
         ModelAndView mav = new ModelAndView("paciente-form");
         Paciente paciente=pacienteServicio.buscarPorId(idPaciente);
@@ -104,6 +111,7 @@ public class PacienteControlador {
 
     }
     @PostMapping("/modificar")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public RedirectView modificarPaciente(@ModelAttribute("paciente") Paciente paciente, Usuario usuario,Model model){
         try {
             pacienteServicio.modificar(
@@ -124,11 +132,14 @@ public class PacienteControlador {
             return new RedirectView("/");
         }
     }
+
     @GetMapping("/buscarPaciente")
+   @PreAuthorize("hasAnyRole('ADMIN')")
     public ModelAndView buscarPacientePorDni(@RequestParam(required = false) Long dni,
                                              @RequestParam("pagina") Optional<Integer> pagina,
                                              @RequestParam("tamano") Optional<Integer> tamano) {   //ModelAndView busca un HTml
         ModelAndView mav = new ModelAndView("paciente");
+
         try {
             mav.addObject("ListaPacientes", pacienteServicio.buscarPacientePorDni(dni));
             return mav;
@@ -149,6 +160,7 @@ public class PacienteControlador {
         }
     }
     @GetMapping("/buscarPacientePorNombre")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ModelAndView buscarPacientePorNombre(@RequestParam(required = false) String nombre) {   //ModelAndView busca un HTML
 
         ModelAndView mav = new ModelAndView("paciente");
@@ -171,6 +183,7 @@ public class PacienteControlador {
     // FUNCIONALIDAD PARA PERFIL
 
     @GetMapping("/perfil/{idPaciente}")
+    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public ModelAndView mostrarPerfil(@PathVariable(value ="idPaciente") String idPaciente){
         ModelAndView mav = new ModelAndView("paciente-perfil");
         Paciente paciente=pacienteServicio.buscarPorId(idPaciente);
@@ -179,6 +192,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/perfil/{idPaciente}/nombre")
+    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public String actualizarNombre(@PathVariable(value ="idPaciente") String idPaciente,
                                          @Valid Paciente paciente, BindingResult result, Model model){
         if(result.hasErrors()){
@@ -192,6 +206,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/perfil/{idPaciente}/apellido")
+    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public String actualizarApellido(@PathVariable(value ="idPaciente") String idPaciente,
                                      @Valid Paciente paciente, BindingResult result, Model model){
         if(result.hasErrors()){
@@ -205,6 +220,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/perfil/{idPaciente}/dni")
+    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public String actualizarDni(@PathVariable(value ="idPaciente") String idPaciente,
                                 @Valid Paciente paciente, BindingResult result, Model model){
         if(result.hasErrors()){
@@ -218,6 +234,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/perfil/{idPaciente}/telefono")
+    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public String actualizarTelefono(@PathVariable(value ="idPaciente") String idPaciente,
                                      @Valid Paciente paciente, BindingResult result, Model model){
         if(result.hasErrors()){
@@ -231,6 +248,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/perfil/{idPaciente}/email")
+    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public String actualizarEmail(@PathVariable(value ="idPaciente") String idPaciente,
                                   @Valid Paciente paciente, BindingResult result, Model model){
         if(result.hasErrors()){
@@ -244,6 +262,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/perfil/{idPaciente}/usuario")
+    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public String actualizarUsuario(@PathVariable(value ="idPaciente") String idPaciente,
                                     @Valid Paciente paciente, BindingResult result, Model model){
         if(result.hasErrors()){
@@ -257,6 +276,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/perfil/{idPaciente}/clave")
+    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public String actualizarClave(@PathVariable(value ="idPaciente") String idPaciente,
                                   @Valid Paciente paciente, BindingResult result, Model model){
         if(result.hasErrors()){

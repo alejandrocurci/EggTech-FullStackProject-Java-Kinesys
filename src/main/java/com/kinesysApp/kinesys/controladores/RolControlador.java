@@ -1,10 +1,8 @@
 package com.kinesysApp.kinesys.controladores;
 
-import com.kinesysApp.kinesys.repositorios.RolRepositorio;
 import com.kinesysApp.kinesys.roles.Rol;
 import com.kinesysApp.kinesys.servicios.RolServicio;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,7 +19,7 @@ public class RolControlador {
     private RolServicio rolServicio;
 
     @GetMapping()
-    @PreAuthorize("hasRole('ADMIN')")
+   //@PreAuthorize("hasRole('ADMIN')")
     public ModelAndView mostrarRoles() {
         ModelAndView mav = new ModelAndView("rol");
         mav.addObject("listaRoles", rolServicio.buscarTodos());
@@ -29,15 +27,14 @@ public class RolControlador {
     }
 
     @GetMapping("/crear")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ModelAndView crearRol(){
         ModelAndView mav= new ModelAndView("rol-form");
         mav.addObject("rol",new Rol());
         return mav;
     }
-
     @PostMapping("/guardar")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public RedirectView guardarRol(@ModelAttribute("rol") Rol rol){
         rolServicio.crear(rol.getNombre());
         return new RedirectView("/roles");

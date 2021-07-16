@@ -1,5 +1,6 @@
 package com.kinesysApp.kinesys.controladores;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,9 +14,13 @@ public class PrincipalControlador {
         return new ModelAndView("home");
     }
 
-    @GetMapping("/login")     //
+    @GetMapping("/login")
     public ModelAndView loginUsuario(@RequestParam(required = false) String error, ModelAndView mav) {
         mav.setViewName("login");
         return mav;  // asi deberia llamarse el nombre del formulario HTML.
+    }
+    @GetMapping("/index")
+    public ModelAndView index(){
+        return new ModelAndView("index");
     }
 }

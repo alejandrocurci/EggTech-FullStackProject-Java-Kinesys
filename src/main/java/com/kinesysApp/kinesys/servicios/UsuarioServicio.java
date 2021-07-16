@@ -1,6 +1,8 @@
 package com.kinesysApp.kinesys.servicios;
 
 import com.kinesysApp.kinesys.entidades.Usuario;
+import com.kinesysApp.kinesys.repositorios.PacienteRepositorio;
+import com.kinesysApp.kinesys.repositorios.ProfesionalRepositorio;
 import com.kinesysApp.kinesys.repositorios.UsuarioRepositorio;
 import com.kinesysApp.kinesys.roles.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,12 @@ public class UsuarioServicio implements UserDetailsService {
     private UsuarioRepositorio usuarioRepositorio;
 
     @Autowired
+    private PacienteRepositorio pacienteRepositorio;
+
+    @Autowired
+    private ProfesionalRepositorio profesionalRepositorio;
+
+    @Autowired
     private BCryptPasswordEncoder encoder;
 
     public Usuario crear(String nombreU, String clave,Rol rol) {
@@ -46,10 +54,9 @@ public class UsuarioServicio implements UserDetailsService {
 
 
 
-    @Override
     public UserDetails loadUserByUsername(String nombreU) throws UsernameNotFoundException {
 
-        Usuario usuario= usuarioRepositorio.buscarPorNombreDeUsuario(nombreU);
+        Usuario usuario= usuarioRepositorio.findByNombreU(nombreU);
         if(nombreU == null || nombreU.isEmpty()){
             throw new UsernameNotFoundException("No hay ningun usuario con ese nombre "+ nombreU);
         }
@@ -65,9 +72,11 @@ public class UsuarioServicio implements UserDetailsService {
 //            roles.add(new SimpleGrantedAuthority("ROLE_"+rol.getNombreRol()));
 //        }
 //
-        // creamos un objeto "USER" tiene un construtor que recibe 3 parametros (useraname,password y una collection"roles") ;
+        // creamos un objeto "USER" tiene un construtor que recibe 3 parametros (useraname,passwordy una collection"roles") ;
+
         User user = new User(usuario.getNombreU(), usuario.getClave(), Collections.singletonList(rol));
 
-        return user;
+               return user;
+            }
+
     }
-}

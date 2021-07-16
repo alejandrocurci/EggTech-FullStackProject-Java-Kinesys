@@ -15,24 +15,15 @@ public class ObraSocialServicio {
     @Autowired
     private ObraSocialRepositorio obraSocialRepositorio;
 
-   /* @Transactional(rollbackFor = Exception.class)
-    public void crear(String nombre, Long telefono, String plan) {
-
-        ObraSocial obraSocial = new ObraSocial();
-        obraSocial.setNombre(nombre);
-        obraSocial.setTelefono(telefono);
-        obraSocial.setPlan(plan);
-        obraSocialRepositorio.save(obraSocial);
-    }*/
 
     @Transactional(rollbackFor = Exception.class)
-    public void crear(ObraSocial obraSocia) {
+    public void crear(ObraSocial obraSocial) {
 
-        ObraSocial obraSocial = new ObraSocial();
-        obraSocial.setNombre(obraSocia.getNombre());
-        obraSocial.setTelefono(obraSocia.getTelefono());
-        obraSocial.setPlan(obraSocia.getPlan());
-        obraSocialRepositorio.save(obraSocial);
+        ObraSocial oS = new ObraSocial();
+        oS.setNombre(obraSocial.getNombre());
+        //obraSocial.setTelefono(obraSocia.getTelefono());
+        //obraSocial.setPlan(obraSocia.getPlan());
+        obraSocialRepositorio.save(oS);
 
     }
 
@@ -43,7 +34,7 @@ public class ObraSocialServicio {
     }
 
     @Transactional
-    public void eliminar(String idObraSocial) {
+    public void eliminar(String idObraSocial) throws ExcepcionKinessysObraSocial{
 
         obraSocialRepositorio.deleteById(idObraSocial);
     }

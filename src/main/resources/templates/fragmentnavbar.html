@@ -11,14 +11,14 @@
         <div id="navbarSupportedContent" class="collapse navbar-collapse">
             <ul class="navbar-nav mb-2 mb-md-0 w-100">
                 <!--DROPDOWN PACIENTES-->
-                <li class="nav-item dropdown">
+                <li sec:authorize="hasAnyAuthority('ADMIN','PACIENTE')" class="nav-item dropdown">
                     <a id="dropdown-pacientes" class="nav-link dropdown-toggle" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
                         Pacientes
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdown-pacientes">
-                        <li>
-                            <a class="dropdown-item" th:href="@{/pacientes}">Mostrar pacientes</a>
+                    <ul  class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdown-pacientes">
+                        <li >
+                            <a sec:authorize="hasAnyAuthority('ADMIN')"class="dropdown-item" th:href="@{/pacientes}">Mostrar pacientes</a>
                         </li>
                         <li>
                             <a class="dropdown-item" th:href="@{/pacientes/crear}">Registrar nuevo</a>
@@ -27,15 +27,15 @@
                     </ul>
                 </li>
                 <!--DROPDOWN PROFESIONALES-->
-                <li class="nav-item dropdown">
+                <li  sec:authorize="hasAnyAuthority('ADMIN','PACIENTE','PROFESIONAL')" class="nav-item dropdown">
                     <a id="dropdown-profesionales" class="nav-link dropdown-toggle" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">Profesionales
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdown-profesionales">
-                        <li>
-                            <a class="dropdown-item" th:href="@{/profesionales}">Mostrar profesionales</a>
+                        <li >
+                            <a sec:authorize="hasAnyAuthority('ADMIN','PACIENTE','PROFESIONAL')" class="dropdown-item" th:href="@{/profesionales}">Mostrar profesionales</a>
                         </li>
-                        <li>
+                        <li >
                             <a class="dropdown-item" th:href="@{/profesionales/crear}">Registrar nuevo</a>
                         </li>
                     </ul>

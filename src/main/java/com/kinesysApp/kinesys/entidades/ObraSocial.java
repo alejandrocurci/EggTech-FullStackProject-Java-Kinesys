@@ -21,10 +21,10 @@ public class ObraSocial implements Serializable {
     @NotBlank(message = "El nombre es requerido")
     private String nombre;
 
-    @Size(min = 7, max = 10, message = "Debe contener entre 7 y 10 digitos")
+
     private Long telefono;
 
-    @NotBlank(message = "El plan es requerido")
+
     private String Plan;
 
 }
