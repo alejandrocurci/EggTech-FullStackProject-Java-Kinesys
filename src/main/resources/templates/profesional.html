@@ -1,133 +1,157 @@
 <!DOCTYPE html>
-<html lang="es"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+    xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <meta name="description" content="Kinesys"/>
-    <meta name="Profesional" content="Leonardo Mella"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="Kinesys" />
+    <meta name="Profesional" content="Leonardo Mella" />
     <title>login</title>
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" th:href="@{/estilos.css}"/>
+    <link rel="stylesheet" th:href="@{/estilos.css}" />
 
 </head>
+
 <body class="fondoProfesional">
-<nav th:replace="fragmentnavbar :: navbar "></nav>
-<div class="container mt-5 main" id="ajustarpantalla" style="background-color:transparent;">
-    <h1 class="content-header-title"  th:text="#{text.tipo.titulo.profesional.list}"></h1>
-    <hr class="mb-5"/>  <!-- "<hr></hr>" separación temática -->
+    <nav th:replace="fragmentnavbar :: navbar "></nav>
+    <div class="container mt-5 main" id="ajustarpantalla" style="background-color:transparent;">
+        <h1 class="content-header-title" th:text="#{text.tipo.titulo.profesional.list}"></h1>
+        <hr class="mb-5" /> <!-- "<hr></hr>" separación temática -->
 
-    <div th:if="${(ListaProfesionales == null || ListaProfesionales.isEmpty()) && error == null}"> <!-- recorre la lista clientes y si no hay me manda a cargar  un cliente -->
+        <div th:if="${(ListaProfesionales == null || ListaProfesionales.isEmpty()) && error == null}">
+            <!-- recorre la lista clientes y si no hay me manda a cargar  un cliente -->
 
-        <h5> Todavía no hay Profesionales cargados. <a th:href="@{/profesionales/crear}"><i class="bi bi-person-plus-fill"></i> Cargar profesional.</a></h5>
-    </div>
-    <br>
-    <!--&& (ListaProfesionales == null && ListaProfesionales.isEmpty())-->
-    <div th:if="${error != null}" class="alert alert-danger" th:text="${error}"></div>                  <!-- "<p>..</p>" etiquta de parrafo-->
-    <div th:if="${errorfiltro != null}" class="alert alert-danger" th:text="${errorfiltro}"></div>
-    <aside>
-    <div class="card-body" >
-        <div class="row">
-            <form th:action="@{/profesionales}" th:object="${busqueda}">
-                <div class="row mb-2">
-                    <div class="col-sm-12 col-md-12">
-                        <label for="provincia" th:text="#{text.list.filtro.tipo.provincia}"></label>
-                        <select class="form-control" id="provincia" th:field="*{provincia}">
-                            <option th:text="#{text.list.filtro.tipo.todas}" value="" selected></option>
-                            <option th:each="provincia : ${provincias}"
-                                    th:text="${provincia}"
-                                    th:value="${provincia}" ></option>
-                        </select>
-                    </div>
-                    <div class="col-sm-12 col-md-12" >
-                        <label for="especialidad" th:text="#{text.list.filtro.tipo.especialidad}"></label>
-                        <select class="form-control" id="especialidad" th:field="*{especialidad}">
-                            <option th:text="#{text.list.filtro.tipo.todas}" value="" selected></option>
-                            <option th:each="especialidad : ${especialidades}"
-                                    th:text="${especialidad}"
-                                    th:value="${especialidad}" ></option>
-                        </select>
-                    </div>
-                    <div class="col-sm-12 col-md-12" >
-                        <label for="obraSocial" th:text="#{text.list.filtro.tipo.obraSocial}"></label>
-                        <select class="form-control" id="obraSocial" th:field="*{idObraSocial}">
-                            <option th:text="#{text.list.filtro.tipo.todas}" value="" selected></option>
-                            <option th:each="obraSocial : ${obrasSociales}"
-                                    th:text="|${obraSocial.nombre} ${obraSocial.Plan}|"
-                                    th:value="${obraSocial.idObraSocial}" ></option>
-                        </select>
-                    </div>
-                    <div class="col-sm-12 col-md-12 mt-2 float-right">
-                        <button type="submit" name="search" id="search-btn" class="btn btn-success square">
-                            <i class="la la-search"></i>
-                            <span th:text="#{text.filtro.btn.buscar}"></span>
-                        </button>
-                        <a type="button" class="btn btn-info square text-white" th:href="@{/profesionales}" th:text="#{text.btn.limpiar.filtros}"></a>
-                    </div>
-                </div>
-            </form>
+            <h5> Todavía no hay Profesionales cargados. <a th:href="@{/profesionales/crear}"><i
+                        class="bi bi-person-plus-fill"></i> Cargar profesional.</a></h5>
         </div>
-    </div>
-    </aside>
-    <section>
-    <div th:unless="${ListaProfesionales == null || ListaProfesionales.isEmpty()}" class="table-responsive">
-        <table class=" table table-hover table-sm table-bordered">
-            <thead class="table-secondary text-center">                                                             <!-- "<thead></thead>" agrupacion de cabecera -->
-            <tr>                                                                                                <!-- "<tr></tr>" es la fila de la tabla -->
-                <th class="table-dark col-md-4 px-md-2" scope="col"><i class="bi bi-person-lines-fill"></i> Dni</th>
-                <th class="table-dark col-md-4 px-md-2" scope="col"><i class="bi bi-person-lines-fill"></i> Nombre y Apellido </th>   <!-- "<th></th>" es la cabecera  de la tabla -->
-                <th class="table-dark col-md-4 px-md-2" scope="col"><i class="bi bi-telephone-fill"></i> Telefono</th>
-                <th class="table-dark col-md-4 px-md-2" scope="col"><i class="bi bi-calendar2"></i> Edad</th>
-                <th class="table-dark col-md-4 px-md-2" scope="col"><i class="bi bi-file-medical"></i> Especialidad</th>
-                <th class="table-dark col-md-4 px-md-2" scope="col"><i class="bi bi-at"></i> Correo electronico</th>
-                <th class="table-dark col-md-4 px-md-2" scope="col"><i class="bi bi-columns-gap"></i> Matricula</th>
-                <th class="table-dark col-md-4 px-md-2" scope="col"><i class="bi bi-grid-3x2-gap-fill"></i> Acciones</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            <tr th:each="profesional : ${ListaProfesionales}">
-                <th class="col-md-4 px-md-2 text-center"
-                    style="text-decoration: aliceblue;"
-                    scope="row"
-                    th:text="${#numbers.formatInteger(profesional.dni, 8, 'POINT')}"></th>
-                <td class="col-md-4 px-md-2 text-center"  th:text="|${profesional.nombre} ${profesional.apellido}|"></td>    <!-- "<td></td>" Datos de la tabla de la tabla -->
-                <td class="col-md-0 px-md-2 text-center"  th:text="${profesional.telefono}"></td>
-                <td class="col-md-4 px-md-2 text-center"  th:text="${profesional.edad}"></td>
-                <td class="col-md-4 px-md-2 text-center"  th:text="${profesional.especialidad}"></td>
-                <td class="col-md-4 px-md-2 text-center"  th:text="${profesional.email}"></td>
-                <td class="col-md-4 px-md-2 text-center"  th:text="${profesional.matricula}"></td>
-                <td class="col-md-4 px-md-2 d-flex justify-content-around w-100">    <!-- "<td></td>" Datos de la tabla de la tabla -->
-                    <a class="btn btn-secondary btn-sm" th:href="@{/profesionales/editar/__${profesional.idProfesional}__}"><i class="bi bi-vector-pen"></i> Editar</a>
-                    <form th:action="@{/profesionales/eliminar/__${profesional.idProfesional}__}" method="post">
-                        <button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-trash"></i> Eliminar</button>
+        <br>
+        <!--&& (ListaProfesionales == null && ListaProfesionales.isEmpty())-->
+        <div th:if="${error != null}" class="alert alert-danger" th:text="${error}"></div>
+        <!-- "<p>..</p>" etiquta de parrafo-->
+        <div th:if="${errorfiltro != null}" class="alert alert-danger" th:text="${errorfiltro}"></div>
+        <aside>
+            <div class="card-body">
+                <div class="row">
+                    <form th:action="@{/profesionales}" th:object="${busqueda}">
+                        <div class="row mb-2">
+                            <div class="col-sm-12 col-md-12">
+                                <label for="provincia" th:text="#{text.list.filtro.tipo.provincia}"></label>
+                                <select class="form-control" id="provincia" th:field="*{provincia}">
+                                    <option th:text="#{text.list.filtro.tipo.todas}" value="" selected></option>
+                                    <option th:each="provincia : ${provincias}" th:text="${provincia}"
+                                        th:value="${provincia}"></option>
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-12">
+                                <label for="especialidad" th:text="#{text.list.filtro.tipo.especialidad}"></label>
+                                <select class="form-control" id="especialidad" th:field="*{especialidad}">
+                                    <option th:text="#{text.list.filtro.tipo.todas}" value="" selected></option>
+                                    <option th:each="especialidad : ${especialidades}" th:text="${especialidad}"
+                                        th:value="${especialidad}"></option>
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-12">
+                                <label for="obraSocial" th:text="#{text.list.filtro.tipo.obraSocial}"></label>
+                                <select class="form-control" id="obraSocial" th:field="*{idObraSocial}">
+                                    <option th:text="#{text.list.filtro.tipo.todas}" value="" selected></option>
+                                    <option th:each="obraSocial : ${obrasSociales}"
+                                        th:text="|${obraSocial.nombre} ${obraSocial.Plan}|"
+                                        th:value="${obraSocial.idObraSocial}"></option>
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-12 mt-2 float-right">
+                                <button type="submit" name="search" id="search-btn" class="btn btn-success square">
+                                    <i class="la la-search"></i>
+                                    <span th:text="#{text.filtro.btn.buscar}"></span>
+                                </button>
+                                <a type="button" class="btn btn-info square text-white" th:href="@{/profesionales}"
+                                    th:text="#{text.btn.limpiar.filtros}"></a>
+                            </div>
+                        </div>
                     </form>
-                    <!-- BOTON PERFIL-->
-                    <a class="btn btn-secondary btn-sm" th:href="@{/profesionales/perfil/__${profesional.idProfesional}__}"><i class="bi bi-vector-pen"></i> Perfil</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <!-- PAGINACION -->
-        <!-- FALTAN ESTILOS !!!!!-->
-        <div th:if="${ListaProfesionales.totalPages > 0}" class="pagination"
-            th:each="num : ${numeros}">
-            <a th:href="@{/profesionales(tamano=${ListaProfesionales.size}, pagina=${num})}"
-                th:text=${num}
-                th:class="${num==ListaProfesionales.number + 1} ? active"></a>
-        </div>
-    </div>
-</section>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-        crossorigin="anonymous"></script>
+                </div>
+            </div>
+        </aside>
+        <section>
+            <div th:unless="${ListaProfesionales == null || ListaProfesionales.isEmpty()}" class="table-responsive">
+                <table class=" table table-hover table-sm table-bordered">
+                    <thead class="table-secondary text-center">
+                        <!-- "<thead></thead>" agrupacion de cabecera -->
+                        <tr>
+                            <!-- "<tr></tr>" es la fila de la tabla -->
+                            <th class="table-dark col-md-4 px-md-2" scope="col"><i class="bi bi-person-lines-fill"></i>
+                                Dni</th>
+                            <th class="table-dark col-md-4 px-md-2" scope="col"><i class="bi bi-person-lines-fill"></i>
+                                Nombre y Apellido </th> <!-- "<th></th>" es la cabecera  de la tabla -->
+                            <th class="table-dark col-md-4 px-md-2" scope="col"><i class="bi bi-telephone-fill"></i>
+                                Telefono</th>
+                            <th class="table-dark col-md-4 px-md-2" scope="col"><i class="bi bi-calendar2"></i> Edad
+                            </th>
+                            <th class="table-dark col-md-4 px-md-2" scope="col"><i class="bi bi-file-medical"></i>
+                                Especialidad</th>
+                            <th class="table-dark col-md-4 px-md-2" scope="col"><i class="bi bi-at"></i> Correo
+                                electronico</th>
+                            <th class="table-dark col-md-4 px-md-2" scope="col"><i class="bi bi-columns-gap"></i>
+                                Matricula</th>
+                            <th class="table-dark col-md-4 px-md-2" scope="col"><i class="bi bi-grid-3x2-gap-fill"></i>
+                                Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="profesional : ${ListaProfesionales}">
+                            <th class="col-md-4 px-md-2 text-center" style="text-decoration: aliceblue;" scope="row"
+                                th:text="${#numbers.formatInteger(profesional.dni, 8, 'POINT')}"></th>
+                            <td class="col-md-4 px-md-2 text-center"
+                                th:text="|${profesional.nombre} ${profesional.apellido}|"></td>
+                            <!-- "<td></td>" Datos de la tabla de la tabla -->
+                            <td class="col-md-0 px-md-2 text-center" th:text="${profesional.telefono}"></td>
+                            <td class="col-md-4 px-md-2 text-center" th:text="${profesional.edad}"></td>
+                            <td class="col-md-4 px-md-2 text-center" th:text="${profesional.especialidad}"></td>
+                            <td class="col-md-4 px-md-2 text-center" th:text="${profesional.email}"></td>
+                            <td class="col-md-4 px-md-2 text-center" th:text="${profesional.matricula}"></td>
+                            <td class="col-md-4 px-md-2 d-flex justify-content-around w-100">
+                                <!-- "<td></td>" Datos de la tabla de la tabla -->
+                                <!-- BOTON EDITAR (DEPRECADO)-->
+                                <!--
+                    <a class="btn btn-secondary btn-sm" th:href="@{/profesionales/editar/__${profesional.idProfesional}__}"><i class="bi bi-vector-pen"></i> Editar</a>
+                    -->
+                                <!-- BOTON PERFIL-->
+                                <a class="btn btn-primary btn-sm"
+                                    th:href="@{/profesionales/perfil/__${profesional.idProfesional}__}"><i
+                                        class="bi bi-vector-pen"></i> Perfil</a>
+                                <form th:action="@{/profesionales/eliminar/__${profesional.idProfesional}__}"
+                                    method="post">
+                                    <button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-trash"></i>
+                                        Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- PAGINACION -->
+                <!-- FALTAN ESTILOS !!!!!-->
+                <div th:if="${ListaProfesionales.totalPages > 0}" class="pagination" th:each="num : ${numeros}">
+                    <div style="text-align:center;">
+                        <div class="d-inline btn-group mr-1 mb-1">
+                            <a th:href="@{/profesionales(tamano=${ListaProfesionales.size}, pagina=${num})}"
+                                th:text=${num} th:class="${num==ListaProfesionales.number + 1} ? active"> | </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+            crossorigin="anonymous"></script>
 </body>
+
 </html>
