@@ -1,12 +1,22 @@
 package com.kinesysApp.kinesys.controladores;
 
 import com.kinesysApp.kinesys.entidades.Paciente;
+import com.kinesysApp.kinesys.entidades.Profesional;
 import com.kinesysApp.kinesys.entidades.Usuario;
+import com.kinesysApp.kinesys.enumeraciones.Especialidad;
+import com.kinesysApp.kinesys.enumeraciones.Provincia;
+import com.kinesysApp.kinesys.excepciones.ExcepcionKinessysProfesional;
 import com.kinesysApp.kinesys.excepciones.ExcepcionKinesysPaciente;
+import com.kinesysApp.kinesys.modelos.busqueda.BusquedaProfesional;
 import com.kinesysApp.kinesys.servicios.PacienteServicio;
 import com.kinesysApp.kinesys.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.access.prepost.PreAuthorize;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +25,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/pacientes")
@@ -28,6 +43,8 @@ public class PacienteControlador {
 
     private final String ETIQUETA_ERROR = "error";
 
+    // REEMPLAZO POR LA PAGINACION
+    /*
     @GetMapping()
     @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public ModelAndView mostrarPacientes() {  //ModelAndView busca un HTML
@@ -35,6 +52,7 @@ public class PacienteControlador {
         mav.addObject("ListaPacientes", pacienteServicio.buscarTodos());
         return mav;
     }
+    */
 
     @GetMapping("/crear")
     public ModelAndView crearPaciente() {
@@ -114,18 +132,31 @@ public class PacienteControlador {
             return new RedirectView("/");
         }
     }
-   @GetMapping("/buscarPaciente")
+
+    @GetMapping("/buscarPaciente")
    @PreAuthorize("hasAnyRole('ADMIN')")
-    public ModelAndView buscarPacientePorDni(@RequestParam(required = false) Long dni) {   //ModelAndView busca un HTml
-       ModelAndView mav = new ModelAndView("paciente");
+    public ModelAndView buscarPacientePorDni(@RequestParam(required = false) Long dni,
+                                             @RequestParam("pagina") Optional<Integer> pagina,
+                                             @RequestParam("tamano") Optional<Integer> tamano) {   //ModelAndView busca un HTml
+        ModelAndView mav = new ModelAndView("paciente");
+
         try {
             mav.addObject("ListaPacientes", pacienteServicio.buscarPacientePorDni(dni));
             return mav;
         } catch (ExcepcionKinesysPaciente ex) {
-
+            int paginaActual = pagina.orElse(1);
+            int tamanoPagina = tamano.orElse(4);
+            Page<Paciente> paginaPacientes = pacienteServicio.buscarPagina(PageRequest.of(paginaActual - 1, tamanoPagina), pacienteServicio.buscarTodos());
             mav.addObject("error", ex.getMessage());
+            mav.addObject("ListaPacientes", paginaPacientes);
+            int totalPaginas = paginaPacientes.getTotalPages();
+            if(totalPaginas > 0) {
+                List<Integer> numeros = IntStream.rangeClosed(1, totalPaginas)
+                        .boxed()
+                        .collect(Collectors.toList());
+                mav.addObject("numeros", numeros);
+            }
             return mav;
-
         }
     }
     @GetMapping("/buscarPacientePorNombre")
@@ -256,6 +287,29 @@ public class PacienteControlador {
         }
         pacienteServicio.actualizarClave(idPaciente, paciente.getUsuarioPaciente().getClave());
         return "redirect:/pacientes/perfil/{idPaciente}";
+    }
+
+    // PAGINACION  (reemplaza al mostrarPacientes original)
+    @GetMapping
+    public String paginarPacientes(Model model, @RequestParam("pagina") Optional<Integer> pagina,
+                                       @RequestParam("tamano") Optional<Integer> tamano) {
+
+        int paginaActual = pagina.orElse(1);
+        int tamanoPagina = tamano.orElse(4);
+
+        Page<Paciente> paginaPacientes = pacienteServicio.buscarPagina(PageRequest.of(paginaActual - 1, tamanoPagina), pacienteServicio.buscarTodos());
+
+        model.addAttribute("ListaPacientes", paginaPacientes);
+
+        int totalPaginas = paginaPacientes.getTotalPages();
+        if(totalPaginas > 0) {
+            List<Integer> numeros = IntStream.rangeClosed(1, totalPaginas)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("numeros", numeros);
+        }
+
+        return "paciente";
     }
 
 }
