@@ -19,7 +19,7 @@ public class RolControlador {
     private RolServicio rolServicio;
 
     @GetMapping()
-   //@PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public ModelAndView mostrarRoles() {
         ModelAndView mav = new ModelAndView("rol");
         mav.addObject("listaRoles", rolServicio.buscarTodos());
@@ -28,22 +28,18 @@ public class RolControlador {
 
     @GetMapping("/crear")
     //@PreAuthorize("hasRole('ADMIN')")
-    public ModelAndView crearRol(){
-        ModelAndView mav= new ModelAndView("rol-form");
-        mav.addObject("rol",new Rol());
+    public ModelAndView crearRol() {
+        ModelAndView mav = new ModelAndView("rol-form");
+        mav.addObject("rol", new Rol());
         return mav;
     }
+
     @PostMapping("/guardar")
     //@PreAuthorize("hasRole('ADMIN')")
-    public RedirectView guardarRol(@ModelAttribute("rol") Rol rol){
+    public RedirectView guardarRol(@ModelAttribute("rol") Rol rol) {
         rolServicio.crear(rol.getNombre());
         return new RedirectView("/roles");
-}
-
-
-
-
-
+    }
 
 
 }

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class PrincipalControlador {
 
     @GetMapping("/")
-    public ModelAndView inicio(){
+    public ModelAndView inicio() {
         return new ModelAndView("home");
     }
 
@@ -19,8 +19,9 @@ public class PrincipalControlador {
         mav.setViewName("login");
         return mav;  // asi deberia llamarse el nombre del formulario HTML.
     }
+
     @GetMapping("/index")
-    public ModelAndView index(){
+    public ModelAndView index() {
         return new ModelAndView("index");
     }
 }
