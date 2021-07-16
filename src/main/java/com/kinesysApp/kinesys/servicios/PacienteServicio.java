@@ -1,15 +1,21 @@
 package com.kinesysApp.kinesys.servicios;
 
 import com.kinesysApp.kinesys.entidades.Paciente;
+import com.kinesysApp.kinesys.entidades.Profesional;
 import com.kinesysApp.kinesys.excepciones.ExcepcionKinesysPaciente;
 import com.kinesysApp.kinesys.repositorios.PacienteRepositorio;
 import com.kinesysApp.kinesys.roles.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -96,10 +102,11 @@ public class PacienteServicio {
         if (dni == null) {
             respPaciente = pacienteRepositorio.findAll();
         } else {
-            respPaciente = Arrays.asList(pacienteRepositorio.findByDni(dni));
-            if (respPaciente == null) {
+            Paciente p = pacienteRepositorio.findByDni(dni);
+            if (p ==null) {
                 throw new ExcepcionKinesysPaciente("No existe ese paciente registrado");
             }
+            respPaciente = Arrays.asList(p);
         }
         return respPaciente;
     }
@@ -195,6 +202,24 @@ public class PacienteServicio {
         Paciente paciente = pacienteRepositorio.findById(idPaciente).orElse(null);
         paciente.getUsuarioPaciente().setClave(encoder.encode(claveNueva));
         pacienteRepositorio.save(paciente);
+    }
+
+    // PAGINACION
+    public Page<Paciente> buscarPagina(Pageable pageable, List<Paciente> pacientes) {
+        int tamano = pageable.getPageSize();
+        int paginaActual = pageable.getPageNumber();
+        int itemInicial = tamano * paginaActual;
+        List<Paciente> lista;
+
+        if (pacientes.size() < itemInicial) {
+            lista = Collections.emptyList();
+        } else {
+            int indiceHasta = Math.min(itemInicial + tamano, pacientes.size());
+            lista = pacientes.subList(itemInicial, indiceHasta);
+        }
+
+        Page<Paciente> paginacion = new PageImpl<>(lista, PageRequest.of(paginaActual, tamano), pacientes.size());
+        return paginacion;
     }
 
 
