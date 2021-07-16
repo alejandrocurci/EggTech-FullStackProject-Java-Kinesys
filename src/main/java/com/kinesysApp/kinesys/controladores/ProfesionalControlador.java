@@ -35,7 +35,7 @@ public class ProfesionalControlador {
     private ObraSocialServicio obraSocialServicio;
 
     @GetMapping()
-    @PreAuthorize("hasAnyRole('PROFESIONAL')")
+    @PreAuthorize("hasAnyRole('PACIENTE','ADMIN','PROFESIONAL')")
     public ModelAndView mostrarProfesionales(@ModelAttribute BusquedaProfesional busqueda,
                                              Model model) throws ExcepcionKinessysProfesional {  //ModelAndView busca un HTML
         ModelAndView mav = new ModelAndView("profesional");

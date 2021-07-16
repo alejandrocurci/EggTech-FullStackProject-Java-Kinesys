@@ -1,7 +1,5 @@
 package com.kinesysApp.kinesys.servicios;
 
-import com.kinesysApp.kinesys.entidades.Paciente;
-import com.kinesysApp.kinesys.entidades.Profesional;
 import com.kinesysApp.kinesys.entidades.Usuario;
 import com.kinesysApp.kinesys.repositorios.PacienteRepositorio;
 import com.kinesysApp.kinesys.repositorios.ProfesionalRepositorio;
@@ -22,7 +20,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
-import java.util.List;
 
 @Service
 public class UsuarioServicio implements UserDetailsService {

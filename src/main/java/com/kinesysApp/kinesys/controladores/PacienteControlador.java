@@ -29,7 +29,7 @@ public class PacienteControlador {
     private final String ETIQUETA_ERROR = "error";
 
     @GetMapping()
-    @PreAuthorize("hasAnyRole('PACIENTE')")
+    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public ModelAndView mostrarPacientes() {  //ModelAndView busca un HTML
         ModelAndView mav = new ModelAndView("paciente");
         mav.addObject("ListaPacientes", pacienteServicio.buscarTodos());
