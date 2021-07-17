@@ -66,10 +66,10 @@ public class PacienteControlador {
 
     @PostMapping("/guardar")
     public String guardarPaciente(@Valid Paciente paciente, BindingResult resultPaciente,
-                                  @Valid Usuario usuario,BindingResult resultUsuario,
+                                  @Valid Usuario usuario, BindingResult resultUsuario,
                                   Model model) {
 
-        if(resultPaciente.hasErrors() || resultUsuario.hasErrors()){
+        if (resultPaciente.hasErrors() || resultUsuario.hasErrors()) {
             model.addAttribute("paciente", paciente);
             model.addAttribute("usuario", usuario);
             model.addAttribute("titulo", "Nuevo Paciente");
@@ -87,7 +87,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/eliminar/{idPaciente}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    //@PreAuthorize("hasAnyRole('ADMIN')")
     public String eliminarPaciente(@PathVariable String idPaciente, Model model) {
         try {
             pacienteServicio.eliminarPaciente(idPaciente);
@@ -99,20 +99,21 @@ public class PacienteControlador {
     }
 
     @GetMapping("/editar/{idPaciente}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    public ModelAndView editarPaciente(@PathVariable(value ="idPaciente") String idPaciente){
+    //@PreAuthorize("hasAnyRole('ADMIN')")
+    public ModelAndView editarPaciente(@PathVariable(value = "idPaciente") String idPaciente) {
         ModelAndView mav = new ModelAndView("paciente-form");
-        Paciente paciente=pacienteServicio.buscarPorId(idPaciente);
-        mav.addObject("paciente",paciente);
+        Paciente paciente = pacienteServicio.buscarPorId(idPaciente);
+        mav.addObject("paciente", paciente);
         mav.addObject("usuario", paciente.getUsuarioPaciente());
         mav.addObject("titulo", "editar Paciente");
         mav.addObject("action", "modificar");
         return mav;
 
     }
+
     @PostMapping("/modificar")
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    public RedirectView modificarPaciente(@ModelAttribute("paciente") Paciente paciente, Usuario usuario,Model model){
+    //@PreAuthorize("hasAnyRole('ADMIN')")
+    public RedirectView modificarPaciente(@ModelAttribute("paciente") Paciente paciente, Usuario usuario, Model model) {
         try {
             pacienteServicio.modificar(
                     paciente.getIdPaciente(),
@@ -122,7 +123,7 @@ public class PacienteControlador {
                     paciente.getTelefono(),
                     paciente.getEmail());
             return new RedirectView("/pacientes");
-        }catch (ExcepcionKinesysPaciente ex){
+        } catch (ExcepcionKinesysPaciente ex) {
 
             model.addAttribute(ETIQUETA_ERROR, ex.getMessage());
             model.addAttribute("paciente", paciente);
@@ -134,7 +135,7 @@ public class PacienteControlador {
     }
 
     @GetMapping("/buscarPaciente")
-   @PreAuthorize("hasAnyRole('ADMIN')")
+    //@PreAuthorize("hasAnyRole('ADMIN')")
     public ModelAndView buscarPacientePorDni(@RequestParam(required = false) Long dni,
                                              @RequestParam("pagina") Optional<Integer> pagina,
                                              @RequestParam("tamano") Optional<Integer> tamano) {   //ModelAndView busca un HTml
@@ -150,7 +151,7 @@ public class PacienteControlador {
             mav.addObject("error", ex.getMessage());
             mav.addObject("ListaPacientes", paginaPacientes);
             int totalPaginas = paginaPacientes.getTotalPages();
-            if(totalPaginas > 0) {
+            if (totalPaginas > 0) {
                 List<Integer> numeros = IntStream.rangeClosed(1, totalPaginas)
                         .boxed()
                         .collect(Collectors.toList());
@@ -159,12 +160,13 @@ public class PacienteControlador {
             return mav;
         }
     }
+
     @GetMapping("/buscarPacientePorNombre")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    //@PreAuthorize("hasAnyRole('ADMIN')")
     public ModelAndView buscarPacientePorNombre(@RequestParam(required = false) String nombre) {   //ModelAndView busca un HTML
 
         ModelAndView mav = new ModelAndView("paciente");
-        if(nombre.isEmpty()){
+        if (nombre.isEmpty()) {
             mav.addObject("ListaPacientes", pacienteServicio.buscarTodos());
             return mav;
         }
@@ -183,19 +185,19 @@ public class PacienteControlador {
     // FUNCIONALIDAD PARA PERFIL
 
     @GetMapping("/perfil/{idPaciente}")
-    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
-    public ModelAndView mostrarPerfil(@PathVariable(value ="idPaciente") String idPaciente){
+    //@PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
+    public ModelAndView mostrarPerfil(@PathVariable(value = "idPaciente") String idPaciente) {
         ModelAndView mav = new ModelAndView("paciente-perfil");
-        Paciente paciente=pacienteServicio.buscarPorId(idPaciente);
+        Paciente paciente = pacienteServicio.buscarPorId(idPaciente);
         mav.addObject("paciente", paciente);
         return mav;
     }
 
     @PostMapping("/perfil/{idPaciente}/nombre")
     @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
-    public String actualizarNombre(@PathVariable(value ="idPaciente") String idPaciente,
-                                         @Valid Paciente paciente, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarNombre(@PathVariable(value = "idPaciente") String idPaciente,
+                                   @Valid Paciente paciente, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             paciente = pacienteServicio.buscarPorId(idPaciente);
             model.addAttribute("paciente", paciente);
             model.addAttribute("errorNombre", "No se ha podido modificar el nombre");
@@ -207,9 +209,9 @@ public class PacienteControlador {
 
     @PostMapping("/perfil/{idPaciente}/apellido")
     @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
-    public String actualizarApellido(@PathVariable(value ="idPaciente") String idPaciente,
-                                     @Valid Paciente paciente, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarApellido(@PathVariable(value = "idPaciente") String idPaciente,
+                                     @Valid Paciente paciente, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             paciente = pacienteServicio.buscarPorId(idPaciente);
             model.addAttribute("paciente", paciente);
             model.addAttribute("errorApellido", "No se ha podido modificar el apellido");
@@ -221,9 +223,9 @@ public class PacienteControlador {
 
     @PostMapping("/perfil/{idPaciente}/dni")
     @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
-    public String actualizarDni(@PathVariable(value ="idPaciente") String idPaciente,
-                                @Valid Paciente paciente, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarDni(@PathVariable(value = "idPaciente") String idPaciente,
+                                @Valid Paciente paciente, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             paciente = pacienteServicio.buscarPorId(idPaciente);
             model.addAttribute("paciente", paciente);
             model.addAttribute("errorDni", "No se ha podido modificar el DNI");
@@ -235,9 +237,9 @@ public class PacienteControlador {
 
     @PostMapping("/perfil/{idPaciente}/telefono")
     @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
-    public String actualizarTelefono(@PathVariable(value ="idPaciente") String idPaciente,
-                                     @Valid Paciente paciente, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarTelefono(@PathVariable(value = "idPaciente") String idPaciente,
+                                     @Valid Paciente paciente, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             paciente = pacienteServicio.buscarPorId(idPaciente);
             model.addAttribute("paciente", paciente);
             model.addAttribute("errorTelefono", "No se ha podido modificar el telefono");
@@ -249,9 +251,9 @@ public class PacienteControlador {
 
     @PostMapping("/perfil/{idPaciente}/email")
     @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
-    public String actualizarEmail(@PathVariable(value ="idPaciente") String idPaciente,
-                                  @Valid Paciente paciente, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarEmail(@PathVariable(value = "idPaciente") String idPaciente,
+                                  @Valid Paciente paciente, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             paciente = pacienteServicio.buscarPorId(idPaciente);
             model.addAttribute("paciente", paciente);
             model.addAttribute("errorEmail", "No se ha podido modificar el email");
@@ -263,9 +265,9 @@ public class PacienteControlador {
 
     @PostMapping("/perfil/{idPaciente}/usuario")
     @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
-    public String actualizarUsuario(@PathVariable(value ="idPaciente") String idPaciente,
-                                    @Valid Paciente paciente, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarUsuario(@PathVariable(value = "idPaciente") String idPaciente,
+                                    @Valid Paciente paciente, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             paciente = pacienteServicio.buscarPorId(idPaciente);
             model.addAttribute("paciente", paciente);
             model.addAttribute("errorUsuario", "No se ha podido modificar el nombre de usuario");
@@ -277,9 +279,9 @@ public class PacienteControlador {
 
     @PostMapping("/perfil/{idPaciente}/clave")
     @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
-    public String actualizarClave(@PathVariable(value ="idPaciente") String idPaciente,
-                                  @Valid Paciente paciente, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarClave(@PathVariable(value = "idPaciente") String idPaciente,
+                                  @Valid Paciente paciente, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             paciente = pacienteServicio.buscarPorId(idPaciente);
             model.addAttribute("paciente", paciente);
             model.addAttribute("errorClave", "No se ha podido modificar la clave de usuario");
@@ -292,7 +294,7 @@ public class PacienteControlador {
     // PAGINACION  (reemplaza al mostrarPacientes original)
     @GetMapping
     public String paginarPacientes(Model model, @RequestParam("pagina") Optional<Integer> pagina,
-                                       @RequestParam("tamano") Optional<Integer> tamano) {
+                                   @RequestParam("tamano") Optional<Integer> tamano) {
 
         int paginaActual = pagina.orElse(1);
         int tamanoPagina = tamano.orElse(4);
@@ -302,7 +304,7 @@ public class PacienteControlador {
         model.addAttribute("ListaPacientes", paginaPacientes);
 
         int totalPaginas = paginaPacientes.getTotalPages();
-        if(totalPaginas > 0) {
+        if (totalPaginas > 0) {
             List<Integer> numeros = IntStream.rangeClosed(1, totalPaginas)
                     .boxed()
                     .collect(Collectors.toList());

@@ -29,20 +29,21 @@ public class ObraSocialControlador {
 
     @GetMapping("/crear")
     //@PreAuthorize("hasRole('ADMIN')")
-    public ModelAndView crearObraSocial(){
-        ModelAndView mav= new ModelAndView("oS-form");
-        mav.addObject("obraSoacial",new ObraSocial());
+    public ModelAndView crearObraSocial() {
+        ModelAndView mav = new ModelAndView("oS-form");
+        mav.addObject("obraSoacial", new ObraSocial());
         return mav;
     }
 
     @PostMapping("/guardar")
     //@PreAuthorize("hasRole('ADMIN')")
-    public RedirectView guardarObraSocial(@ModelAttribute("obraSocial") ObraSocial obraSocial){
+    public RedirectView guardarObraSocial(@ModelAttribute("obraSocial") ObraSocial obraSocial) {
         obraSocialServicio.crear(obraSocial);
         return new RedirectView("/obraSocial");
     }
+
     @PostMapping("/eliminar/{idObraSocial}")
-   // @PreAuthorize("hasAnyRole('ADMIN')")
+    // @PreAuthorize("hasAnyRole('ADMIN')")
     public String eliminarObraSocial(@PathVariable String idObraSocial, Model model) {
         obraSocialServicio.eliminarObraSocial(idObraSocial);
         return "redirect:/obraSocial";

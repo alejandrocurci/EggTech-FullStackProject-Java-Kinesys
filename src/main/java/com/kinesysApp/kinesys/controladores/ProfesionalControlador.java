@@ -118,7 +118,7 @@ public class ProfesionalControlador {
     }
 
     @GetMapping("/editar/{idProfesional}")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public ModelAndView editarProfesional(@PathVariable(value = "idProfesional") String idProfesional) {
         ModelAndView mav = new ModelAndView("profesional-form");
         Profesional profesional = profesionalServicio.buscarPorId(idProfesional);
@@ -136,7 +136,7 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/modificar")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public RedirectView modificarProfesional(@ModelAttribute("profesional") Profesional profesional,
                                              Usuario usuario, Zona zona, Sexo sexo, Model model) {
         try {
@@ -164,12 +164,12 @@ public class ProfesionalControlador {
             model.addAttribute("obrasSociales", profesional.getObraSocialProfesionales());
             model.addAttribute("titulo", "Nuevo Profesional");
             model.addAttribute("action", "guardar");
-            return new RedirectView ("/modificar");
+            return new RedirectView("/modificar");
         }
     }
 
     @PostMapping("/eliminar/{idProfesional}")
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     public String eliminarProfesional(@PathVariable String idProfesional, Model model) {
         try {
             profesionalServicio.eliminarProfesional(idProfesional);
@@ -183,10 +183,10 @@ public class ProfesionalControlador {
     // FUNCIONALIDAD PARA PERFIL
 
     @GetMapping("/perfil/{idProfesional}")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
-    public ModelAndView mostrarPerfil(@PathVariable(value ="idProfesional") String idProfesional){
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    public ModelAndView mostrarPerfil(@PathVariable(value = "idProfesional") String idProfesional) {
         ModelAndView mav = new ModelAndView("profesional-perfil");
-        Profesional profesional=profesionalServicio.buscarPorId(idProfesional);
+        Profesional profesional = profesionalServicio.buscarPorId(idProfesional);
         mav.addObject("profesional", profesional);
         mav.addObject("zona", new Zona());
         mav.addObject("provincias", Provincia.values());
@@ -198,9 +198,9 @@ public class ProfesionalControlador {
 
     @PostMapping("/perfil/{idProfesional}/nombre")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
-    public String actualizarNombre(@PathVariable(value ="idProfesional") String idProfesional,
-                                   @Valid Profesional profesional, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarNombre(@PathVariable(value = "idProfesional") String idProfesional,
+                                   @Valid Profesional profesional, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             profesional = profesionalServicio.buscarPorId(idProfesional);
             model.addAttribute("profesional", profesional);
             model.addAttribute("zona", new Zona());
@@ -217,9 +217,9 @@ public class ProfesionalControlador {
 
     @PostMapping("/perfil/{idProfesional}/apellido")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
-    public String actualizarApellido(@PathVariable(value ="idProfesional") String idProfesional,
-                                     @Valid Profesional profesional, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarApellido(@PathVariable(value = "idProfesional") String idProfesional,
+                                     @Valid Profesional profesional, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             profesional = profesionalServicio.buscarPorId(idProfesional);
             model.addAttribute("profesional", profesional);
             model.addAttribute("zona", new Zona());
@@ -236,9 +236,9 @@ public class ProfesionalControlador {
 
     @PostMapping("/perfil/{idProfesional}/dni")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
-    public String actualizarDni(@PathVariable(value ="idProfesional") String idProfesional,
-                                @Valid Profesional profesional, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarDni(@PathVariable(value = "idProfesional") String idProfesional,
+                                @Valid Profesional profesional, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             profesional = profesionalServicio.buscarPorId(idProfesional);
             model.addAttribute("profesional", profesional);
             model.addAttribute("zona", new Zona());
@@ -255,9 +255,9 @@ public class ProfesionalControlador {
 
     @PostMapping("/perfil/{idProfesional}/telefono")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
-    public String actualizarTelefono(@PathVariable(value ="idProfesional") String idProfesional,
-                                     @Valid Profesional profesional, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarTelefono(@PathVariable(value = "idProfesional") String idProfesional,
+                                     @Valid Profesional profesional, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             profesional = profesionalServicio.buscarPorId(idProfesional);
             model.addAttribute("profesional", profesional);
             model.addAttribute("zona", new Zona());
@@ -274,9 +274,9 @@ public class ProfesionalControlador {
 
     @PostMapping("/perfil/{idProfesional}/edad")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
-    public String actualizarEdad(@PathVariable(value ="idProfesional") String idProfesional,
-                                 @Valid Profesional profesional, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarEdad(@PathVariable(value = "idProfesional") String idProfesional,
+                                 @Valid Profesional profesional, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             profesional = profesionalServicio.buscarPorId(idProfesional);
             model.addAttribute("profesional", profesional);
             model.addAttribute("zona", new Zona());
@@ -293,9 +293,9 @@ public class ProfesionalControlador {
 
     @PostMapping("/perfil/{idProfesional}/sexo")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
-    public String actualizarSexo(@PathVariable(value ="idProfesional") String idProfesional,
-                                 @Valid Profesional profesional, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarSexo(@PathVariable(value = "idProfesional") String idProfesional,
+                                 @Valid Profesional profesional, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             profesional = profesionalServicio.buscarPorId(idProfesional);
             model.addAttribute("profesional", profesional);
             model.addAttribute("zona", new Zona());
@@ -312,9 +312,9 @@ public class ProfesionalControlador {
 
     @PostMapping("/perfil/{idProfesional}/especialidad")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
-    public String actualizarEspecialidad(@PathVariable(value ="idProfesional") String idProfesional,
-                                         @Valid Profesional profesional, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarEspecialidad(@PathVariable(value = "idProfesional") String idProfesional,
+                                         @Valid Profesional profesional, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             profesional = profesionalServicio.buscarPorId(idProfesional);
             model.addAttribute("profesional", profesional);
             model.addAttribute("zona", new Zona());
@@ -331,9 +331,9 @@ public class ProfesionalControlador {
 
     @PostMapping("/perfil/{idProfesional}/email")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
-    public String actualizarEmail(@PathVariable(value ="idProfesional") String idProfesional,
-                                  @Valid Profesional profesional, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarEmail(@PathVariable(value = "idProfesional") String idProfesional,
+                                  @Valid Profesional profesional, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             profesional = profesionalServicio.buscarPorId(idProfesional);
             model.addAttribute("profesional", profesional);
             model.addAttribute("zona", new Zona());
@@ -350,9 +350,9 @@ public class ProfesionalControlador {
 
     @PostMapping("/perfil/{idProfesional}/matricula")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
-    public String actualizarMatricula(@PathVariable(value ="idProfesional") String idProfesional,
-                                      @Valid Profesional profesional, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarMatricula(@PathVariable(value = "idProfesional") String idProfesional,
+                                      @Valid Profesional profesional, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             profesional = profesionalServicio.buscarPorId(idProfesional);
             model.addAttribute("profesional", profesional);
             model.addAttribute("zona", new Zona());
@@ -370,9 +370,9 @@ public class ProfesionalControlador {
     // SESION
     @PostMapping("/perfil/{idProfesional}/usuario")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
-    public String actualizarUsuario(@PathVariable(value ="idProfesional") String idProfesional,
-                                    @Valid Profesional profesional, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarUsuario(@PathVariable(value = "idProfesional") String idProfesional,
+                                    @Valid Profesional profesional, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             profesional = profesionalServicio.buscarPorId(idProfesional);
             model.addAttribute("profesional", profesional);
             model.addAttribute("zona", new Zona());
@@ -389,9 +389,9 @@ public class ProfesionalControlador {
 
     @PostMapping("/perfil/{idProfesional}/clave")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
-    public String actualizarClave(@PathVariable(value ="idProfesional") String idProfesional,
-                                  @Valid Profesional profesional, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarClave(@PathVariable(value = "idProfesional") String idProfesional,
+                                  @Valid Profesional profesional, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             profesional = profesionalServicio.buscarPorId(idProfesional);
             model.addAttribute("profesional", profesional);
             model.addAttribute("zona", new Zona());
@@ -409,9 +409,9 @@ public class ProfesionalControlador {
     // ZONAS
     @PostMapping("/perfil/{idProfesional}/zona/agregar")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
-    public String actualizarZona(@PathVariable(value ="idProfesional") String idProfesional, Profesional profesional,
-                                 @Valid Zona zonaNueva, BindingResult result, Model model){
-        if(result.hasErrors()){
+    public String actualizarZona(@PathVariable(value = "idProfesional") String idProfesional, Profesional profesional,
+                                 @Valid Zona zonaNueva, BindingResult result, Model model) {
+        if (result.hasErrors()) {
             profesional = profesionalServicio.buscarPorId(idProfesional);
             model.addAttribute("profesional", profesional);
             model.addAttribute("zona", new Zona());
@@ -428,8 +428,8 @@ public class ProfesionalControlador {
 
     @PostMapping("/perfil/{idProfesional}/zona/eliminar")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
-    public RedirectView eliminarZona(@PathVariable(value ="idProfesional") String idProfesional,
-                                     @RequestParam String idZona){
+    public RedirectView eliminarZona(@PathVariable(value = "idProfesional") String idProfesional,
+                                     @RequestParam String idZona) {
         profesionalServicio.eliminarZona(idProfesional, idZona);
         return new RedirectView("/profesionales/perfil/{idProfesional}");
     }
@@ -437,16 +437,16 @@ public class ProfesionalControlador {
     // OBRAS SOCIALES
     @PostMapping("/perfil/{idProfesional}/obras/agregar")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
-    public RedirectView actualizarObraSocial(@PathVariable(value ="idProfesional") String idProfesional,
-                                             @RequestParam String idObraSocial){
+    public RedirectView actualizarObraSocial(@PathVariable(value = "idProfesional") String idProfesional,
+                                             @RequestParam String idObraSocial) {
         profesionalServicio.agregarObraSocial(idProfesional, idObraSocial);
         return new RedirectView("/profesionales/perfil/{idProfesional}");
     }
 
     @PostMapping("/perfil/{idProfesional}/obras/eliminar")
     @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
-    public RedirectView eliminarObraSocial(@PathVariable(value ="idProfesional") String idProfesional,
-                                           @RequestParam String idObraSocial){
+    public RedirectView eliminarObraSocial(@PathVariable(value = "idProfesional") String idProfesional,
+                                           @RequestParam String idObraSocial) {
         profesionalServicio.eliminarObraSocial(idProfesional, idObraSocial);
         return new RedirectView("/profesionales/perfil/{idProfesional}");
     }
@@ -458,11 +458,11 @@ public class ProfesionalControlador {
                                        @RequestParam("tamano") Optional<Integer> tamano) {
         // proceso de filtrado
         List<Profesional> profesionales = null;
-        try{
+        try {
             profesionales = profesionalServicio.buscarPorFiltro(busqueda);
-        }catch(ExcepcionKinessysProfesional ex){
-            profesionales=new ArrayList<>();
-            model.addAttribute("errorfiltro",ex.getMessage());
+        } catch (ExcepcionKinessysProfesional ex) {
+            profesionales = new ArrayList<>();
+            model.addAttribute("errorfiltro", ex.getMessage());
         }
 
         // proceso de paginacion
@@ -474,7 +474,7 @@ public class ProfesionalControlador {
         model.addAttribute("ListaProfesionales", paginaProfesionales);
 
         int totalPaginas = paginaProfesionales.getTotalPages();
-        if(totalPaginas > 0) {
+        if (totalPaginas > 0) {
             List<Integer> numeros = IntStream.rangeClosed(1, totalPaginas)
                     .boxed()
                     .collect(Collectors.toList());
@@ -484,7 +484,7 @@ public class ProfesionalControlador {
         model.addAttribute("provincias", Provincia.values());
         model.addAttribute("especialidades", Especialidad.values());
         model.addAttribute("obrasSociales", obraSocialServicio.buscarTodasObrasSocial());
-        model.addAttribute("busqueda",busqueda );
+        model.addAttribute("busqueda", busqueda);
 
         return "profesional";
     }
