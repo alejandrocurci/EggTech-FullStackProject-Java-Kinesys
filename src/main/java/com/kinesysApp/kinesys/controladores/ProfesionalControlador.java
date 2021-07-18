@@ -197,7 +197,7 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/perfil/{idProfesional}/nombre")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public String actualizarNombre(@PathVariable(value = "idProfesional") String idProfesional,
                                    @Valid Profesional profesional, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -216,7 +216,7 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/perfil/{idProfesional}/apellido")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public String actualizarApellido(@PathVariable(value = "idProfesional") String idProfesional,
                                      @Valid Profesional profesional, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -235,7 +235,7 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/perfil/{idProfesional}/dni")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public String actualizarDni(@PathVariable(value = "idProfesional") String idProfesional,
                                 @Valid Profesional profesional, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -254,7 +254,7 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/perfil/{idProfesional}/telefono")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public String actualizarTelefono(@PathVariable(value = "idProfesional") String idProfesional,
                                      @Valid Profesional profesional, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -273,7 +273,7 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/perfil/{idProfesional}/edad")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public String actualizarEdad(@PathVariable(value = "idProfesional") String idProfesional,
                                  @Valid Profesional profesional, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -292,7 +292,7 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/perfil/{idProfesional}/sexo")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public String actualizarSexo(@PathVariable(value = "idProfesional") String idProfesional,
                                  @Valid Profesional profesional, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -311,7 +311,7 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/perfil/{idProfesional}/especialidad")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public String actualizarEspecialidad(@PathVariable(value = "idProfesional") String idProfesional,
                                          @Valid Profesional profesional, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -330,7 +330,7 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/perfil/{idProfesional}/email")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public String actualizarEmail(@PathVariable(value = "idProfesional") String idProfesional,
                                   @Valid Profesional profesional, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -349,7 +349,7 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/perfil/{idProfesional}/matricula")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public String actualizarMatricula(@PathVariable(value = "idProfesional") String idProfesional,
                                       @Valid Profesional profesional, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -369,7 +369,7 @@ public class ProfesionalControlador {
 
     // SESION
     @PostMapping("/perfil/{idProfesional}/usuario")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public String actualizarUsuario(@PathVariable(value = "idProfesional") String idProfesional,
                                     @Valid Profesional profesional, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -388,7 +388,7 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/perfil/{idProfesional}/clave")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public String actualizarClave(@PathVariable(value = "idProfesional") String idProfesional,
                                   @Valid Profesional profesional, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -408,7 +408,7 @@ public class ProfesionalControlador {
 
     // ZONAS
     @PostMapping("/perfil/{idProfesional}/zona/agregar")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public String actualizarZona(@PathVariable(value = "idProfesional") String idProfesional, Profesional profesional,
                                  @Valid Zona zonaNueva, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -427,7 +427,7 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/perfil/{idProfesional}/zona/eliminar")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public RedirectView eliminarZona(@PathVariable(value = "idProfesional") String idProfesional,
                                      @RequestParam String idZona) {
         profesionalServicio.eliminarZona(idProfesional, idZona);
@@ -436,7 +436,7 @@ public class ProfesionalControlador {
 
     // OBRAS SOCIALES
     @PostMapping("/perfil/{idProfesional}/obras/agregar")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public RedirectView actualizarObraSocial(@PathVariable(value = "idProfesional") String idProfesional,
                                              @RequestParam String idObraSocial) {
         profesionalServicio.agregarObraSocial(idProfesional, idObraSocial);
@@ -444,7 +444,7 @@ public class ProfesionalControlador {
     }
 
     @PostMapping("/perfil/{idProfesional}/obras/eliminar")
-    @PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
+   //PreAuthorize("hasAnyRole('ADMIN','PROFESIONAL')")
     public RedirectView eliminarObraSocial(@PathVariable(value = "idProfesional") String idProfesional,
                                            @RequestParam String idObraSocial) {
         profesionalServicio.eliminarObraSocial(idProfesional, idObraSocial);

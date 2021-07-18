@@ -17,7 +17,7 @@
 
 <body class="fondo">
     <!-- NAVBAR -->
-    <nav th:replace="fragmentnavbar :: navbar "></nav>
+    <nav th:replace="fragmentnavbar-listas :: navbar "></nav>
 
     <div class="container mt-5 main" th:object="${profesional}">
         <h1>Datos personales</h1>
@@ -189,7 +189,7 @@
                 <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/sexo}" method="post"
                     class="d-inline">
                     <label for="sexo"><i class="bi bi-gender-ambiguous"></i>Nuevo sexo: </label>
-                    <select id="sexo" type="text" name="sexo" class="form-control" placeholder="Sexo" th:field="*{sexo}"
+                    <select id="sexo" type="text" name="sexo" class="form-group" placeholder="Sexo" th:field="*{sexo}"
                         required>
                         <option th:each="sexo : ${sexos}" th:value="${sexo}" th:text="${sexo}"
                             th:selected="${sexo != null}"></option>
@@ -288,7 +288,7 @@
                 <form th:action="@{/profesionales/perfil/__${profesional.idProfesional}__/especialidad}" method="post"
                     class="d-inline">
                     <label for="especialidad"><i class="bi bi-gender-ambiguous"></i>Nueva especialidad: </label>
-                    <select id="especialidad" type="text" name="especialidad" class="form-control"
+                    <select id="especialidad" type="text" name="especialidad" class="form-group"
                         placeholder="Especialidad" th:field="*{especialidad}" required>
                         <option th:each="esp : ${especialidades}" th:value="${esp}" th:text="${esp}"
                             th:selected="${esp != null}"></option>
@@ -342,7 +342,7 @@
                             <!-- provincia -->
                             <h3>Nueva zona:</h3>
                             <label for="provincia"><i class="bi bi-gender-ambiguous"></i>Provincia: </label>
-                            <select id="provincia" type="text" name="provincia" class="form-control"
+                            <select id="provincia" type="text" name="provincia" class="form-group"
                                 placeholder="Provincia" th:field="*{provincia}" required>
                                 <option th:each="provincia : ${provincias}" th:value="${provincia}"
                                     th:text="${provincia}" th:selected="${provincia != null}"></option>
@@ -389,10 +389,10 @@
                             <h3>Nueva obra social:</h3>
                             <!-- obra social -->
                             <label for="obra-social"><i class="bi bi-gender-ambiguous"></i>Obra Social: </label>
-                            <select id="obra-social" type="text" name="idObraSocial" class="form-control"
+                            <select id="obra-social" type="text" name="idObraSocial" class="form-group"
                                 placeholder="Obra Social" required>
                                 <option th:each="os : ${obrasSociales}" th:value="${os.idObraSocial}"
-                                    th:text="${os.nombre}" th:selected="${os != null}"></option>
+                                    th:text="|${os.nombre} ${os.Plan}|" th:selected="${os != null}"></option>
                             </select>
                             <button class="btn btn-success btn-sm" type="submit">Agregar</button>
                         </form>

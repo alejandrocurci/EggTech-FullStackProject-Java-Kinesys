@@ -3,7 +3,7 @@
 }
 
 html {
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 body {
@@ -199,4 +199,13 @@ textarea {
        -webkit-background-size: cover;
           -moz-background-size: cover;
 
+}
+
+.avatar{
+  width: 50px;
+  height: 50px;
+  border-radius: 10%;
+  position: relative fixed;
+  top: -10px;
+  left: calc(50% - 50px);
 }
