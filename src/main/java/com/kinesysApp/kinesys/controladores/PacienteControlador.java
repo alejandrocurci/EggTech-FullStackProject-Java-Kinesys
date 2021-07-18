@@ -194,7 +194,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/perfil/{idPaciente}/nombre")
-    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public String actualizarNombre(@PathVariable(value = "idPaciente") String idPaciente,
                                    @Valid Paciente paciente, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -208,7 +208,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/perfil/{idPaciente}/apellido")
-    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public String actualizarApellido(@PathVariable(value = "idPaciente") String idPaciente,
                                      @Valid Paciente paciente, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -222,7 +222,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/perfil/{idPaciente}/dni")
-    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public String actualizarDni(@PathVariable(value = "idPaciente") String idPaciente,
                                 @Valid Paciente paciente, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -236,7 +236,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/perfil/{idPaciente}/telefono")
-    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public String actualizarTelefono(@PathVariable(value = "idPaciente") String idPaciente,
                                      @Valid Paciente paciente, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -250,7 +250,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/perfil/{idPaciente}/email")
-    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public String actualizarEmail(@PathVariable(value = "idPaciente") String idPaciente,
                                   @Valid Paciente paciente, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -264,7 +264,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/perfil/{idPaciente}/usuario")
-    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public String actualizarUsuario(@PathVariable(value = "idPaciente") String idPaciente,
                                     @Valid Paciente paciente, BindingResult result, Model model) {
         if (result.hasErrors()) {
@@ -278,7 +278,7 @@ public class PacienteControlador {
     }
 
     @PostMapping("/perfil/{idPaciente}/clave")
-    @PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
+    //@PreAuthorize("hasAnyRole('ADMIN','PACIENTE')")
     public String actualizarClave(@PathVariable(value = "idPaciente") String idPaciente,
                                   @Valid Paciente paciente, BindingResult result, Model model) {
         if (result.hasErrors()) {

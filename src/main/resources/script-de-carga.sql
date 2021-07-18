@@ -54,27 +54,28 @@ INSERT INTO `kinesysbd`.`zona` (`id_zona`, `domicilio`, `localidad`, `provincia`
 
 ## USUARIOS DE PACIENTES Y PROFESIONALES
 ## CLAVE ES "1234"
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('1', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'paciente1', 'PACIENTE');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('2', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'paciente2', 'PACIENTE');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('3', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'paciente3', 'PACIENTE');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('4', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'paciente4', 'PACIENTE');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('5', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'paciente5', 'PACIENTE');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('6', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'paciente6', 'PACIENTE');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('7', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'paciente7', 'PACIENTE');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('8', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'paciente8', 'PACIENTE');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('9', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'paciente9', 'PACIENTE');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('10', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'paciente10', 'PACIENTE');
 
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('11', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'profesional1', 'PROFESIONAL');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('12', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'profesional2', 'PROFESIONAL');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('13', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'profesional3', 'PROFESIONAL');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('14', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'profesional4', 'PROFESIONAL');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('15', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'profesional5', 'PROFESIONAL');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('16', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'profesional6', 'PROFESIONAL');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('17', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'profesional7', 'PROFESIONAL');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('18', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'profesional8', 'PROFESIONAL');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('19', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'profesional9', 'PROFESIONAL');
-INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('20', '$10$RI2dOrfndDvLEd5zYxkt5eUA8wQ75dHeWkUQji.7JNif6n5P2HNI2', 'profesional10', 'PROFESIONAL');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('1', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'paciente1', 'PACIENTE');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('2', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'paciente2', 'PACIENTE');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('3', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'paciente3', 'PACIENTE');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('4', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'paciente4', 'PACIENTE');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('5', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'paciente5', 'PACIENTE');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('6', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'paciente6', 'PACIENTE');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('7', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'paciente7', 'PACIENTE');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('8', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'paciente8', 'PACIENTE');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('9', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'paciente9', 'PACIENTE');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('10', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'paciente10', 'PACIENTE');
+
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('11', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'profesional1', 'PROFESIONAL');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('12', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'profesional2', 'PROFESIONAL');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('13', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'profesional3', 'PROFESIONAL');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('14', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'profesional4', 'PROFESIONAL');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('15', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'profesional5', 'PROFESIONAL');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('16', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'profesional6', 'PROFESIONAL');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('17', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'profesional7', 'PROFESIONAL');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('18', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'profesional8', 'PROFESIONAL');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('19', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'profesional9', 'PROFESIONAL');
+INSERT INTO `kinesysbd`.`usuario` (`id`, `clave`, `nombreu`, `rol_id_rol`) VALUES ('20', '$2a$10$Pjbp7Gy2MedlAriX1Wi9KubU8umYxZgpOFud/S5bwYeiRDDyyT.Yu', 'profesional10', 'PROFESIONAL');
 
 ## PACIENTES ##
 INSERT INTO `kinesysbd`.`paciente` (`id_paciente`, `apellido`, `dni`, `email`, `nombre`, `telefono`, `rol_paciente_id_rol`, `usuario_paciente_id`) 

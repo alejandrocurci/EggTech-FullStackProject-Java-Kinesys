@@ -20,12 +20,13 @@
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdown-pacientes">
                         <li>
                             <!--    <a sec:authorize="hasAnyAuthority('ADMIN')"class="dropdown-item" th:href="@{/pacientes}">Mostrar pacientes</a>   -->
-                            <a class="dropdown-item" th:href="@{/pacientes}">Mostrar pacientes</a>
+                            <a class="dropdown-item" th:href="@{/pacientes}">Mostrar lista</a>
                         </li>
-                        <li>
+                        <!-- 
+                            <li>
                             <a class="dropdown-item" th:href="@{/pacientes/crear}">Registrar nuevo</a>
-                        </li>
-
+                            </li>
+                        -->
                     </ul>
                 </li>
                 <!--DROPDOWN PROFESIONALES-->
@@ -37,11 +38,13 @@
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdown-profesionales">
                         <li>
                             <!--   sec:authorize="hasAnyAuthority('ADMIN','PACIENTE','PROFESIONAL')"   -->
-                            <a class="dropdown-item" th:href="@{/profesionales}">Mostrar profesionales</a>
+                            <a class="dropdown-item" th:href="@{/profesionales}">Mostrar lista</a>
                         </li>
-                        <li>
+                        <!-- 
+                            <li>
                             <a class="dropdown-item" th:href="@{/profesionales/crear}">Registrar nuevo</a>
-                        </li>
+                            </li>
+                        -->
                     </ul>
                 </li>
                 <!--LOG OUT-->
