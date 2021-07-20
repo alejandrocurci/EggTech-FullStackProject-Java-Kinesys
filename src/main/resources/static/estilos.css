@@ -10,7 +10,7 @@
         margin: auto;
         padding: auto;
         font-family: sans-serif;
-        overflow: scroll;
+        overflow: auto;
          -webkit-background-size: cover;
             -moz-background-size: cover;
 
@@ -27,7 +27,7 @@
         margin: auto;
         padding: auto;
         font-family: sans-serif;
-        overflow: scroll;
+        overflow: auto;
          -webkit-background-size: cover;
             -moz-background-size: cover;
 }
