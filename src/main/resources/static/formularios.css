@@ -1,20 +1,22 @@
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
 }
 
 html {
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 body {
   background: #c1bdba;
-  font-family: 'Titillium Web', sans-serif;
+  font-family: "Titillium Web", sans-serif;
 }
 
 a {
   text-decoration: none;
   color: #1ab188;
-  transition: .5s ease;
+  transition: 0.5s ease;
 }
 a:hover {
   color: #179b77;
@@ -50,7 +52,7 @@ a:hover {
   width: 50%;
   text-align: center;
   cursor: pointer;
-  transition: .5s ease;
+  transition: 0.5s ease;
 }
 .tab-group li a:hover {
   background: #179b77;
@@ -60,7 +62,6 @@ a:hover {
   background: #1ab188;
   color: #ffffff;
 }
-
 
 h1 {
   text-align: center;
@@ -97,7 +98,8 @@ label.highlight {
   color: #ffffff;
 }
 
-input, textarea {
+input,
+textarea {
   font-size: 22px;
   display: block;
   width: 100%;
@@ -108,10 +110,10 @@ input, textarea {
   border: 1px solid #a0b3b0;
   color: #ffffff;
   border-radius: 0;
-  transition: border-color .25s ease, box-shadow .25s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
-.field-wrap  > select {
- font-size: 22px;
+.field-wrap > select {
+  font-size: 22px;
   display: block;
   width: 100%;
   height: 100%;
@@ -121,9 +123,10 @@ input, textarea {
   border: 1px solid #a0b3b0;
   color: #ffffff;
   border-radius: 0;
-  transition: border-color .25s ease, box-shadow .25s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   outline: 0;
   border-color: #1ab188;
 }
@@ -164,13 +167,14 @@ textarea {
   font-size: 2rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
   background: #1ab188;
   color: #ffffff;
   transition: all 0.5s ease;
   -webkit-appearance: none;
 }
-.button:hover, .button:focus {
+.button:hover,
+.button:focus {
   background: #179b77;
 }
 
@@ -187,25 +191,39 @@ textarea {
 .fondo {
   background: url(/img/imagen-fondo.jpg) #ccc no-repeat;
   background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-attachment: fixed;
-      height: 600px;
-      margin: auto;
-      padding: auto;
-      font-family: sans-serif;
-      overflow: auto;
-       -webkit-background-size: cover;
-          -moz-background-size: cover;
-
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  height: 600px;
+  margin: auto;
+  padding: auto;
+  font-family: sans-serif;
+  overflow: hidden;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
 }
 
-.avatar{
+.avatar {
   width: 50px;
   height: 50px;
   border-radius: 10%;
   position: relative fixed;
   top: -10px;
   left: calc(50% - 50px);
+}
+
+.fondo-registro {
+  background: url(/img/imagen-fondo.jpg) #ccc no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  margin: auto;
+  padding: auto;
+  font-family: sans-serif;
+  overflow: auto;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
 }
